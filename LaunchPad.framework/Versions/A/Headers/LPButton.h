@@ -10,10 +10,10 @@
 
 @interface LPButton : UIButton <LPElementProtocol>
 
-- (id)initWithLPElementKey:(NSString*)key styleKey:(NSString*)styleKey;
+- (id)initWithElementKey:(NSString*)key styleKey:(NSString*)styleKey;
 
-- (id)initWithFrame:(CGRect)frame LPElementKey:(NSString*)key styleKey:(NSString*)styleKey;
+- (id)initWithFrame:(CGRect)frame elementKey:(NSString*)key styleKey:(NSString*)styleKey;
 
-+ (instancetype)buttonWithType:(UIButtonType)buttonType LPElementKey:(NSString*)key stlyeKey:(NSString*)styleKey;
++ (instancetype)buttonWithType:(UIButtonType)buttonType elementKey:(NSString*)key stlyeKey:(NSString*)styleKey;
 
 @end

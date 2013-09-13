@@ -10,12 +10,12 @@
 
 @interface LPTextField : UITextField <LPElementProtocol>
 
-- (id)initWithLPElementKey:(NSString*)elementKey styleKey:(NSString*)styleKey;
+- (id)initWithElementKey:(NSString*)elementKey styleKey:(NSString*)styleKey;
 
-- (id)initWithFrame:(CGRect)frame LPElementKey:(NSString*)elementKey styleKey:(NSString*)styleKey;
+- (id)initWithFrame:(CGRect)frame elementKey:(NSString*)elementKey styleKey:(NSString*)styleKey;
 
-+ (instancetype)textFieldWithLPElementKey:(NSString*)elementKey styleKey:(NSString*)styleKey;
++ (instancetype)textFieldWithElementKey:(NSString*)elementKey styleKey:(NSString*)styleKey;
 
-+ (instancetype)textFieldWithFrame:(CGRect)frame LPElementKey:(NSString*)elementKey styleKey:(NSString*)styleKey;
++ (instancetype)textFieldWithFrame:(CGRect)frame elementKey:(NSString*)elementKey styleKey:(NSString*)styleKey;
 
 @end

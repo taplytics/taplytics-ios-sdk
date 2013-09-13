@@ -11,12 +11,12 @@
 
 @interface LPScrollView : UIScrollView <LPElementProtocol>
 
-- (id)initWithLPElementKey:(NSString*)elementKey styleKey:(NSString*)styleKey;
+- (id)initWithElementKey:(NSString*)elementKey styleKey:(NSString*)styleKey;
 
-- (id)initWithFrame:(CGRect)frame LPElementKey:(NSString*)elementKey styleKey:(NSString*)styleKey;
+- (id)initWithFrame:(CGRect)frame elementKey:(NSString*)elementKey styleKey:(NSString*)styleKey;
 
-+ (instancetype)viewWithLPElementKey:(NSString*)elementKey styleKey:(NSString*)styleKey;
++ (instancetype)viewWithElementKey:(NSString*)elementKey styleKey:(NSString*)styleKey;
 
-+ (instancetype)viewWithFrame:(CGRect)frame LPElementKey:(NSString*)elementKey styleKey:(NSString*)styleKey;
++ (instancetype)viewWithFrame:(CGRect)frame elementKey:(NSString*)elementKey styleKey:(NSString*)styleKey;
 
 @end

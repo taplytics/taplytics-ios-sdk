@@ -32,23 +32,30 @@ typedef enum {
 @property (nonatomic, strong) LPProperties* lpProperties;
 @property (nonatomic) LPServer lpServer;
 
+// Get Singleton LaunchPadManager Object
 + (LaunchPadManager*)sharedManager;
 
+// Start LaunchPad With API Key Methods
 + (void)startLaunchPadAPIKey:(NSString*)apiKey isTesting:(BOOL)isTesting;
 
 + (void)startLaunchPadAPIKey:(NSString*)appID server:(LPServer)server isTesting:(BOOL)isTesting;
 
+// Element Life Cycle Methods
 - (void)elementInit:(id<LPElementProtocol>)element;
 
 - (void)elementDealloc:(id<LPElementProtocol>)element;
 
 - (void)element:(id<LPElementProtocol>)element setState:(NSString*)stateName;
 
+// Change the LaunchPad Server
 - (void)setLPServer:(LPServer)server;
 
-#pragma mark - Setting Element Values
+// Setting Element Property Values
 - (BOOL)setValueInElement:(NSObject*)element lpElement:(id<LPElementProtocol>)lpElement fromValue:(id)value key:(NSString *)key;
 
 - (void)setValuesInElement:(NSObject<LPElementProtocol>*)element propertiesDic:(NSDictionary*)propertiesDic;
+
+// Setting ViewController Appearance
+- (void)setViewControllerAppearance:(UIViewController*)vc forKey:(NSString*)key;
 
 @end

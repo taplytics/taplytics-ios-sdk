@@ -10,12 +10,12 @@
 
 @interface LPLabel : UILabel <LPElementProtocol>
 
-- (id)initWithLPElementKey:(NSString*)elementKey styleKey:(NSString*)styleKey;
+- (id)initWithElementKey:(NSString*)elementKey styleKey:(NSString*)styleKey;
 
-- (id)initWithFrame:(CGRect)frame LPElementKey:(NSString*)elementKey styleKey:(NSString*)styleKey;
+- (id)initWithFrame:(CGRect)frame elementKey:(NSString*)elementKey styleKey:(NSString*)styleKey;
 
-+ (instancetype)labelWithLPElementKey:(NSString*)elementKey styleKey:(NSString*)styleKey;
++ (instancetype)labelWithElementKey:(NSString*)elementKey styleKey:(NSString*)styleKey;
 
-+ (instancetype)labelWithFrame:(CGRect)frame LPElementKey:(NSString*)elementKey styleKey:(NSString*)styleKey;
++ (instancetype)labelWithFrame:(CGRect)frame elementKey:(NSString*)elementKey styleKey:(NSString*)styleKey;
 
 @end
