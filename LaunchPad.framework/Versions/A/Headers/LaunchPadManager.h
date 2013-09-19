@@ -27,7 +27,7 @@ typedef enum {
 
 @property (nonatomic, weak) id<LaunchPadDelegate> delegate;
 @property (nonatomic) BOOL isLoadingProperties;
-@property (nonatomic) BOOL isTesting;
+@property (nonatomic) BOOL liveUpdate;
 // Loaded Side Step Properties
 @property (nonatomic, strong) LPProperties* lpProperties;
 @property (nonatomic) LPServer lpServer;
@@ -36,9 +36,9 @@ typedef enum {
 + (LaunchPadManager*)sharedManager;
 
 // Start LaunchPad With API Key Methods
-+ (void)startLaunchPadAPIKey:(NSString*)apiKey isTesting:(BOOL)isTesting;
++ (void)startLaunchPadAPIKey:(NSString*)apiKey liveUpdate:(BOOL)liveUpdate;
 
-+ (void)startLaunchPadAPIKey:(NSString*)appID server:(LPServer)server isTesting:(BOOL)isTesting;
++ (void)startLaunchPadAPIKey:(NSString*)appID server:(LPServer)server liveUpdate:(BOOL)liveUpdate;
 
 // Element Life Cycle Methods
 - (void)elementInit:(id<LPElementProtocol>)element;
@@ -56,6 +56,6 @@ typedef enum {
 - (void)setValuesInElement:(NSObject<LPElementProtocol>*)element propertiesDic:(NSDictionary*)propertiesDic;
 
 // Setting ViewController Appearance
-- (void)setViewControllerAppearance:(UIViewController*)vc forKey:(NSString*)key;
+- (void)setupViewController:(UIViewController*)vc forViewKey:(NSString*)viewKey;
 
 @end
