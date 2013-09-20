@@ -55,6 +55,8 @@ typedef enum {
 
 - (void)setValuesInElement:(NSObject<LPElementProtocol>*)element propertiesDic:(NSDictionary*)propertiesDic;
 
+- (void)checkLoadedElementsWithNewProperties;
+
 // Setting ViewController Appearance
 - (void)setupViewController:(UIViewController*)vc forViewKey:(NSString*)viewKey;
 
