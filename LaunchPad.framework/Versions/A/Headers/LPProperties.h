@@ -10,15 +10,15 @@
 
 @interface LPProperties : NSObject
 
-@property (nonatomic, strong) NSString* appName;
-@property (nonatomic, strong) NSString* appID;
-@property (nonatomic, strong) NSNumber* version;
-@property (nonatomic, strong) NSDictionary* views;
-@property (nonatomic, strong) NSDictionary* elements;
-@property (nonatomic, strong) NSDictionary* styles;
-@property (nonatomic, strong) NSDictionary* theme;
-@property (nonatomic, strong) NSDictionary* propertyTypes;
-@property (nonatomic, strong) NSString* themeName;
+@property (nonatomic, readonly, strong) NSString* appName;
+@property (nonatomic, readonly, strong) NSString* appID;
+@property (nonatomic, readonly, strong) NSNumber* version;
+@property (nonatomic, readonly, strong) NSDictionary* views;
+@property (nonatomic, readonly, strong) NSDictionary* elements;
+@property (nonatomic, readonly, strong) NSDictionary* styles;
+@property (nonatomic, readonly, strong) NSDictionary* theme;
+@property (nonatomic, readonly, strong) NSDictionary* propertyTypes;
+@property (nonatomic, readonly, strong) NSString* themeName;
 
 - (id)initWithJSONDic:(NSDictionary*)dic;
 
@@ -31,5 +31,7 @@
 - (NSString*)styleKeyForElementKey:(NSString*)elementKey;
 
 - (NSString*)propertyTypeForPropertyName:(NSString*)name;
+
+- (NSDictionary*)getAnalyticsPropertiesForElement:(id<LPElementProtocol>)element analyticsSource:(NSString*)source;
 
 @end
