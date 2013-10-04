@@ -18,6 +18,7 @@
 @property (nonatomic, readonly, strong) NSDictionary* styles;
 @property (nonatomic, readonly, strong) NSDictionary* theme;
 @property (nonatomic, readonly, strong) NSDictionary* propertyTypes;
+@property (nonatomic, readonly, strong) NSDictionary* releaseInfo;
 @property (nonatomic, readonly, strong) NSString* themeName;
 
 - (id)initWithJSONDic:(NSDictionary*)dic;
@@ -26,7 +27,7 @@
 
 - (NSDictionary *)getPropertiesForElement:(id<LPElementProtocol>)element;
 
-- (NSDictionary*)getPropertiesForElementKey:(NSString*)key;
+- (NSDictionary *)getPropertiesForElementKey:(NSString *)key styleKey:(NSString*)style state:(NSString *)stateName;
 
 - (NSString*)styleKeyForElementKey:(NSString*)elementKey;
 

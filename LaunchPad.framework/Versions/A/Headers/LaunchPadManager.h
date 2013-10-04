@@ -12,7 +12,8 @@
 typedef enum {
     LPDev,
     LPProduction,
-    LPLocalHost
+    LPLocalHost,
+    LPLocalTest
 } LPServer;
 
 @protocol LaunchPadDelegate <NSObject>
@@ -39,6 +40,11 @@ typedef enum {
 + (void)startLaunchPadAPIKey:(NSString*)apiKey liveUpdate:(BOOL)liveUpdate;
 
 + (void)startLaunchPadAPIKey:(NSString*)appID server:(LPServer)server liveUpdate:(BOOL)liveUpdate;
+
+// Update LaunchPad Properties in Background, only iOS7 and higher
+#ifdef SYSTEM_IOS7_OR_GREATER
+- (void)performBackgroundFetch:(void(^)(UIBackgroundFetchResult))completionBlock;
+#endif
 
 // Element Life Cycle Methods
 - (void)elementInit:(id<LPElementProtocol>)element;
