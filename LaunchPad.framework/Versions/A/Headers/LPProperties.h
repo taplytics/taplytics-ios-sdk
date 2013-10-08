@@ -13,6 +13,7 @@
 @property (nonatomic, readonly, strong) NSString* appName;
 @property (nonatomic, readonly, strong) NSString* appID;
 @property (nonatomic, readonly, strong) NSNumber* version;
+@property (nonatomic, readonly, strong) NSDictionary* project;
 @property (nonatomic, readonly, strong) NSDictionary* views;
 @property (nonatomic, readonly, strong) NSDictionary* elements;
 @property (nonatomic, readonly, strong) NSDictionary* styles;
