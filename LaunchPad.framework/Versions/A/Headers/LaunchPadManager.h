@@ -29,7 +29,7 @@ typedef enum {
 @property (nonatomic, weak) id<LaunchPadDelegate> delegate;
 @property (nonatomic) BOOL isLoadingProperties;
 @property (nonatomic) BOOL liveUpdate;
-// Loaded Side Step Properties
+// Loaded LaunchPad Properties
 @property (nonatomic, strong) LPProperties* lpProperties;
 @property (nonatomic) LPServer lpServer;
 
