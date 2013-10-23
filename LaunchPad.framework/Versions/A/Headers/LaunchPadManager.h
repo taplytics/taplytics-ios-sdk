@@ -56,11 +56,6 @@ typedef enum {
 // Change the LaunchPad Server
 - (void)setLPServer:(LPServer)server;
 
-// Setting Element Property Values
-- (BOOL)setValueInElement:(NSObject*)element lpElement:(id<LPElementProtocol>)lpElement fromValue:(id)value key:(NSString *)key;
-
-- (void)setValuesInElement:(NSObject<LPElementProtocol>*)element propertiesDic:(NSDictionary*)propertiesDic;
-
 - (void)checkLoadedElementsWithNewPropertiesChanges:(NSDictionary*)changes;
 
 // Setting ViewController Appearance
