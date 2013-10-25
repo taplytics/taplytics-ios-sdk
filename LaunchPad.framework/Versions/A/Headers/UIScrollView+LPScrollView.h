@@ -1,15 +1,14 @@
 //
-//  LPScrollView.h
+//  UIScrollView+LPScrollView.h
 //  LaunchPad
 //
-//  Created by Aaron Glazer on 2013-08-29.
 //  Copyright (c) 2013 Syrp Inc. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import "LPElementProtocol.h"
 
-@interface LPScrollView : UIScrollView <LPElementProtocol>
+@interface UIScrollView (LPScrollView) <LPElementProtocol>
 
 - (id)initWithElementKey:(NSString*)elementKey styleKey:(NSString*)styleKey;
 

@@ -1,15 +1,16 @@
 //
-//  LPScrollView.h
+//  LPCollectionViewCell.h
 //  LaunchPad
 //
-//  Created by Aaron Glazer on 2013-08-29.
+//  Created by Jonathan Norris on 2013-10-15.
 //  Copyright (c) 2013 Syrp Inc. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import "LPElementProtocol.h"
+#import "LPLabel.h"
 
-@interface LPScrollView : UIScrollView <LPElementProtocol>
+@interface LPCollectionViewCell : UICollectionViewCell <LPElementProtocol>
 
 - (id)initWithElementKey:(NSString*)elementKey styleKey:(NSString*)styleKey;
 

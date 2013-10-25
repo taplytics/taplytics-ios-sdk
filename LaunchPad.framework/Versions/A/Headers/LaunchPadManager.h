@@ -18,6 +18,7 @@ typedef enum {
 
 @protocol LaunchPadDelegate <NSObject>
 
+@optional
 - (void)launchPadUpdated;
 
 - (void)launchPadThemeChanged:(NSString*)themeName;
