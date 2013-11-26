@@ -29,6 +29,8 @@
 #import "UICollectionViewFlowLayout+LPCollectionViewFlowLayout.h"
 #import "LPCollectionViewCell.h"
 #import "UICollectionViewCell+LPCollectionViewCell.h"
+#import "LPCollectionReusableView.h"
+#import "UICollectionReusableView+LPCollectionReusableView.h"
 #import "LPTableView.h"
 #import "UITableView+LPTableView.h"
 #import "UIViewController+LPViewController.h"
