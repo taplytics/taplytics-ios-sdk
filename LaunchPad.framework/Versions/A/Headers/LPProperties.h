@@ -20,6 +20,7 @@
 @property (nonatomic, readonly, strong) NSDictionary* theme;
 @property (nonatomic, readonly, strong) NSDictionary* propertyTypes;
 @property (nonatomic, readonly, strong) NSDictionary* releaseInfo;
+@property (nonatomic, readonly, strong) NSDictionary* images;
 @property (nonatomic, readonly, strong) NSString* themeName;
 
 - (id)initWithJSONDic:(NSDictionary*)dic;
