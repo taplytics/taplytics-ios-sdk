@@ -7,12 +7,12 @@
 
 #import <Foundation/Foundation.h>
 
-NSString* const TLKEY_isSettingUP = @"TL_isSettingUP";
-NSString* const TLKEY_isSettingProperties = @"TL_isSettingProperties";
-NSString* const TLKEY_elementKey = @"TL_elementKey";
-NSString* const TLKEY_styleKey = @"TL_styleKey";
-NSString* const TLKEY_stateName = @"TL_stateName";
-NSString* const TLKEY_viewKey = @"TL_viewKey";
+#define TLKEY_isSettingUP @"TL_isSettingUP"
+#define TLKEY_isSettingProperties @"TL_isSettingProperties"
+#define TLKEY_elementKey @"TL_elementKey"
+#define TLKEY_styleKey @"TL_styleKey"
+#define TLKEY_stateName @"TL_stateName"
+#define TLKEY_viewKey @"TL_viewKey"
 
 @protocol TLElementProtocol <NSObject>
 

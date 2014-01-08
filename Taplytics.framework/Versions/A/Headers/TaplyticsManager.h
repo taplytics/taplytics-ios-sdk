@@ -43,9 +43,7 @@ typedef enum {
 + (void)startTaplyticsAPIKey:(NSString*)appID server:(TLServer)server liveUpdate:(BOOL)liveUpdate;
 
 // Update Taplytics Properties in Background, only iOS7 and higher
-#ifdef SYSTEM_IOS7_OR_GREATER
 - (void)performBackgroundFetch:(void(^)(UIBackgroundFetchResult))completionBlock;
-#endif
 
 // Element Life Cycle Methods
 - (void)elementInit:(id<TLElementProtocol>)element;
