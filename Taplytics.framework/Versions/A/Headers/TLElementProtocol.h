@@ -21,11 +21,16 @@
 @property (nonatomic, strong) NSString* elementKey;
 @property (nonatomic, strong) NSString* styleKey;
 @property (nonatomic, strong) NSString* stateName;
+@property (nonatomic, strong) NSMutableDictionary* origProperties;
 @property (nonatomic) BOOL isSettingProperties;
 
 - (void)setupWithElementKey:(NSString*)elementKey styleKey:(NSString*)styleKey;
 
 - (void)setElementState:(NSString*)stateName;
+
+- (id)getOrigPropertyValueForKey:(NSString*)key;
+
+- (void)setOrigPropertyValue:(id)value forKey:(NSString*)key;
 
 @optional
 

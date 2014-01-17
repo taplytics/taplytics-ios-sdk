@@ -46,6 +46,8 @@ typedef enum {
 - (void)performBackgroundFetch:(void(^)(UIBackgroundFetchResult))completionBlock;
 
 // Element Life Cycle Methods
+- (void)checkElementInit:(id<TLElementProtocol>)element;
+
 - (void)elementInit:(id<TLElementProtocol>)element;
 
 - (void)elementDealloc:(id<TLElementProtocol>)element;

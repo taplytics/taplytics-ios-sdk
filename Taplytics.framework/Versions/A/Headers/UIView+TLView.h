@@ -2,7 +2,6 @@
 //  UIView+TLView.h
 //  Taplytics
 //
-//  Created by Jonathan Norris on 2013-10-17.
 //  Copyright (c) 2013 Syrp Inc. All rights reserved.
 //
 

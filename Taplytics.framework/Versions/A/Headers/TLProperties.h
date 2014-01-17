@@ -17,6 +17,7 @@
 @property (nonatomic, readonly, strong) NSDictionary* project;
 @property (nonatomic, readonly, strong) NSDictionary* views;
 @property (nonatomic, readonly, strong) NSDictionary* elements;
+@property (nonatomic, readonly, strong) NSDictionary* initializeElements;
 @property (nonatomic, readonly, strong) NSDictionary* styles;
 @property (nonatomic, readonly, strong) NSDictionary* theme;
 @property (nonatomic, readonly, strong) NSDictionary* propertyTypes;
