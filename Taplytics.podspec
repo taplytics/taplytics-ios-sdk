@@ -11,4 +11,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.frameworks =  'CFNetwork', 'Security', 'CoreTelephony', 'AdSupport', 'SystemConfiguration'
   s.vendored_frameworks = 'Taplytics.framework'
+  s.xcconfig = {
+    'OTHER_LDFLAGS' => '$(inherited) -ObjC'
+  }
 end
