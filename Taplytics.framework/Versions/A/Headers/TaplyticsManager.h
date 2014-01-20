@@ -62,6 +62,6 @@ typedef enum {
 // Setting ViewController Appearance
 - (void)setupViewController:(UIViewController*)vc forViewKey:(NSString*)viewKey;
 
-- (void)highlightElementforKey:(NSString*)elementKey styleKey:(NSString*)styleKey duration:(NSNumber*)duration;
+- (void)highlightElementforKey:(NSString*)elementKey styleKey:(NSString*)styleKey showBackground:(BOOL)showBackground duration:(NSNumber*)duration;
 
 @end
