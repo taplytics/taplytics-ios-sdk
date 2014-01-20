@@ -12,9 +12,9 @@ _How do I, as a developer, start using Taplytics?_
 
 ## Installation Instructions
 
-1. _Download the SDK or clone into your app._
-2. _Load the Taplytics framework in to your app._
-3. _Add the required frameworks:_
+- _Download the SDK or clone into your app._
+- _Load the Taplytics framework into your app._
+- _Add the required frameworks:_
     
 ```objective-c
 CFNetwork.framework
@@ -24,36 +24,31 @@ AdSupport.framework
 SystemConfiguration.framework
 libicucore.dylib
 ```
+- _Add the -ObjC Linker flag to your project settings_
+- _Add an import for the taplytics framework to your _prefix.pch file._
 
-4. _Add the -ObjC Linker flag to your project settings
+```objective-c
+// YourApp_prefix.pch:
 
-## Deploying
+#ifdef __OBJC__
+  #import <Foundation/Foundation.h>
+  #import <UIKit/UIKit.h>
+  // Add the following line:
+  #import <Taplytics/Taplytics.h>
+#endif
+```
 
-### _How to setup the deployment environment_
+- _Initialize the SDK by adding a line of code with your API key in your AppDelegate.m file_
+```objective-c
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    ...
+    [TaplyticsManager startTaplyticsAPIKey:@"Your App Token Here" liveUpdate:YES];
+    
+    //For internal builds, use liveUpdate:YES. For public builds, use liveUpdate:NO.
+    ...
+}
+```
 
-- _Required heroku addons, packages, or chef recipes._
-- _Required environment variables or credentials not included in git._
-- _Monitoring services and logging._
+## Questions or Need Help?
 
-### _How to deploy_
-
-## Troubleshooting & Useful Tools
-
-_Examples of common tasks_
-
-> e.g.
-> 
-> - How to make curl requests while authenticated via oauth.
-> - How to monitor background jobs.
-> - How to run the app through a proxy.
-
-## Contributing changes
-
-- _Internal git workflow_
-- _Pull request guidelines_
-- _Tracker project_
-- _Google group_
-- _irc channel_
-- _"Please open github issues"_
-
-## License
+_The taplytics team is available 24/7 to answer any questions you have. Just email help@taplytics.com or visit http://help.taplytics.com for more detailed installation and usage information._
