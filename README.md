@@ -17,7 +17,7 @@ _How do I, as a developer, start using Taplytics?_
 
     ```ruby
     platform :ios
-    pod 'Taplytics', :git => 'https://github.com/taplytics/taplytics-ios-sdk.git'
+    pod 'Taplytics'
     ```
     
 2. _Add an import for the taplytics framework to your _prefix.pch file._
