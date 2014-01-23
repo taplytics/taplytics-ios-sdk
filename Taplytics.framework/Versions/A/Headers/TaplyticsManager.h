@@ -2,7 +2,7 @@
 //  TaplyticsManager.h
 //  Taplytics
 //
-//  Copyright (c) 2013 Syrp Inc. All rights reserved.
+//  Copyright (c) 2014 Syrp Inc. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -42,8 +42,10 @@ typedef enum {
 
 + (void)startTaplyticsAPIKey:(NSString*)appID server:(TLServer)server liveUpdate:(BOOL)liveUpdate;
 
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
 // Update Taplytics Properties in Background, only iOS7 and higher
 - (void)performBackgroundFetch:(void(^)(UIBackgroundFetchResult))completionBlock;
+#endif
 
 // Element Life Cycle Methods
 - (void)checkElementInit:(id<TLElementProtocol>)element;

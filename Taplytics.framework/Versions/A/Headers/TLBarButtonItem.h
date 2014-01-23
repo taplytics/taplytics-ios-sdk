@@ -2,7 +2,7 @@
 //  TLBarButtonItem.h
 //  Taplytics
 //
-//  Copyright (c) 2013 Syrp Inc. All rights reserved.
+//  Copyright (c) 2014 Syrp Inc. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -25,5 +25,7 @@
                                elementKey:(NSString*)elementKey styleKey:(NSString*)styleKey;
 
 - (id)initWithCustomView:(UIView *)customView elementKey:(NSString*)elementKey styleKey:(NSString*)styleKey;
+
+@property (nonatomic, strong) NSString* testString;
 
 @end

@@ -2,7 +2,7 @@
 //  TLPageControl.h
 //  Taplytics
 //
-//  Copyright (c) 2013 Syrp Inc. All rights reserved.
+//  Copyright (c) 2014 Syrp Inc. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

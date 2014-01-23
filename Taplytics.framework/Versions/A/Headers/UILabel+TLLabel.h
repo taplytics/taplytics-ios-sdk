@@ -2,8 +2,7 @@
 //  UILabel+TLLabel.h
 //  Taplytics
 //
-//  Created by Jonathan Norris on 2013-10-15.
-//  Copyright (c) 2013 Syrp Inc. All rights reserved.
+//  Copyright (c) 2014 Syrp Inc. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
