@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'Taplytics'
-  s.version      = '1.0.0'
+  s.version      = '1.0.2'
   s.license = { :type => 'Commercial', :text => 'See http://taplytics.com/terms' }
   s.platform = :ios
   s.summary      = 'iOS framework for using the Taplytics native mobile A/B testing service.'
