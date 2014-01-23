@@ -10,44 +10,82 @@ _How do I, as a developer, start using Taplytics?_
 2. _Install the SDK._
 3. _Create an experiment and push it live to your users!_
 
-## Installation Instructions
-
-- _Download the SDK or clone into your app._
-- _Load the Taplytics framework into your app._
-- _Add the required frameworks:_
+## Installation Instructions (using CocoaPods)
     
-```objective-c
-CFNetwork.framework
-Security.framework
-CoreTelephony.framework
-AdSupport.framework
-SystemConfiguration.framework
-libicucore.dylib
-```
-- _Add the -ObjC Linker flag to your project settings_
-- _Add an import for the taplytics framework to your _prefix.pch file._
+1. _Install using CocoaPods_
+    - Add a Podfile to the root of your project directory with the following:
 
-```objective-c
-// YourApp_prefix.pch:
+    ```ruby
+    platform :ios
+    pod 'Taplytics'
+    ```
+    
+2. _Add an import for the taplytics framework to your _prefix.pch file._
+    
+    ```
+    // YourApp_prefix.pch:
+    #ifdef __OBJC__
+      #import <Foundation/Foundation.h>
+      #import <UIKit/UIKit.h>
+      // Add the following line:
+      #import <Taplytics/Taplytics.h>
+    #endif
+    ```
 
-#ifdef __OBJC__
-  #import <Foundation/Foundation.h>
-  #import <UIKit/UIKit.h>
-  // Add the following line:
-  #import <Taplytics/Taplytics.h>
-#endif
-```
+3. _Initialize the SDK by adding a line of code with your API key in your AppDelegate.m file_
 
-- _Initialize the SDK by adding a line of code with your API key in your AppDelegate.m file_
-```objective-c
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    ```objective-c
+    - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     ...
     [TaplyticsManager startTaplyticsAPIKey:@"Your App Token Here" liveUpdate:YES];
     
     //For internal builds, use liveUpdate:YES. For public builds, use liveUpdate:NO.
     ...
-}
-```
+    }
+    ```
+
+## Installation Instructions (Manual Installation)
+
+
+1. _Download the SDK / clone into your app._
+2. _Load the Taplytics framework into your app._
+3. _Add the required frameworks:_
+    
+    ```objective-c
+    CFNetwork.framework
+    Security.framework
+    CoreTelephony.framework
+    AdSupport.framework
+    SystemConfiguration.framework
+    libicucore.dylib
+    ```
+4. _Add the -ObjC Linker flag to your project settings_
+5. _Add an import for the taplytics framework to your _prefix.pch file._
+
+    ```objective-c
+    
+    // YourApp_prefix.pch:
+    
+    #ifdef __OBJC__
+      #import <Foundation/Foundation.h>
+      #import <UIKit/UIKit.h>
+      // Add the following line:
+      #import <Taplytics/Taplytics.h>
+    #endif
+    ```
+
+6. _Initialize the SDK by adding a line of code with your API key in your AppDelegate.m file_
+    
+    ```objective-c
+    - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    ...
+    [TaplyticsManager startTaplyticsAPIKey:@"Your App Token Here" liveUpdate:YES];
+    
+    //For internal builds, use liveUpdate:YES. For public builds, use liveUpdate:NO.
+    ...
+    }
+    ```
 
 ## Questions or Need Help?
 
