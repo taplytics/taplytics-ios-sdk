@@ -37,11 +37,9 @@ _How do I, as a developer, start using Taplytics?_
     
     ```objective-c
     - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    ...
-    [TaplyticsManager startTaplyticsAPIKey:@"Your App Token Here" liveUpdate:YES];
-    
-    //For internal builds, use liveUpdate:YES. For public builds, use liveUpdate:NO.
-    ...
+        ...
+        [TaplyticsManager startTaplyticsAPIKey:@"Your App Token Here"];
+        ...
     }
     ```
 
