@@ -9,10 +9,8 @@ Pod::Spec.new do |s|
   s.author = { 'Taplytics' => 'help@taplytics.com' }
   s.source = { :git => 'https://github.com/taplytics/taplytics-ios-sdk.git', :tag => "#{s.version}" }
   s.requires_arc = true
-  s.frameworks =  'CFNetwork', 'Security', 'CoreTelephony', 'AdSupport', 'SystemConfiguration'
+  s.frameworks =  'CFNetwork', 'Security', 'CoreTelephony', 'AdSupport', 'SystemConfiguration', 'Taplytics'
   s.library      = 'icucore'
   s.vendored_frameworks = 'Taplytics.framework'
-  s.xcconfig = {
-    'OTHER_LDFLAGS' => '$(inherited) -ObjC'
-  }
+  s.xcconfig     = { 'OTHER_LDFLAGS' => '-ObjC', 'FRAMEWORK_SEARCH_PATHS' => '"$(PODS_ROOT)/Taplytics"' }
 end
