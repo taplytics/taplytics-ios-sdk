@@ -20,22 +20,13 @@ _How do I, as a developer, start using Taplytics?_
     pod 'Taplytics'
     ```
     
-2. _Add an import for the taplytics framework to your _prefix.pch file._
-    
-    ```
-    // YourApp_prefix.pch:
-    #ifdef __OBJC__
-      #import <Foundation/Foundation.h>
-      #import <UIKit/UIKit.h>
-      // Add the following line:
-      #import <Taplytics/Taplytics.h>
-    #endif
-    ```
-
-3. _Initialize the SDK by adding a line of code with your API key in your AppDelegate.m file_
+2. _Initialize the SDK by adding an import and the following line of code with your API key to your AppDelegate.m file_
 
     
     ```objective-c
+    #import <Taplytics/Taplytics.h>
+
+
     - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
         ...
         [TaplyticsManager startTaplyticsAPIKey:@"Your App Token Here"];
