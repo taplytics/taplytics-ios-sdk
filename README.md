@@ -50,29 +50,17 @@ _How do I, as a developer, start using Taplytics?_
     libicucore.dylib
     ```
 4. _Add the -ObjC Linker flag to your project settings_
-5. _Add an import for the taplytics framework to your _prefix.pch file._
-
-    ```objective-c
-    
-    // YourApp_prefix.pch:
-    
-    #ifdef __OBJC__
-      #import <Foundation/Foundation.h>
-      #import <UIKit/UIKit.h>
-      // Add the following line:
-      #import <Taplytics/Taplytics.h>
-    #endif
-    ```
-
-6. _Initialize the SDK by adding a line of code with your API key in your AppDelegate.m file_
+5. _Initialize the SDK by adding a line of code with your API key in your AppDelegate.m file_
     
     ```objective-c
+    #import <Taplytics/Taplytics.h>
+    ...
     - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    ...
-    [TaplyticsManager startTaplyticsAPIKey:@"Your App Token Here" liveUpdate:YES];
-    
-    //For internal builds, use liveUpdate:YES. For public builds, use liveUpdate:NO.
-    ...
+        ...
+        [TaplyticsManager startTaplyticsAPIKey:@"Your App Token Here" liveUpdate:YES];
+        
+        //For internal builds, use liveUpdate:YES. For public builds, use liveUpdate:NO.
+        ...
     }
     ```
 
