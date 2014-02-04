@@ -14,6 +14,10 @@ typedef enum {
     TLLocalTest
 } TLServer;
 
+__deprecated
+/**
+ DEPRECATED please use same methods in Taplytics.h
+ */
 @interface TaplyticsManager : NSObject
 
 // Start Taplytics With API Key Methods
@@ -24,6 +28,8 @@ typedef enum {
 + (void)startTaplyticsAPIKey:(NSString*)apiKey server:(TLServer)server;
 
 + (void)startTaplyticsAPIKey:(NSString*)apiKey server:(TLServer)server liveUpdate:(BOOL)liveUpdate;
+
+
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
 
