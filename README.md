@@ -29,7 +29,7 @@ _How do I, as a developer, start using Taplytics?_
 
     - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
         ...
-        [TaplyticsManager startTaplyticsAPIKey:@"Your App Token Here"];
+        [Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here"];
         ...
     }
     ```
@@ -56,8 +56,7 @@ _How do I, as a developer, start using Taplytics?_
     ...
     - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
         ...
-        [TaplyticsManager startTaplyticsAPIKey:@"Your App Token Here"];
-
+        [Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here"];
         ...
     }
     ```
