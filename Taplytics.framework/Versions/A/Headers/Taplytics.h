@@ -10,6 +10,20 @@
 
 typedef void(^TLExperimentBlock)(NSDictionary *variables);
 
+@protocol TaplyticsDelegate <NSObject>
+
+@optional
+/** 
+ Delegate method called when a experiment is changed, use this to call runCodeExperiment:withBaseline:variations: again
+ in your code to test and visually see the different code experiments. Only neccisary for code experiments, visual experiments
+ will update themselves.
+ @param experimentName the name of the experiment
+ @param variationName the name of the experiment varariation, nil if Baseline
+ */
+- (void)taplyticsExperimentChanged:(NSString*)experimentName variationName:(NSString*)variationName;
+
+@end
+
 @interface Taplytics : NSObject
 
 /**
@@ -20,6 +34,13 @@ typedef void(^TLExperimentBlock)(NSDictionary *variables);
 + (void)startTaplyticsAPIKey:(NSString*)apiKey;
 
 + (void)startTaplyticsAPIKey:(NSString*)apiKey options:(NSDictionary*)options;
+
+/**
+ Optionally set the taplytics delegate when you need to know when a experiment has changed. For example if you are testing 
+ a code experiment on your root view and want to visually see the different variations.
+ @param delegate
+ */
++ (void)setTaplyticsDelegate:(id<TaplyticsDelegate>)delegate;
 
 /**
  Run code experiment with experiment defined by experimentName, one baseline block or variation block will be run synchronously.
