@@ -29,7 +29,7 @@ typedef void(^TLExperimentBlock)(NSDictionary *variables);
 /**
  Start the Taplytics SDK with your api key. the api key can be found in the 'project settings' page.
  @param apiKey your api key
- @param options Options dictionary, used for testing, can be nil
+ @param options options dictionary, used for testing, set @{"liveUpdate":@NO} to force app store mode, can be nil
  */
 + (void)startTaplyticsAPIKey:(NSString*)apiKey;
 
