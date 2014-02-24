@@ -16,7 +16,7 @@ _How do I, as a developer, start using Taplytics?_
     - Add a Podfile to the root of your project directory with the following:
 
     ```ruby
-    platform :ios
+    platform :ios, '6.0'
     pod 'Taplytics'
     ```
     
