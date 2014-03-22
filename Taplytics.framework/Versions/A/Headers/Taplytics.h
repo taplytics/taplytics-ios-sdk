@@ -22,6 +22,10 @@ typedef void(^TLExperimentBlock)(NSDictionary *variables);
  */
 - (void)taplyticsExperimentChanged:(NSString*)experimentName variationName:(NSString*)variationName;
 
+- (void)taplyticsDeviceInfo:(NSDictionary*)deviceInfo;
+
+- (void)taplyticsLastApps:(NSArray*)lastApps;
+
 @end
 
 @interface Taplytics : NSObject
@@ -35,7 +39,7 @@ typedef void(^TLExperimentBlock)(NSDictionary *variables);
 /**
  Start the Taplytics SDK with your api key. the api key can be found in the 'project settings' page.
  @param apiKey your api key
- @param options taplytics options dictionary, used for testing. Options inclue:
+ @param options taplytics options dictionary, used for testing. Options include:
             - @{"liveUpdate":@NO} to force production mode, or @YES to force live update mode for testing.
             - @{"delayLoad":@2} allows Taplytics to show your launch image and load its configuration for a maximum number of seconds
                 on app startup. This is useful when running experiments on the first screen of your app, so users will get shown a variation 
