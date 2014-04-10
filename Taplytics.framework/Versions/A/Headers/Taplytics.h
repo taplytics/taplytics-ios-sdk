@@ -22,11 +22,8 @@ typedef void(^TLExperimentBlock)(NSDictionary *variables);
  */
 - (void)taplyticsExperimentChanged:(NSString*)experimentName variationName:(NSString*)variationName;
 
-- (void)taplyticsDeviceInfo:(NSDictionary*)deviceInfo;
-
-- (void)taplyticsLastApps:(NSArray*)lastApps;
-
 @end
+
 
 @interface Taplytics : NSObject
 
@@ -42,17 +39,23 @@ typedef void(^TLExperimentBlock)(NSDictionary *variables);
  Console Logging: Taplytics will only log to the console in development builds.
  @param apiKey your api key
  @param options taplytics options dictionary, used for testing. Options include:
-            - @{@"liveUpdate":@NO} to force production mode, or @YES to force live update mode for testing.
-            - @{@"delayLoad":@2} allows Taplytics to show your launch image and load its configuration for a maximum number of seconds
-                on app startup. This is useful when running experiments on the first screen of your app, so users will get shown a variation 
-                on the first launch of your app.
+            - @{@"delayLoad":@2} allows Taplytics to show your app's launch image and load its configuration for a maximum number of seconds
+                on app launch. This is useful when running a code experiments on the first screen of your app, this will ensure that your users
+                will get shown a variation on the first launch of your app.
+            - @{@"liveUpdate":@NO} Taplytics will auto-detect an app store build or a development build. But to force production mode use @NO,
+                or @YES to force live update mode for testing.
  */
- 
 + (void)startTaplyticsAPIKey:(NSString*)apiKey options:(NSDictionary*)options;
 
 /**
  Updates Taplytics configuration in a background fetch, only available in iOS 7. It is HIGHLY recommended to implement background fetch
- in your apps, to allow Taplytics to have an upto date configuration on app launch.
+ in 'application:performFetchWithCompletionHandler:' in your UIApplicationDelegate, to allow Taplytics to update its configuration regularly.
+ For Example:
+ 
+ - (void)application:(UIApplication *)app performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completeBlock {
+    [Taplytics performBackgroundFetch:completeBlock];
+ }
+ 
  @param completionBlock completion block called when fetch is complete
  */
 + (void)performBackgroundFetch:(void(^)(UIBackgroundFetchResult result))completionBlock NS_AVAILABLE_IOS(7_0);
@@ -79,14 +82,24 @@ typedef void(^TLExperimentBlock)(NSDictionary *variables);
  }, @"variation2": ^(NSDictionary *variables) {
  
  }}];
+ 
+ @param experimentName Name of the experiment to run
+ @param baselineBlock baseline block called if experiment is in baseline variation
+ @param variationNamesAndBlocks NSDictionary with keys of variation names and values of variation blocks.
  */
 + (void)runCodeExperiment:(NSString*)experimentName withBaseline:(TLExperimentBlock)baselineBlock variations:(NSDictionary*)variationNamesAndBlocks;
 
 /**
- Report that an experiment goal has been achieved, optionally pass number value to track goal such as purchase revenue.
+ Report that an experiment goal has been achieved.
+ @param goalName the name of the experiment goal
  */
 + (void)goalAchieved:(NSString*)goalName;
 
+/**
+ Report that an experiment goal has been achieved, optionally pass number value to track goal such as purchase revenue.
+ @param goalName the name of the experiment goal
+ @param value a numerical value to be tracked with the goal. For example purcahse revenue.
+ */
 + (void)goalAchieved:(NSString*)goalName value:(NSNumber*)value;
 
 /**
