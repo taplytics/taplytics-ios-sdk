@@ -60,7 +60,7 @@ typedef void(^TLExperimentBlock)(NSDictionary *variables);
 /**
  Optionally set the taplytics delegate when you need to know when a experiment has changed. For example if you are testing 
  a code experiment on your root view and want to visually see the different variations.
- @param delegate
+ @param delegate The delegate for the receiver. The delegate must implement the TaplyticsDelegate protocol.
  */
 + (void)setTaplyticsDelegate:(id<TaplyticsDelegate>)delegate;
 
