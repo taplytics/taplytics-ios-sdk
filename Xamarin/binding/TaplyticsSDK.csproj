@@ -52,7 +52,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ObjcBindingNativeLibrary Include="..\..\..\Taplytics.framework\Versions\A\Taplytics">
+    <ObjcBindingNativeLibrary Include="..\..\Taplytics.framework\Versions\A\Taplytics">
       <Link>Taplytics</Link>
     </ObjcBindingNativeLibrary>
   </ItemGroup>
