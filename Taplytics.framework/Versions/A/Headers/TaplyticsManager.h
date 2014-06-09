@@ -21,20 +21,20 @@ __deprecated
 @interface TaplyticsManager : NSObject
 
 // Start Taplytics With API Key Methods
-+ (void)startTaplyticsAPIKey:(NSString*)apiKey;
++ (void)startTaplyticsAPIKey:(NSString*)apiKey __deprecated;
 
-+ (void)startTaplyticsAPIKey:(NSString*)apiKey liveUpdate:(BOOL)liveUpdate;
++ (void)startTaplyticsAPIKey:(NSString*)apiKey liveUpdate:(BOOL)liveUpdate __deprecated;
 
-+ (void)startTaplyticsAPIKey:(NSString*)apiKey server:(TLServer)server;
++ (void)startTaplyticsAPIKey:(NSString*)apiKey server:(TLServer)server __deprecated;
 
-+ (void)startTaplyticsAPIKey:(NSString*)apiKey server:(TLServer)server liveUpdate:(BOOL)liveUpdate;
++ (void)startTaplyticsAPIKey:(NSString*)apiKey server:(TLServer)server liveUpdate:(BOOL)liveUpdate __deprecated;
 
 
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
 
 // Update Taplytics Properties in Background, only iOS7 and later
-+ (void)performBackgroundFetch:(void(^)(UIBackgroundFetchResult))completionBlock;
++ (void)performBackgroundFetch:(void(^)(UIBackgroundFetchResult))completionBlock __deprecated;
 
 #endif
 
