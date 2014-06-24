@@ -7,13 +7,6 @@
 
 #import <UIKit/UIKit.h>
 
-typedef enum {
-    TLDev,
-    TLProduction,
-    TLLocalHost,
-    TLLocalTest
-} TLServer;
-
 typedef void(^TLExperimentBlock)(NSDictionary *variables);
 
 @protocol TaplyticsDelegate <NSObject>
@@ -108,20 +101,5 @@ typedef void(^TLExperimentBlock)(NSDictionary *variables);
  @param value A numerical value to be tracked with the goal. For example purcahse revenue.
  */
 + (void)goalAchieved:(NSString*)goalName value:(NSNumber*)value;
-
-/**
- DEPRECATED Start Taplytics Methods, please use startTaplyticsAPIKey:options:
- */
-+ (void)startTaplyticsAPIKey:(NSString*)apiKey liveUpdate:(BOOL)liveUpdate __deprecated;
-
-/**
- DEPRECATED Start Taplytics Methods, please use startTaplyticsAPIKey:options:
- */
-+ (void)startTaplyticsAPIKey:(NSString*)apiKey server:(TLServer)server __deprecated;
-
-/**
- DEPRECATED Start Taplytics Methods, please use startTaplyticsAPIKey:options:
- */
-+ (void)startTaplyticsAPIKey:(NSString*)apiKey server:(TLServer)server liveUpdate:(BOOL)liveUpdate __deprecated;
 
 @end
