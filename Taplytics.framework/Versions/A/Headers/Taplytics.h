@@ -27,7 +27,13 @@ typedef void(^TLExperimentBlock)(NSDictionary *variables);
 @interface Taplytics : NSObject
 
 /**
- Start the Taplytics SDK with your api key. the api key can be found in the 'project settings' page.
+ Start the Taplytics SDK with your api key. the api key can be found in the 'project settings' page. 
+ 
+ On the first launch of your app Taplytics will show your launch image for a maximum of two seconds, this gives Taplytics time 
+ to download your experiment's configuration and display the experiment's changes to your users. In subsequent launches of your 
+ app Taplytics will use the experiment's configuration from disk, and not show your launch image. If you do not want this behavior, use:
+ [Taplytics startTaplyticsAPIKey:@"API_KEY" options:@{@"delayLoad":@0}];
+ 
  Console Logging: Taplytics will only log to the console in development builds.
  @param apiKey your api key
  */
@@ -35,12 +41,19 @@ typedef void(^TLExperimentBlock)(NSDictionary *variables);
 
 /**
  Start the Taplytics SDK with your api key. the api key can be found in the 'project settings' page.
+ 
+ On the first launch of your app Taplytics will show your launch image for a maximum of two seconds, this gives Taplytics time
+ to download your experiment's configuration and display the experiment's changes to your users. In subsequent launches of your
+ app Taplytics use the experiment's configuration from disk, and not show your launch image. If you do not want this behavior, use:
+ [Taplytics startTaplyticsAPIKey:@"API_KEY" options:@{@"delayLoad":@0}];
+ 
  Console Logging: Taplytics will only log to the console in development builds.
  @param apiKey Your API key
  @param options Taplytics options dictionary, used for testing. Options include:
             - @{@"delayLoad":@2} allows Taplytics to show your app's launch image and load its configuration for a maximum number of seconds
-                on app launch. This is useful when running a code experiments on the first screen of your app, this will ensure that your users
-                will get shown a variation on the first launch of your app.
+                on app launch, the default for first launch is 2 seconds. This is useful when running a code experiments on the first screen 
+                of your app, this will ensure that your users will get shown a variation on the first launch of your app. Set to @0 for no
+                delay.
             - @{@"liveUpdate":@NO} Taplytics will auto-detect an app store build or a development build. But to force production mode use @NO,
                 or @YES to force live update mode for testing.
             - @{@"shakeMenu":@NO} To disable the Taplytics development mode shake menu set @NO, only use if you have your own development shake menu.
