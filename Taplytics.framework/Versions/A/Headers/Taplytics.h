@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v1.4.4
+//  Taplytics v1.4.6
 //
 //  Copyright (c) 2014 Syrp Inc. All rights reserved.
 //
