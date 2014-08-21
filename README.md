@@ -1,5 +1,7 @@
 # Taplytics iOS SDK - iOS 8
 
+**All Builds 1.4.8 or newer are built with XCode 6.0 and iOS 8, these builds are intended for developers working on iOS 8 Apps, do no use these builds in production.**
+
 _Description: Taplytics is a native mobile A/B testing platform that allows you to create new tests and push them live without any code updates!_
 
 ## Project Setup
