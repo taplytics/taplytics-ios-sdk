@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.description  = 'For installation instructions, please visit: https://github.com/taplytics/taplytics-ios-sdk'
   s.source = { :git => 'https://github.com/taplytics/taplytics-ios-sdk.git', :tag => "#{s.version}" }
   s.platform = :ios, '6.0'
-  s.frameworks = 'CFNetwork', 'Security', 'CoreTelephony', 'SystemConfiguration'
+  s.frameworks = 'CFNetwork', 'Security', 'CoreTelephony', 'SystemConfiguration', 'MobileCoreServices'
   s.weak_frameworks = 'AdSupport'
   s.requires_arc = true
   s.library      = 'icucore'
