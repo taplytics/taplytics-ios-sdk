@@ -1,4 +1,4 @@
-# Taplytics iOS SDK - iOS 8
+# Taplytics iOS SDK
 
 _Description: Taplytics is a native mobile A/B testing platform that allows you to create new tests and push them live without any code updates! Supports iOS 6-8_
 
