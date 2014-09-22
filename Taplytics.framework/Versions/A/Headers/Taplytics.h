@@ -6,6 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TaplyticsOptions.h"
 
 typedef void(^TLExperimentBlock)(NSDictionary *variables);
 
@@ -57,6 +58,8 @@ typedef void(^TLExperimentBlock)(NSDictionary *variables);
             - @{@"liveUpdate":@NO} Taplytics will auto-detect an app store build or a development build. But to force production mode use @NO,
                 or @YES to force live update mode for testing.
             - @{@"shakeMenu":@NO} To disable the Taplytics development mode shake menu set @NO, only use if you have your own development shake menu.
+            - @{@"disable":@[TaplyticsOptionTrackLocaiton]} To disable any tracking attributes set a @"disable" key with an array of values to disable from
+                TaplyticsOptions.h
  */
 + (void)startTaplyticsAPIKey:(NSString*)apiKey options:(NSDictionary*)options;
 
@@ -103,16 +106,76 @@ typedef void(^TLExperimentBlock)(NSDictionary *variables);
 + (void)runCodeExperiment:(NSString*)experimentName withBaseline:(TLExperimentBlock)baselineBlock variations:(NSDictionary*)variationNamesAndBlocks;
 
 /**
+ Settings User Attributes allows for submitting mutiple user attributes with custom values. 
+ This allows you to set attributes such as a user_id, email, name, age, gender, ect. You can also set a dictionary
+ of custom data for the user. The avaliable key-values are shown below:
+ 
+    [Taplytics setUserAttributes:@{
+        @"user_id": @"testUser",
+        @"email": @"test@taplytics.com",
+        @"gender": @"female",
+        @"age": @25,
+        @"avatarUrl": @"https://pbs.twimg.com/profile_images/497895869270618112/1zbNvWlD.png",
+        @"customData": @{
+            @"paidSubscriber": @YES,
+            @"purchases": @3,
+            @"totalRevenue": @42.42
+        }
+    }];
+ 
+ @param attributes is a dictionary of user attributes that can be used to segment your users against.
+ @warning Attributes can only be values allowed by NSJSONSerialization.
+*/
++ (void)setUserAttributes:(NSDictionary*)attributes;
+
+/**
+ Log an event to Taplytics, these events can be used as goals in your experiments.
+ 
+ @param eventName the name of the event
+*/
++ (void)logEvent:(NSString*)eventName;
+
+/** 
+ Log an event to Taplytics with an optional number value and optional metadata, these events can be used as goals in your experiments.
+ 
+ @param eventName the name of the event
+ @param value an optional number value to quantify your event
+ @param metaData an optional dictionary of metaData to attach to your event. Keep the values of this dictionary flat.
+ @warning the metaData can only be values allowed by NSJSONSerialization.
+*/
++ (void)logEvent:(NSString *)eventName value:(NSNumber*)value metaData:(NSDictionary*)metaData;
+
+/**
+ Log revenue to Taplytics with a revenue value, these events can be used as goals in your experiments.
+ 
+ @param eventName the name of the revenue event
+ @param value an optional number value to quantify your event
+ */
++ (void)logRevenue:(NSString*)eventName revenue:(NSNumber*)value;
+
+/**
+ Log revenue to Taplytics with a revenue value and optional metadata, these events can be used as goals in your experiments.
+ 
+ @param eventName the name of the revenue event
+ @param value an optional number value to quantify your event
+ @param metaData an optional dictionary of metaData to attach to your event. Keep the values of this dictionary flat.
+ @warning the metaData can only be values allowed by NSJSONSerialization.
+ */
++ (void)logRevenue:(NSString*)eventName revenue:(NSNumber*)value metaData:(NSDictionary*)metaData;
+
+/**
  Report that an experiment goal has been achieved.
  @param goalName the name of the experiment goal
  */
-+ (void)goalAchieved:(NSString*)goalName;
++ (void)goalAchieved:(NSString*)goalName __deprecated;
 
 /**
  Report that an experiment goal has been achieved, optionally pass number value to track goal such as purchase revenue.
  @param goalName The name of the experiment goal
  @param value A numerical value to be tracked with the goal. For example purcahse revenue.
  */
-+ (void)goalAchieved:(NSString*)goalName value:(NSNumber*)value;
++ (void)goalAchieved:(NSString*)goalName value:(NSNumber*)value __deprecated;
+
 
 @end
+
