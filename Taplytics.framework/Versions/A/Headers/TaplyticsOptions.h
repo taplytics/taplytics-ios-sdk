@@ -14,3 +14,5 @@ extern NSString *const TaplyticsOptionSourceGoogleAnalytics;
 extern NSString *const TaplyticsOptionSourceFlurry;
 extern NSString *const TaplyticsOptionSourceMixpanel;
 extern NSString *const TaplyticsOptionSourceIntercom;
+extern NSString *const TaplyticsOptionSourceParse;
+extern NSString *const TaplyticsOptionSourceApsalar;
