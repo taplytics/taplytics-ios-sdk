@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v2.0.4
+//  Taplytics v2.0.6
 //
 //  Copyright (c) 2014 Syrp Inc. All rights reserved.
 //
@@ -84,9 +84,9 @@ typedef void(^TLExperimentBlock)(NSDictionary *variables);
 + (void)setTaplyticsDelegate:(id<TaplyticsDelegate>)delegate;
 
 /**
- Run code experiment with experiment defined by experimentName, one baseline or variation block will be run synchronously.
- If the "delayLoad" option is set in the options dictionary of startTaplyticsAPIKey:options: the block will be called asynchronously
- once the Taplytics configuration has been loaded, but before the launch image is hidden.
+ Run a code experiment defined by experimentName, one baseline or variation block will be run synchronously.
+ If the "delayLoad" option is set in the options dictionary of startTaplyticsAPIKey:options: the block execution will be delayed
+ and will be called once the Taplytics configuration has been loaded, but before the launch image is hidden.
  
  If no experiment has been defined or no configuration has been loaded the baseline block will be called. 
  Variation blocks are defined in a NSDictionary with a key of the variation name, and a value of TLExperimentBlock. For Example:

@@ -9,6 +9,7 @@ extern NSString *const TaplyticsOptionTrackLocaiton;
 extern NSString *const TaplyticsOptionTrackStoreKit;
 extern NSString *const TaplyticsOptionTrackSocialSignIn;
 extern NSString *const TaplyticsOptionTrackiAdInstallation;
+extern NSString *const TaplyticsOptionTrackPhotoLibraryAccess;
 
 extern NSString *const TaplyticsOptionSourceGoogleAnalytics;
 extern NSString *const TaplyticsOptionSourceFlurry;
