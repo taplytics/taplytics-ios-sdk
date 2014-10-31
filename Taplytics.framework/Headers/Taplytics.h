@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v2.0.12
+//  Taplytics v2.0.14
 //
 //  Copyright (c) 2014 Syrp Inc. All rights reserved.
 //
@@ -120,7 +120,7 @@ typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsA
  @param block This block will be called back with a NSDictionary with key value of experiment name and value of it's variation name.
  */
 
-+ (void)getRunningExperimentAndVariations:(TLRunningExperimentsAndVariationsBlock)block;
++ (void)getRunningExperimentsAndVariations:(TLRunningExperimentsAndVariationsBlock)block;
 
 /**
  Settings User Attributes allows for submitting mutiple user attributes with custom values. 
