@@ -5,7 +5,7 @@
 //  Copyright (c) 2014 Syrp Inc. All rights reserved.
 //
 
-extern NSString *const TaplyticsOptionTrackLocaiton;
+extern NSString *const TaplyticsOptionTrackLocation;
 extern NSString *const TaplyticsOptionTrackStoreKit;
 extern NSString *const TaplyticsOptionTrackSocialSignIn;
 extern NSString *const TaplyticsOptionTrackiAdInstallation;
