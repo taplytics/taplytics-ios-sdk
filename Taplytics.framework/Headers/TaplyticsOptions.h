@@ -17,3 +17,4 @@ extern NSString *const TaplyticsOptionSourceMixpanel;
 extern NSString *const TaplyticsOptionSourceIntercom;
 extern NSString *const TaplyticsOptionSourceParse;
 extern NSString *const TaplyticsOptionSourceApsalar;
+extern NSString *const TaplyticsOptionSourceAdobe;
