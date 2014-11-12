@@ -129,6 +129,7 @@ typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsA
  
     [Taplytics setUserAttributes:@{
         @"user_id": @"testUser",
+        @"name": @"Test User",
         @"email": @"test@taplytics.com",
         @"gender": @"female",
         @"age": @25,
