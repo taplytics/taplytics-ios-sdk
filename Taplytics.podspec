@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'Taplytics'
-  s.version      = '2.0.28'
+  s.version      = '2.0.30'
   s.author       = { 'Taplytics' => 'help@taplytics.com' }
   s.license      = { :type => 'Commercial', :text => 'See http://taplytics.com/terms' }
   s.homepage     = 'http://taplytics.com'
@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.description  = 'For installation instructions, please visit: https://github.com/taplytics/taplytics-ios-sdk'
   s.source = { :git => 'https://github.com/taplytics/taplytics-ios-sdk.git', :tag => "#{s.version}" }
   s.platform = :ios, '6.0'
-  s.frameworks = 'CFNetwork', 'Security', 'CoreTelephony', 'SystemConfiguration', 'MobileCoreServices'
+  s.frameworks = 'CFNetwork', 'Security', 'CoreTelephony', 'SystemConfiguration', 'MobileCoreServices', 'JavaScriptCore.framework'
   s.weak_frameworks = 'AdSupport'
   s.requires_arc = true
   s.library      = 'icucore'

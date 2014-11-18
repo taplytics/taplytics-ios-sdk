@@ -46,6 +46,7 @@ _How do I, as a developer, start using Taplytics?_
     Security.framework
     CoreTelephony.framework
     SystemConfiguration.framework
+    JavaScriptCore.framework
     libicucore.dylib
     ```
 4. _Add the -ObjC Linker flag to your project settings_
