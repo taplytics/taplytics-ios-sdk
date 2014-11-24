@@ -18,3 +18,4 @@ extern NSString *const TaplyticsOptionSourceIntercom;
 extern NSString *const TaplyticsOptionSourceParse;
 extern NSString *const TaplyticsOptionSourceApsalar;
 extern NSString *const TaplyticsOptionSourceAdobe;
+extern NSString *const TaplyticsOptionSourceLocalytics;
