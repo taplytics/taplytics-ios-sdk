@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v2.1.16
+//  Taplytics v2.1.18
 //
 //  Copyright (c) 2014 Syrp Inc. All rights reserved.
 //
@@ -9,6 +9,8 @@
 #import "TaplyticsOptions.h"
 
 typedef void(^TLExperimentBlock)(NSDictionary *variables);
+
+typedef void(^TLVariationBlock)(NSString* variationName, NSDictionary *variables);
 
 typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsAndVariations);
 
@@ -107,6 +109,37 @@ typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsA
  @param variationNamesAndBlocks NSDictionary with keys of variation names and values of variation blocks.
  */
 + (void)runCodeExperiment:(NSString*)experimentName withBaseline:(TLExperimentBlock)baselineBlock variations:(NSDictionary*)variationNamesAndBlocks;
+
+/**
+ Use this method when running code experiments in Swift, due to how blocks/closures are handled in Swift 
+ passing blocks/closures in an NSDictioary is not supported well. This method will return to either the baselineBlock
+ or the variationBlock with the variation's name. The blocks are called in the same manner as explained in 
+ runCodeExperiment:withBaseline:variations:
+ 
+ Using this method in Swift:
+ Taplytics.runCodeExperiment("testExperiment",
+    forBaseline: { variables in
+        let myVar0: NSNumber? = variables?["var"] as? NSNumber
+        println("Baseline, variable: \(myVar0)")
+    },
+    forVariation: { variationName, variables in
+        let myVar0: NSNumber? = variables?["var"] as? NSNumber
+        if variationName == "variation1" {
+            println("variation 1, variable: \(myVar0)")
+        }
+        else if variationName == "variation2" {
+            println("variation2, variable: \(myVar0)")
+        }
+    }
+ )
+ 
+ @param experimentName Name of the experiment to run
+ @param baselineBlock Baseline block called if experiment is in baseline variation
+ @param variationBlock Variation block called when the experiment is running a variation
+ */
+
++ (void)runCodeExperiment:(NSString*)experimentName forBaseline:(TLExperimentBlock)baselineBlock forVariation:(TLVariationBlock)variationBlock;
+
 
 /**
  Get a NSDictionary of all running experiments and their current variation. This block will return async once the experiment
