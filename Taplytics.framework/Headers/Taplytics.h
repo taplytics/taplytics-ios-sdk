@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v2.1.18
+//  Taplytics v2.1.20
 //
 //  Copyright (c) 2014 Syrp Inc. All rights reserved.
 //
@@ -137,9 +137,7 @@ typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsA
  @param baselineBlock Baseline block called if experiment is in baseline variation
  @param variationBlock Variation block called when the experiment is running a variation
  */
-
 + (void)runCodeExperiment:(NSString*)experimentName forBaseline:(TLExperimentBlock)baselineBlock forVariation:(TLVariationBlock)variationBlock;
-
 
 /**
  Get a NSDictionary of all running experiments and their current variation. This block will return async once the experiment
