@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v2.1.22
+//  Taplytics v2.1.24
 //
 //  Copyright (c) 2014 Syrp Inc. All rights reserved.
 //
@@ -225,6 +225,7 @@ typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsA
  */
 + (void)goalAchieved:(NSString*)goalName value:(NSNumber*)value __deprecated;
 
++ (void)registerPushNotifications;
 
 @end
 
