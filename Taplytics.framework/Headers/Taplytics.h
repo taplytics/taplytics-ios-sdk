@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v2.1.28
+//  Taplytics v2.1.30
 //
 //  Copyright (c) 2014 Syrp Inc. All rights reserved.
 //
@@ -224,6 +224,7 @@ typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsA
  @param value A numerical value to be tracked with the goal. For example purcahse revenue.
  */
 + (void)goalAchieved:(NSString*)goalName value:(NSNumber*)value __deprecated;
+
 
 + (void)registerPushNotifications;
 
