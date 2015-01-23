@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v2.1.30
+//  Taplytics v2.1.32
 //
 //  Copyright (c) 2014 Syrp Inc. All rights reserved.
 //
@@ -178,6 +178,11 @@ typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsA
 + (void)setUserAttributes:(NSDictionary*)attributes;
 
 /**
+ Register for push notification access, this method will show the iOS alert asking your user for acces to send them push notificaitons.
+ */
++ (void)registerPushNotifications;
+
+/**
  Log an event to Taplytics, these events can be used as goals in your experiments.
  
  @param eventName the name of the event
@@ -225,8 +230,6 @@ typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsA
  */
 + (void)goalAchieved:(NSString*)goalName value:(NSNumber*)value __deprecated;
 
-
-+ (void)registerPushNotifications;
 
 @end
 
