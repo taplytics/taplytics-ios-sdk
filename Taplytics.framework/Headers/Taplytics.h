@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v2.1.34
+//  Taplytics v2.1.36
 //
 //  Copyright (c) 2014 Syrp Inc. All rights reserved.
 //
@@ -178,7 +178,7 @@ typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsA
 + (void)setUserAttributes:(NSDictionary*)attributes;
 
 /**
- Register for push notification access, this method will show the iOS alert asking your user for acces to send them push notificaitons.
+ Register for push notification access, this method will show the iOS alert asking for access to send push notificaitons.
  */
 + (void)registerPushNotifications;
 
