@@ -2,8 +2,10 @@
 //  TaplyticsOptions.h
 //  Taplytics
 //
-//  Copyright (c) 2014 Syrp Inc. All rights reserved.
+//  Copyright (c) 2014 Taplytics All rights reserved.
 //
+
+extern NSString *const TaplyticsOptionShowLaunchImage;
 
 extern NSString *const TaplyticsOptionTrackLocation;
 extern NSString *const TaplyticsOptionTrackStoreKit;

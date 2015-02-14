@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v2.1.42
+//  Taplytics v2.1.44
 //
 //  Copyright (c) 2014 Syrp Inc. All rights reserved.
 //
@@ -158,7 +158,7 @@ typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsA
  This allows you to set attributes such as a user_id, email, name, age, gender, ect. You can also set a dictionary
  of custom data for the user. The avaliable key-values are shown below:
  
-    [Taplytics setUserAttributes:@{
+    [Taplytics setUserAttributes: @{
         @"user_id": @"testUser",
         @"name": @"Test User",
         @"email": @"test@taplytics.com",
@@ -179,8 +179,28 @@ typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsA
 
 /**
  Register for push notification access, this method will show the iOS alert asking for access to send push notificaitons.
+ This method will register for Badge, Sound, and Alert notificaiton types
  */
 + (void)registerPushNotifications;
+
+/**
+ Register for push notification access, this method will show the iOS alert asking for access to send push notificaitons.
+ @param types accepts both UIUserNotificationType (iOS 8) or UIRemoteNotificationType
+ */
++ (void)registerPushNotificationsWithTypes:(NSInteger)types;
+
+/**
+ @return if the the user is registered with Taplytics and iOS for push notifications.
+ */
++ (BOOL)isUserRegisteredForPushNotifications;
+
+/**
+ This method will reset the User to a new empty user, this method is intended to be used when your user logs out of an account. 
+ This method will also disable sending push notifications to this device for the previous user. 
+ Call registerPushNotifications again to register push notifications for the new user.
+ @param callback called when Taplytics has completed resetting your user.
+ */
++ (void)resetUser:(void(^)(void))callback;
 
 /**
  Log an event to Taplytics, these events can be used as goals in your experiments.
