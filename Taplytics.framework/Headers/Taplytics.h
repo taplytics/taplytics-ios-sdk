@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v2.1.44
+//  Taplytics v2.1.46
 //
 //  Copyright (c) 2014 Syrp Inc. All rights reserved.
 //
@@ -178,13 +178,13 @@ typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsA
 + (void)setUserAttributes:(NSDictionary*)attributes;
 
 /**
- Register for push notification access, this method will show the iOS alert asking for access to send push notificaitons.
- This method will register for Badge, Sound, and Alert notificaiton types
+ Register for push notification access, this method will show the iOS alert asking for access to send push notifications.
+ This method will register for Badge, Sound, and Alert notification types
  */
 + (void)registerPushNotifications;
 
 /**
- Register for push notification access, this method will show the iOS alert asking for access to send push notificaitons.
+ Register for push notification access, this method will show the iOS alert asking for access to send push notifications.
  @param types accepts both UIUserNotificationType (iOS 8) or UIRemoteNotificationType
  */
 + (void)registerPushNotificationsWithTypes:(NSInteger)types;
