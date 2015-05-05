@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v2.1.82
+//  Taplytics v2.1.84
 //
 //  Copyright (c) 2014 Syrp Inc. All rights reserved.
 //
@@ -77,7 +77,7 @@ typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsA
     [Taplytics performBackgroundFetch:completeBlock];
  }
  
- @param completionBlock Completion block called when fetch is complete
+ @param completionBlock Completion block called when fetch is complete, returns on main thread.
  */
 + (void)performBackgroundFetch:(void(^)(UIBackgroundFetchResult result))completionBlock NS_AVAILABLE_IOS(7_0);
 
@@ -90,8 +90,8 @@ typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsA
 
 /**
  Run a code experiment defined by experimentName, one baseline or variation block will be run synchronously.
- If the "delayLoad" option is set in the options dictionary of startTaplyticsAPIKey:options: the block execution will be delayed
- and will be called once the Taplytics configuration has been loaded, but before the launch image is hidden.
+ On the first launch of your app the execution will be delayed and will be called asynchronously on the main thread
+ once the Taplytics configuration has been loaded, but before the launch image is hidden.
  
  If no experiment has been defined or no configuration has been loaded the baseline block will be called. 
  Variation blocks are defined in a NSDictionary with a key of the variation name, and a value of TLExperimentBlock. For Example:
@@ -105,8 +105,8 @@ typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsA
  }}];
  
  @param experimentName Name of the experiment to run
- @param baselineBlock Baseline block called if experiment is in baseline variation
- @param variationNamesAndBlocks NSDictionary with keys of variation names and values of variation blocks.
+ @param baselineBlock Baseline block called if experiment is in baseline variation. Returns on incoming thread if synchronous, returns on main thread if asynchronous.
+ @param variationNamesAndBlocks NSDictionary with keys of variation names and values of variation blocks. Returns on incoming thread if synchronous, returns on main thread if asynchronous.
  */
 + (void)runCodeExperiment:(NSString*)experimentName withBaseline:(TLExperimentBlock)baselineBlock variations:(NSDictionary*)variationNamesAndBlocks;
 
@@ -134,13 +134,13 @@ typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsA
  )
  
  @param experimentName Name of the experiment to run
- @param baselineBlock Baseline block called if experiment is in baseline variation
- @param variationBlock Variation block called when the experiment is running a variation
+ @param baselineBlock Baseline block called if experiment is in baseline variation. Returns on incoming thread if synchronous, returns on main thread if asynchronous.
+ @param variationBlock Variation block called when the experiment is running a variation. Returns on incoming thread if synchronous, returns on main thread if asynchronous.
  */
 + (void)runCodeExperiment:(NSString*)experimentName forBaseline:(TLExperimentBlock)baselineBlock forVariation:(TLVariationBlock)variationBlock;
 
 /**
- Get a NSDictionary of all running experiments and their current variation. This block will return async once the experiment
+ Get a NSDictionary of all running experiments and their current variation. This block will return async on the main thread once the experiment
  configuration has loaded from our servers, or synchronously if the configuration has already loaded. Example of a NSDictionary that is returned:
  
  NSDictionary* experimentsAndVariations = @{
@@ -148,7 +148,7 @@ typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsA
     @"Experiment 2": @"Variation 1"
  };
  
- @param block This block will be called back with a NSDictionary with key value of experiment name and value of it's variation name.
+ @param block This block will be called back with a NSDictionary with key value of experiment name and value of it's variation name. Returns on main thread.
  */
 
 + (void)getRunningExperimentsAndVariations:(TLRunningExperimentsAndVariationsBlock)block;
