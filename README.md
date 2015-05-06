@@ -6,7 +6,7 @@ _Description: Taplytics is a native mobile A/B testing platform that allows you 
 
 _How do I, as a developer, start using Taplytics?_ 
 
-1. Sign up for a free account at Taplytics.com.
+1. [Sign up](https://taplytics.com/signup) for a free account at Taplytics.com.
 2. Install the SDK.
 3. Create an experiment and push it live to your users!
 
@@ -77,7 +77,7 @@ _How do I, as a developer, start using Taplytics?_
     
 #### App Linking
 
-Optionally app linking allows you to pair your device to Taplytics via a link sent through email or text. This will enable your team to easily pair any build of your app to Taplytics.
+Optionally you can implement app linking, which will allow you to pair your device to Taplytics via a link sent through email or text. This will enable your team to easily pair any build of your app to Taplytics.
 
 1. First ensure that `application:openURL:` method is implemented in your `UIApplicationDelegate`
 
@@ -87,7 +87,7 @@ Optionally app linking allows you to pair your device to Taplytics via a link se
     }
     ```
     
-2. [Get your Taplytics URL Scheme from your Project's Settings](https://taplytics.com/dashboard)
+2. [Get your Taplytics URL Scheme from Taplytics's Settings](https://taplytics.com/dashboard)
 
     ![Image of URL Scheme](http://taplytics.com/assets/docs/install-sdk/url-scheme.png)
     
@@ -99,11 +99,11 @@ Optionally app linking allows you to pair your device to Taplytics via a link se
 
 Taplytics not only lets you run visual experiments with no code needed, the SDK also offers a code-based solution to running experiments in your app.
 
-Code Experiments let you run different variations of your app with simple blocks. You can also set different variable values for each variation to be returned in the code blocks.
+Code Experiments allow you to run different variations of your app with simple code blocks. You can also set different variable values for each variation to be returned in the code blocks.
 
 #### Objective-C Experiments
 
-For example, an experiment named "Code Experiment #1" with a baseline return block, and two variation blocks. Within each block we can get a `numberValue` variable from the `variables` NSDictionary that can have a different value set for each variation.
+For example, an experiment named "Code Experiment #1" with a baseline block, and two variation blocks. Within each block we can get a `numberValue` variable from the `variables` NSDictionary, variables can have a different values set for each variation.
     
 ```objc
 [Taplytics runCodeExperiment:@"Code Experiment #1" withBaseline:^(NSDictionary *variables) {
@@ -142,9 +142,9 @@ Taplytics.runCodeExperiment("Code Experiment #1",
 )
 ```
     
-#### Testing Codeblocks
+#### Testing Code Experiments
 
-Implementing the TaplyticsDelegate is not necessary to properly run code-based experiments. But with code experiments you will only see the changes when the runCodeExperiment block is actually excecuted, so when you switch between variations you might not see changes until the view has been reloaded. If you would like to see these changes when you change variations, you will have to implement the TaplyticsDelegate.
+Implementing the TaplyticsDelegate is not necessary to properly run code-based experiments. But with code experiments you will only see the changes when the runCodeExperiment block is actually excecuted, so when you switch between variations you might not see changes until the view has been reloaded. If you would like to see these changes when you change variations (for example when you shake a development build and choose a different variation to test), you will have to implement the TaplyticsDelegate.
 
 1. Add the TaplyticsDelegate to your Class
 
@@ -152,11 +152,12 @@ Implementing the TaplyticsDelegate is not necessary to properly run code-based e
     #import <Taplytics/Taplytics.h>
     @interface SampleViewController : ViewController <TaplyticsDelegate>
     ```
-2. Add the `taplyticsExperimentChanged:experimentName:variationName:` method to your Class. Then call your code experiment again from that method. This delegate method will be called everytime the current variation is selected on the website or device's shake menu.
+2. Add the `taplyticsExperimentChanged:experimentName:variationName:` method to your Class and register the delegate with Taplytics using `setTaplyticsDelegate:`. Then call your code experiment again from that method. This delegate method will be called everytime the current variation is changed on the website or the shake menu.
 
     ```objc
     - (void)viewDidLoad {
         [super viewDidLoad];
+        [Taplytics setTaplyticsDelegate:self];
         [self runMyCodeExperiment];
     }
     
@@ -213,6 +214,10 @@ If you already have Analytics events instrumented with another Analytics source 
 - [Parse](https://www.parse.com/)
 - [Apsalar](https://apsalar.com/)
 
+#### Push Experiment/Variation Information
+
+If you choose to, the Taplytics SDK can also send the running Experiment/Variation information to a supported Analytics source. [Check out our docs](https://taplytics.com/docs/third-party-integration-setup) for details.
+
 ## User Attributes
 
 Its possible to send user attributes to Taplytics for use in segmenting your users. It is required to set one of `user_id` or `email` to uniquely identify the user across multiple devices. The `customData` field allows you to send Taplytics your own custom data as a flat `NSDictionary` with `NSJSONSerialization` accepted values.
@@ -258,7 +263,7 @@ To reset a user after they have logged out of your app and the User Attributes a
 
 ## Push Notification Instructions
 
-1. In order for iOS and Taplytics to know that your app accepts Push Notifications, you have to implement the following methods on your  `UIApplicationDelegate`.
+1. In order for iOS and Taplytics to know that your app accepts Push Notifications, you must implement the following methods on your  `UIApplicationDelegate`.
 
     ```objc
     // Implement these methods for Taplytics Push Notifications
@@ -281,11 +286,11 @@ To reset a user after they have logged out of your app and the User Attributes a
     }
     ```
     
-2. You'll also have to register for push notifications. When you do so, iOS will ask your users for permission and enable the ability to receive notifications to that device.
+2. You'll also need to register for push notifications with iOS. When you do so, iOS will ask your users for permission and enable the ability to receive notifications to that device.
 
     If you are not already registering for push notifications all you have to do is call registerPushNotifications: on Taplytics, and we take care of all the rest!
 
-    Please note that calling this function will  show the permission dialog  to the user.
+    Please note that calling this function will show the permission dialog to the user.
     
     ```objc
     /* Example usage */
@@ -294,13 +299,13 @@ To reset a user after they have logged out of your app and the User Attributes a
     
 #### Resetting User After Logout
 
-1. If you're using our User Attributes feature, you can easily disconnect a user from the device when they log out. This will prevent our system from sending pushes to that device if you attempt to send a targetted push notification to the user who used to be logged in on it. You can do this by calling our `resetUser:` function:
+If you're using our User Attributes feature, you can easily disconnect a user from the device when they log out. This will prevent our system from sending pushes to that device if you attempt to send a targetted push notification to the user who used to be logged in on it. You can do this by calling our `resetUser:` function:
 
-    ```objc
-    [Taplytics resetUser:^{
-      // Finished User Reset
-    }];
-    ```
+```objc
+[Taplytics resetUser:^{
+  // Finished User Reset
+}];
+```
     
 ## Questions or Need Help
 
