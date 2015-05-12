@@ -107,13 +107,13 @@ For example, an experiment named "Code Experiment #1" with a baseline block, and
     
 ```objc
 [Taplytics runCodeExperiment:@"Code Experiment #1" withBaseline:^(NSDictionary *variables) {
-    NSNumber* numberValue = variables[@"numberValue"];
+    NSNumber* numberValue = variables[@"numberValue"]; // can be null
     // Insert baseline experiment code here
 } variations:@{@"Variation 1": ^(NSDictionary *variables) {
-    NSNumber* numberValue = variables[@"numberValue"];
+    NSNumber* numberValue = variables[@"numberValue"]; // can be null
     // Insert Variation 1 variation code here
 }, @"Variation 2": ^(NSDictionary *variables) {
-    NSNumber* numberValue = variables[@"numberValue"];
+    NSNumber* numberValue = variables[@"numberValue"]; // can be null
     // Insert Variation 2 variation code here
 }}];
 ```
@@ -127,11 +127,11 @@ For example the same code experiment in Objective-C from above, using Swift:
 ```swift
 Taplytics.runCodeExperiment("Code Experiment #1",
     forBaseline: { variables in
-        let numberValue: NSNumber? = variables?["numberValue"] as? NSNumber
+        let numberValue: NSNumber? = variables?["numberValue"] as? NSNumber // can be null
         // Insert baseline experiment code here
     },
     forVariation: { variationName, variables in
-        let numberValue: NSNumber? = variables?["numberValue"] as? NSNumber
+        let numberValue: NSNumber? = variables?["numberValue"] as? NSNumber // can be null
         if variationName == "Variation 1" {
             // Insert Variation 1 variation code here
         }
