@@ -1,6 +1,6 @@
 # Taplytics iOS SDK
 
-_Description: Taplytics is a native mobile A/B testing platform that allows you to create new tests and push them live without any code updates! Supports iOS 6-8_
+_Description: Taplytics is a native mobile A/B testing platform that allows you to create new tests and push them live without any code changes! Supports iOS 6-8_
 
 ## Project Setup
 
@@ -75,6 +75,7 @@ _How do I, as a developer, start using Taplytics?_
     }
     ```
     
+## Other Setup Options
 #### App Linking
 
 Optionally you can implement app linking, which will allow you to pair your device to Taplytics via a link sent through email or text. This will enable your team to easily pair any build of your app to Taplytics.
@@ -94,26 +95,72 @@ Optionally you can implement app linking, which will allow you to pair your devi
 3. Add Taplytics URL Type in XCode's Build Info panel, with Identifier: com.taplytics, add your Taplytics URL Scheme from above.
 
     ![Image Of XCode build info](http://taplytics.com/assets/docs/install-sdk/app-link.png)
+    
+#### Launch Image
+
+On the first launch of your app the Taplytics SDK will show your iOS launch image up to a maximum 2 seconds while it downloads properties from Taplytics servers. This enables you to run experiments on the first view of your app.
+
+If you would like to disable showing the launch image: 
+
+```obc
+[Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{@"delayLoad":@0}];
+```
+
+Or increase the maximum wait time to 10 seconds:
+
+```obc
+[Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{@"delayLoad":@10}];
+```
+
+#### Tracking options
+
+Taplytics automatically tracks events in your app, if you would like to disable any of this tracking pass in one of the constants below into a disabled array
+
+|Constant  |Description         |
+|---	    |---          |
+|TaplyticsOptionTrackLocation | location tracking |
+|TaplyticsOptionTrackSocialSignIn |	social sign in access alert tracking |
+|TaplyticsOptionTrackiAdInstallation |	app install from iAd    |
+|TaplyticsOptionTrackPhotoLibraryAccess |	photo library access alert tracking |
+|TaplyticsOptionSourceGoogleAnalytics | Google Analytics event tracking |
+|TaplyticsOptionSourceFlurry | Flurry Analytics event tracking |
+|TaplyticsOptionSourceMixpanel | Mixpanel Analytics event tracking |
+|TaplyticsOptionSourceIntercom | Intercom event tracking |
+|TaplyticsOptionSourceParse | Parse Analytics event tracking |
+|TaplyticsOptionSourceApsalar | Apsalar Analytics event tracking |
+|TaplyticsOptionSourceAdobe | Adobe Analytics event tracking |
+|TaplyticsOptionSourceLocalytics | Localytics Analytics event tracking |
+
+For example:
+
+```obc
+[Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{@"disable":@[TaplyticsOptionTrackLocation]}];
+```
 
 ## Code Experiment Instructions
 
 Taplytics not only lets you run visual experiments with no code needed, the SDK also offers a code-based solution to running experiments in your app.
 
-Code Experiments allow you to run different variations of your app with simple code blocks. You can also set different variable values for each variation to be returned in the code blocks.
+Code Experiments allow you to run different variations of your app with simple code blocks. You can also set different variable values for each variation to be returned in the code blocks. 
+
+Note that the Dictionary of variables can be empty, if your app loads for the first time an is unable to download properties from Taplytics servers the baseline block will be called with an empty Dictionary. This will obviously cause all your code variables to be null, it is good practice to set a default value as seen below.
 
 #### Objective-C Experiments
 
 For example, an experiment named "Code Experiment #1" with a baseline block, and two variation blocks. Within each block we can get a `numberValue` variable from the `variables` NSDictionary, variables can have a different values set for each variation.
     
 ```objc
-[Taplytics runCodeExperiment:@"Code Experiment #1" withBaseline:^(NSDictionary *variables) {
-    NSNumber* numberValue = variables[@"numberValue"]; // can be null
+[Taplytics runCodeExperiment:@"Code Experiment #1" withBaseline:^(NSDictionary *variableDic) {
+    // code variables can be null
+    NSNumber* numberValue = variableDic[@"numberValue"] ? variableDic[@"numberValue"] : @0; 
     // Insert baseline experiment code here
-} variations:@{@"Variation 1": ^(NSDictionary *variables) {
-    NSNumber* numberValue = variables[@"numberValue"]; // can be null
+} variations:@{@"Variation 1": ^(NSDictionary *variableDic) {
+    // code variables can be null
+    NSNumber* numberValue = variableDic[@"numberValue"] ? variableDic[@"numberValue"] : @1; 
     // Insert Variation 1 variation code here
-}, @"Variation 2": ^(NSDictionary *variables) {
-    NSNumber* numberValue = variables[@"numberValue"]; // can be null
+}, @"Variation 2": ^(NSDictionary *variableDic) {
+    // code variables can be null
+    NSNumber* numberValue = variableDic[@"numberValue"] ? variableDic[@"numberValue"] : @2; 
     // Insert Variation 2 variation code here
 }}];
 ```
@@ -174,6 +221,20 @@ Implementing the TaplyticsDelegate is not necessary to properly run code-based e
         [self runMyCodeExperiment];
     }
     ```
+    
+#### Running Experiments
+
+The Taplytics SDK can tell you what experiments and variations are currently runing. The block can return asynchronously once Taplytics properties have loaded. The block will return a `NSDictionary` with experiment names as the key value, and variation names as the value.
+
+```obc
+[Taplytics getRunningExperimentsAndVariations:^(NSDictionary *experimentsAndVariations) {
+    // For example: 
+    // NSDictionary* experimentsAndVariations = @{
+    //  @"Experiment 1": @"baseline",
+    //  @"Experiment 2": @"Variation 1"
+    //};
+}];
+```
     
 ## Analytics Events
 
