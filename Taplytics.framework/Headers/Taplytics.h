@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v2.1.94
+//  Taplytics v2.1.96
 //
 //  Copyright (c) 2014 Syrp Inc. All rights reserved.
 //
@@ -201,6 +201,12 @@ typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsA
  @param callback called when Taplytics has completed resetting your user.
  */
 + (void)resetUser:(void(^)(void))callback;
+
+/**
+ This method will return the current user attributes for the user.
+ @param callback NSDictionary of user attributes returned when Taplytics has loaded properties from our servers.
+ */
++ (void)getUserAttributes:(void(^)(NSDictionary* userAttributes))callback;
 
 /**
  Log an event to Taplytics, these events can be used as goals in your experiments.
