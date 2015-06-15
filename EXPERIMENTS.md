@@ -93,9 +93,13 @@ Implementing the TaplyticsDelegate is not necessary to properly run code-based e
     }
     ```
 
+---
+
 ## Visual Editing
 
 You don't have to do anything else! All visual editing is done on the Taplytics dashboard. See the docs on visual editing [here](https://taplytics.com/docs/visual-experiments).
+
+---
 
 ## Delay Load
 
@@ -112,6 +116,8 @@ Or increase the maximum wait time to 10 seconds:
 ```obc
 [Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{@"delayLoad":@10}];
 ```
+
+---
 
 ## Running Experiments
 

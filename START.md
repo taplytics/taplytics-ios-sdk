@@ -6,7 +6,7 @@ You can get started with using Taplytics on iOS in minutes. Just follow the step
 | 2 | [Setting User Attributes](#2-user-attributes) (optional) |
 | 3 | [Tracking Events](#3-track-events) (optional) |
 
-## Install
+## 1. Install
 
 ### SDK
 
@@ -200,7 +200,7 @@ For example:
 [Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{@"disable":@[TaplyticsOptionTrackLocation]}];
 ```
 
-### Taplytics Events
+#### Taplytics Events
 
 You can also track your own custom Analytics events to Taplytics using the `logEvent:` methods:
 
@@ -213,6 +213,8 @@ You can also track your own custom Analytics events to Taplytics using the `logE
 // Log Revenue
 [Taplytics logRevenue:@"Purchase" value:@10.25 metaData:@{@"Item":@"blueSweater"}];
 ```
+
+---
 
 ### Experiment Information Postbacks
 

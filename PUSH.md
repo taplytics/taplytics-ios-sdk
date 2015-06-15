@@ -32,9 +32,7 @@ In order for iOS and Taplytics to know that your app accepts Push Notifications,
     }
     ```
 
----
-
-## 2. Register for Push Notifications
+### Register for Push Notifications
 
 You'll also need to register for push notifications with iOS. When you do so, iOS will ask your users for permission and enable the ability to receive notifications to that device.
 
