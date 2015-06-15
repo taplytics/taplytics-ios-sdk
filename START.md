@@ -200,7 +200,9 @@ For example:
 [Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{@"disable":@[TaplyticsOptionTrackLocation]}];
 ```
 
-#### Taplytics Events
+---
+
+### Taplytics Events
 
 You can also track your own custom Analytics events to Taplytics using the `logEvent:` methods:
 
