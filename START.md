@@ -220,5 +220,5 @@ You can also track your own custom Analytics events to Taplytics using the `logE
 
 ### Experiment Information Postbacks
 
-If you choose to, the Taplytics SDK can also send the running Experiment/Variation information to a supported Analytics source. [Check out our docs](https://taplytics.com/docs/third-party-integration-setup) for details.
+If you choose to, the Taplytics SDK can also send the running Experiment/Variation information to a supported Analytics source. [Check out our docs](https://taplytics.com/docs/guides/third-party-integration-setup) for details.
 
