@@ -4,7 +4,7 @@ Here are some of the common errors we've run into when installing the Taplytics 
 | ----------------- |
 | ["_OBJC_CLASS_$_Taplytics" not found](#objc_class_taplytics-not-found) |
 | ["_utf8_nextCharSafeBody" build error](#_utf8_nextcharsafebody-build-error) |
-| [Terminating app due to uncaught exception 'NSInvalidArgumentException'](#terminating-app-due-to-uncaught-exception-nsinvalidargumentexception) |
+| [Terminating app due to uncaught exception 'NSInvalidArgumentException'](#terminating-app-due-to-uncaught-exception) |
 | ["OTHER_LDFLAGS" Error](#other_ldflags-error) |
 
 
@@ -42,7 +42,7 @@ To navigate to the correct menu:
 Project => Build Phases => Link Binary With Libraries
 
 
-### Terminating app due to uncaught exception 'NSInvalidArgumentException'
+### Terminating app due to uncaught exception
 
 ```
 Terminating app due to uncaught exception 'NSInvalidArgumentException'
