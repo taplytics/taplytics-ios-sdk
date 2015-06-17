@@ -6,6 +6,13 @@
 //
 
 extern NSString *const TaplyticsOptionShowLaunchImage;
+extern NSString *const TaplyticsOptionSessionBackgroundTime;
+
+extern NSString *const TaplyticsOptionUITableViewSW;
+extern NSString *const TaplyticsOptionUICollectionViewSW;
+extern NSString *const TaplyticsOptionUIPageViewSW;
+extern NSString *const TaplyticsOptionUIActionSheetSW;
+extern NSString *const TaplyticsOptionUIAlertViewSW;
 
 extern NSString *const TaplyticsOptionTrackLocation;
 extern NSString *const TaplyticsOptionTrackStoreKit;
