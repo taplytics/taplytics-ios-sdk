@@ -1,7 +1,7 @@
 Setting up Push Notifications using Taplytics is simple. Follow the steps below to get started.
 
 | # | Step |
-| - | ----------------- |
+| --- | --- |
 | 1 | [Setup](#1-setup) |
 | 2 | [Receiving Push Notifications](#2-receiving-push-notifictions) |
 | 3 | [Resetting Users](#3-resetting-users) |
@@ -11,26 +11,26 @@ Setting up Push Notifications using Taplytics is simple. Follow the steps below 
 ### Implement functions
 In order for iOS and Taplytics to know that your app accepts Push Notifications, you must implement the following methods on your  `UIApplicationDelegate`.
 
-    ```objc
-    // Implement these methods for Taplytics Push Notifications
-    - (void)application:(UIApplication *)application
-    didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
-    }
-     
-    - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    }
-     
-    - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
-    }
-     
-    - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    }
-     
-    - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
-    fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-    completionHandler(UIBackgroundFetchResultNoData);
-    }
-    ```
+```objc
+// Implement these methods for Taplytics Push Notifications
+- (void)application:(UIApplication *)application
+didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
+}
+ 
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+}
+ 
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+}
+ 
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+}
+ 
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+completionHandler(UIBackgroundFetchResultNoData);
+}
+```
 
 ### Register for Push Notifications
 
