@@ -1,7 +1,7 @@
 You can get started with using Taplytics on iOS in minutes. Just follow the steps below:
 
 | # | Step |
-| - | ----------------- |
+| --- | --- |
 | 1 | [Install & Initialize Taplytics](#1-install) |
 | 2 | [Setting User Attributes](#2-user-attributes) (optional) |
 | 3 | [Tracking Events](#3-track-events) (optional) |
@@ -193,6 +193,11 @@ If you would like to disable any of this tracking pass in one of the constants b
 |TaplyticsOptionSourceApsalar | Apsalar Analytics event tracking |
 |TaplyticsOptionSourceAdobe | Adobe Analytics event tracking |
 |TaplyticsOptionSourceLocalytics | Localytics Analytics event tracking |
+|TaplyticsOptionUITableViewSW | UITableView tracking |
+|TaplyticsOptionUICollectionViewSW | UICollectionView tracking |
+|TaplyticsOptionUIPageViewSW | UIPageView tracking |
+|TaplyticsOptionUIActionSheetSW | UIActionSheet tracking |
+|TaplyticsOptionUIAlertViewSW | UIAlertView tracking |
 
 For example:
 
