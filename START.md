@@ -181,28 +181,36 @@ If you would like to disable any of this tracking pass in one of the constants b
 
 |Constant  |Description         |
 |---        |---          |
-|TaplyticsOptionTrackLocation | location tracking |
-|TaplyticsOptionTrackSocialSignIn | social sign in access alert tracking |
-|TaplyticsOptionTrackiAdInstallation |  app install from iAd    |
-|TaplyticsOptionTrackPhotoLibraryAccess |   photo library access alert tracking |
-|TaplyticsOptionSourceGoogleAnalytics | Google Analytics event tracking |
-|TaplyticsOptionSourceFlurry | Flurry Analytics event tracking |
-|TaplyticsOptionSourceMixpanel | Mixpanel Analytics event tracking |
-|TaplyticsOptionSourceIntercom | Intercom event tracking |
-|TaplyticsOptionSourceParse | Parse Analytics event tracking |
-|TaplyticsOptionSourceApsalar | Apsalar Analytics event tracking |
-|TaplyticsOptionSourceAdobe | Adobe Analytics event tracking |
-|TaplyticsOptionSourceLocalytics | Localytics Analytics event tracking |
-|TaplyticsOptionUITableViewSW | UITableView tracking |
-|TaplyticsOptionUICollectionViewSW | UICollectionView tracking |
-|TaplyticsOptionUIPageViewSW | UIPageView tracking |
-|TaplyticsOptionUIActionSheetSW | UIActionSheet tracking |
-|TaplyticsOptionUIAlertViewSW | UIAlertView tracking |
+|TaplyticsDisableTrackLocation | location tracking |
+|TaplyticsDisableTrackSocialSignIn | social sign in access alert tracking |
+|TaplyticsDisableTrackiAdInstallation |  app install from iAd    |
+|TaplyticsDisableTrackPhotoLibraryAccess |   photo library access alert tracking |
+|TaplyticsDisableSourceGoogleAnalytics | Google Analytics event tracking |
+|TaplyticsDisableSourceFlurry | Flurry Analytics event tracking |
+|TaplyticsDisableSourceMixpanel | Mixpanel Analytics event tracking |
+|TaplyticsDisableSourceIntercom | Intercom event tracking |
+|TaplyticsDisableSourceParse | Parse Analytics event tracking |
+|TaplyticsDisableSourceApsalar | Apsalar Analytics event tracking |
+|TaplyticsDisableSourceAdobe | Adobe Analytics event tracking |
+|TaplyticsDisableSourceLocalytics | Localytics Analytics event tracking |
+|TaplyticsDisableUITableViewSW | UITableView tracking |
+|TaplyticsDisableUICollectionViewSW | UICollectionView tracking |
+|TaplyticsDisableUIPageViewSW | UIPageView tracking |
+|TaplyticsDisableUIActionSheetSW | UIActionSheet tracking |
+|TaplyticsDisableUIAlertViewSW | UIAlertView tracking |
 
 For example:
 
 ```obc
 [Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{@"disable":@[TaplyticsOptionTrackLocation]}];
+```
+
+#### Backgound Session Time
+
+Taplytics automatically tracks sessions for you. The Taplytics SDK keeps track of the last activity timestamp in your app (app activity is considered a view change, button click, or Taplytics event logged), and when your app returns from background if the time since last activity is greater then 10 minutes we create a new session for you. If you would like the session background time something other then 10 minutes you can se it as a start option: 
+
+```obc
+[Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{TaplyticsOptionSessionBackgroundTime:@10}];
 ```
 
 ---
