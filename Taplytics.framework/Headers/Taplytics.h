@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v2.2.0
+//  Taplytics v2.2.2
 //
 //  Copyright (c) 2014 Syrp Inc. All rights reserved.
 //
@@ -63,7 +63,7 @@ typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsA
             - @{@"liveUpdate":@NO} Taplytics will auto-detect an app store build or a development build. But to force production mode use @NO,
                 or @YES to force live update mode for testing.
             - @{@"shakeMenu":@NO} To disable the Taplytics development mode shake menu set @NO, only use if you have your own development shake menu.
-            - @{@"disable":@[TaplyticsOptionTrackLocation]} To disable any tracking attributes set a @"disable" key with an array of values to disable from
+            - @{@"disable":@[TaplyticsDisableTrackLocation]} To disable any tracking attributes set a @"disable" key with an array of values to disable from
                 TaplyticsOptions.h
  */
 + (void)startTaplyticsAPIKey:(NSString*)apiKey options:(NSDictionary*)options;
