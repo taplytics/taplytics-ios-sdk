@@ -1,4 +1,4 @@
-Here are some of the common errors we've run into when installing the Taplytics SDK and the fixes to go with them. We hope it helps keep the install smooth, if you feel like you need a hand, please don't hesitate to reach out. We'd love to hear from you.
+Here are some of the common errors we've run into when installing the Taplytics SDK and the fixes to go with them. We hope it helps keep the installation smooth, if you feel like you need a hand, please don't hesitate to reach out. We'd love to hear from you.
 
 | Table of Contents |
 | ----------------- |

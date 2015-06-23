@@ -14,7 +14,7 @@ Taplytics not only lets you run visual experiments with no code needed, the SDK 
 
 Code Experiments allow you to run different variations of your app with simple code blocks. You can also set different variable values for each variation to be returned in the code blocks. 
 
-Note that the Dictionary of variables can be empty, if your app loads for the first time an is unable to download properties from Taplytics servers the baseline block will be called with an empty Dictionary. This will obviously cause all your code variables to be null, it is good practice to set a default value as seen below.
+Note that the Dictionary of variables can be empty, if your app loads for the first time and is unable to download properties from Taplytics servers, the baseline block will be called with an empty Dictionary. This will  cause all your code variables to be null, it is good practice to set a default value as shown below.
 
 #### Objective-C Experiments
 
@@ -62,7 +62,7 @@ Taplytics.runCodeExperiment("Code Experiment #1",
     
 #### Testing Code Experiments
 
-Implementing the TaplyticsDelegate is not necessary to properly run code-based experiments. But with code experiments you will only see the changes when the runCodeExperiment block is actually excecuted, so when you switch between variations you might not see changes until the view has been reloaded. If you would like to see these changes when you change variations (for example when you shake a development build and choose a different variation to test), you will have to implement the TaplyticsDelegate.
+Implementing the TaplyticsDelegate is not necessary to properly run code-based experiments. But with code experiments you will only see the changes when the runCodeExperiment block is executed, so when you switch between variations, you might not see changes until the view has been reloaded. If you would like to see these changes when you change variations (for example when you shake a development build and choose a variation to test), you will have to implement the TaplyticsDelegate.
 
 1. Add the TaplyticsDelegate to your Class
 
@@ -96,14 +96,13 @@ Implementing the TaplyticsDelegate is not necessary to properly run code-based e
 ---
 
 ## Visual Editing
-
-You don't have to do anything else! All visual editing is done on the Taplytics dashboard. See the docs on visual editing [here](https://taplytics.com/docs/guides/visual-experiments).
+You don't have to do anything else! You can use the Taplytics dashboard to make all your visual changes. See the docs on visual editing [here](https://taplytics.com/docs/guides/visual-experiments).
 
 ---
 
 ## Delay Load
 
-On the first launch of your app the Taplytics SDK will show your iOS launch image up to a maximum 2 seconds while it downloads properties from Taplytics servers. This enables you to run experiments on the first view of your app.
+On the first launch of your app, the Taplytics SDK will show your iOS launch image up to a maximum 2 seconds while it downloads properties from Taplytics servers. This delay will enable you to run experiments in the first view of your app. 
 
 If you would like to disable showing the launch image: 
 
@@ -121,7 +120,7 @@ Or increase the maximum wait time to 10 seconds:
 
 ## Running Experiments
 
-The Taplytics SDK can tell you what experiments and variations are currently runing. The block can return asynchronously once Taplytics properties have loaded. The block will return a `NSDictionary` with experiment names as the key value, and variation names as the value.
+The Taplytics SDK can tell you what experiments and variations are currently running. The block can return asynchronously once Taplytics properties have loaded. The block will return a `NSDictionary` with experiment names as the key value, and variation names as the value.
 
 ```obc
 [Taplytics getRunningExperimentsAndVariations:^(NSDictionary *experimentsAndVariations) {
