@@ -76,7 +76,7 @@ First, you'll want to install our SDK inside your XCode project.
 
 ### App Linking
 
-Secondly, (though, optionally) you can implement app linking, which will allow you to pair your device to Taplytics via a link sent through email or text. This will enable your team to easily pair any build of your app to Taplytics.
+Secondly, (though, optionally) you can implement app linking, which will allow you to pair your device to Taplytics via a link sent by email or text. App Linking is an easy way for your team to pair any build of your app to Taplytics. 
 
 1. First ensure that `application:openURL:` method is implemented in your `UIApplicationDelegate`
 
@@ -86,7 +86,7 @@ Secondly, (though, optionally) you can implement app linking, which will allow y
     }
     ```
     
-2. [Get your Taplytics URL Scheme from Taplytics's Settings](https://taplytics.com/dashboard)
+2. [Get your Taplytics URL Scheme from Taplytics' Settings](https://taplytics.com/dashboard)
 
     ![Image of URL Scheme](http://taplytics.com/assets/docs/install-sdk/url-scheme.png)
     
@@ -99,7 +99,7 @@ Secondly, (though, optionally) you can implement app linking, which will allow y
 
 ## 2. User Attributes
 
-Its possible to send user attributes to Taplytics for use in segmenting your users. It is required to set one of `user_id` or `email` to uniquely identify the user across multiple devices. The `customData` field allows you to send Taplytics your own custom data as a flat `NSDictionary` with `NSJSONSerialization` accepted values.
+It's possible to segment your users based on custom user attributes. To set this up, you need to make either the `user_id` or `email` unique to identify the user across multiple devices. Below is a list of standard custom fields you can send to Taplytics. There is also a `customData` field that allows you to send any custom data you have as a flat `NSDictionary` with `NSJSONSerialization` accepted values.
 
 The possible fields are:
 
@@ -134,7 +134,8 @@ For example:
 
 ### Resetting Users
 
-To reset a user after they have logged out of your app and the User Attributes are no longer valid, call `resetUser:`. Do not set any new user attributes until you receive the callback.
+Once a user logs out of your app, their User Attributes are no longer valid. You can reset their data by calling `resetUser:`, make sure you do not set any new user attributes until you receive the callback.
+
 
 ```objc
 [Taplytics resetUser:^{
@@ -148,12 +149,12 @@ To reset a user after they have logged out of your app and the User Attributes a
 
 ### Automatic Tracking
 
-Some events and general information are automatically tracked by Taplytics and will appear on your dashboard. These are:
+The following events and general information are automatically tracked by Taplytics and will appear on your dashboard.
 
 - App Active/Background/Terminated
-- View Appeared/Dissapeared
+- View Appeared/Disappeared
 - Time on View
-- Location information and Authorized/Denied events
+- Location information and Authorized/Denied events
 - Social Sign-in Authorized/Denied
 - Social Share Authorized/Denied
 - Photo Library Authorized/Denied
@@ -177,7 +178,7 @@ If you already have Analytics events instrumented with another Analytics source 
 
 #### Disabling Automatic Tracking
 
-If you would like to disable any of this tracking pass in one of the constants below into a disabled array
+You can disable automatic tracking for any of the below constants by adding them to the disable array.
 
 |Constant  |Description         |
 |---        |---          |
