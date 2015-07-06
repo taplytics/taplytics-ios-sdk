@@ -102,9 +102,9 @@ You don't have to do anything else! You can use the Taplytics dashboard to make 
 
 ## Delay Load
 
-On the first launch of your app, the Taplytics SDK will show your iOS launch image up to a maximum 2 seconds while it downloads properties from Taplytics servers. This delay will enable you to run experiments in the first view of your app. 
+On the first launch of your app, the Taplytics SDK will show your iOS launch image up to a maximum 4 seconds while it downloads properties from Taplytics servers. This delay will enable you to run experiments in the first view of your app.
 
-If you would like to disable showing the launch image: 
+If you would like to disable showing the launch image:
 
 ```obc
 [Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{@"delayLoad":@0}];
