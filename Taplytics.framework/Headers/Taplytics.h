@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v2.3.4
+//  Taplytics v2.3.6
 //
 //  Copyright (c) 2014 Syrp Inc. All rights reserved.
 //
@@ -188,6 +188,13 @@ typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsA
  @param types accepts both UIUserNotificationType (iOS 8) or UIRemoteNotificationType
  */
 + (void)registerPushNotificationsWithTypes:(NSInteger)types;
+
+/**
+ Register for push notification access, this method will show the iOS alert asking for access to send push notifications.
+ @param types accepts both UIUserNotificationType (iOS 8) or UIRemoteNotificationType
+ @param categories accepts a NSSet of UIUserNotificationCategory settings
+ */
++ (void)registerPushNotificationsWithTypes:(NSInteger)types categories:(NSSet*)categories;
 
 /**
  @return if the the user is registered with Taplytics and iOS for push notifications.

@@ -11,6 +11,8 @@ extern NSString *const TaplyticsOptionSessionBackgroundTime;
 extern NSString *const TaplyticsOptionPushSandbox;
 extern NSString *const TaplyticsOptionDisable;
 
+extern NSString *const TaplyticsDisablePushNotifications;
+
 extern NSString *const TaplyticsDisableUITableViewSW;
 extern NSString *const TaplyticsDisableUICollectionViewSW;
 extern NSString *const TaplyticsDisableUIPageViewSW;
