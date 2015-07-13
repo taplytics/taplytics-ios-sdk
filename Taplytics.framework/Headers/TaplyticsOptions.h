@@ -7,6 +7,7 @@
 
 extern NSString *const TaplyticsOptionDelayLoad;
 extern NSString *const TaplyticsOptionShowLaunchImage;
+extern NSString *const TaplyticsOptionShowShakeMenu;
 extern NSString *const TaplyticsOptionSessionBackgroundTime;
 extern NSString *const TaplyticsOptionPushSandbox;
 extern NSString *const TaplyticsOptionDisable;
