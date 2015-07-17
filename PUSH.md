@@ -50,7 +50,7 @@ Please Note that calling this function will show the permission dialog to the us
 
 ## 2. Receiving Push Notifications
 
-To be able to send your users Push Notifications, we'll need you to upload your Google Cloud Messaging credentials. Please follow [this guide](https://taplytics.com/docs/guides/push-notifications/google-push-certificates) to do so.
+To be able to send your users Push Notifications, we'll need you to upload your Apple Push certificates. Please follow [this guide](https://taplytics.com/docs/guides/push-notifications/apple-push-certificates) to do so.
 
 
 ---
