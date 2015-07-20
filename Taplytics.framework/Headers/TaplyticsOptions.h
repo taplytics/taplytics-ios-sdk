@@ -21,7 +21,6 @@ extern NSString *const TaplyticsDisableUIActionSheetSW;
 extern NSString *const TaplyticsDisableUIAlertViewSW;
 
 extern NSString *const TaplyticsDisableTrackLocation;
-extern NSString *const TaplyticsDisableTrackStoreKit;
 extern NSString *const TaplyticsDisableTrackSocialSignIn;
 extern NSString *const TaplyticsDisableTrackiAdInstallation;
 extern NSString *const TaplyticsDisableTrackPhotoLibraryAccess;
