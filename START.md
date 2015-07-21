@@ -73,7 +73,7 @@ First, you'll want to install our SDK inside your XCode project.
     ```
     
 #### Install Using Segment
-1. Log in to your [Segment Account](https://segment.com/) 
+1. Log in to your [Segment Account](https://segment.com?utm_source=partners&utm_medium=Docs&utm_campaign=taplytics.com) 
 2. Navigate to the integration page for the project you want to install Taplytics.
 3. Scroll through the integration list and turn on the integration for Taplytics.
     ![Image of URL Scheme](http://taplytics.com/assets/docs/install-sdk/segment-integration.png)
