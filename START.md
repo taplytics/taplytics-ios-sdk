@@ -71,8 +71,18 @@ First, you'll want to install our SDK inside your XCode project.
         ...
     }
     ```
+    
+#### Install Using Segment
+1. Log in to your [Segment account](https://segment.com/) 
+2. Navigate to the integration page for the project you want to install Taplytics.
+3. Scroll through the integration list and turn on the integration for Taplytics.
+    ![Image of URL Scheme](http://taplytics.com/assets/docs/install-sdk/segment-integration.png)
+4. You will now be prompted to add your Taplytics API key. Log in to your [Taplytics Account](https://taplytics.com/login/) and navigate to settings. Once there copy your Taplytics iOS/Android SDK Key.
+    ![Image of URL Scheme](http://taplytics.com/assets/docs/install-sdk/taplytics-sdkkey.png)
+5. Head back to Segment and paste in your key. 
+6. Press Save and Enable in the right-hand corner. 
 
---- 
+---
 
 ### App Linking
 
@@ -89,6 +99,7 @@ Secondly, (though, optionally) you can implement app linking, which will allow y
 2. [Get your Taplytics URL Scheme from Taplytics's Settings](https://taplytics.com/dashboard)
 
     ![Image of URL Scheme](http://taplytics.com/assets/docs/install-sdk/url-scheme.png)
+    
     
 3. Add Taplytics URL Type in XCode's Build Info panel, with Identifier: com.taplytics, add your Taplytics URL Scheme from above.
 
