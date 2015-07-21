@@ -45,7 +45,7 @@ First, you'll want to install our SDK inside your XCode project.
 
 #### Manual Installation
 
-1. Download the SDK / clone into your app.
+1. [Download the SDK / clone into your app.](https://github.com/taplytics/taplytics-ios-sdk)
 2. Load the Taplytics framework into your app.
 3. Add the required frameworks:
     
