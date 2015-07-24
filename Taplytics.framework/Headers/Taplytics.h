@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v2.3.14
+//  Taplytics v2.3.16
 //
 //  Copyright (c) 2014 Syrp Inc. All rights reserved.
 //
@@ -249,20 +249,6 @@ typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsA
  @warning the metaData can only be values allowed by NSJSONSerialization.
  */
 + (void)logRevenue:(NSString*)eventName revenue:(NSNumber*)value metaData:(NSDictionary*)metaData;
-
-/**
- Report that an experiment goal has been achieved.
- @param goalName the name of the experiment goal
- */
-+ (void)goalAchieved:(NSString*)goalName __deprecated;
-
-/**
- Report that an experiment goal has been achieved, optionally pass number value to track goal such as purchase revenue.
- @param goalName The name of the experiment goal
- @param value A numerical value to be tracked with the goal. For example purcahse revenue.
- */
-+ (void)goalAchieved:(NSString*)goalName value:(NSNumber*)value __deprecated;
-
 
 @end
 
