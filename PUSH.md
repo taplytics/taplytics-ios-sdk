@@ -3,7 +3,7 @@ Setting up Push Notifications using Taplytics is simple. Follow the steps below 
 | # | Step |
 | --- | --- |
 | 1 | [Setup](#1-setup) |
-| 2 | [Receiving Push Notifications](#2-receiving-push-notifictions) |
+| 2 | [Receiving Push Notifications](#2-receiving-push-notifications) |
 | 3 | [Resetting Users](#3-resetting-users) |
 
 ## 1. Setup
