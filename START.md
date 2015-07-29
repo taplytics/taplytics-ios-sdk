@@ -73,7 +73,7 @@ First, you'll want to install our SDK inside your XCode project.
     ```
     
 #### Install Using Segment
-The Taplytics SDK can also be installed via Segment. You can find install instructions [here](/SEGMENT.md)
+The Taplytics SDK can also be installed via Segment. You can find install instructions [here](https://taplytics.com/docs/segment-integration)
 
 
 ---
