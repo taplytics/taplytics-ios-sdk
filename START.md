@@ -71,8 +71,12 @@ First, you'll want to install our SDK inside your XCode project.
         ...
     }
     ```
+    
+#### Install Using Segment
+The Taplytics SDK can also be installed via Segment. You can find install instructions [here](https://taplytics.com/docs/segment-integration)
 
---- 
+
+---
 
 ### App Linking
 
@@ -89,6 +93,7 @@ Secondly, (though, optionally) you can implement app linking, which will allow y
 2. [Get your Taplytics URL Scheme from Taplytics' Settings](https://taplytics.com/dashboard)
 
     ![Image of URL Scheme](http://taplytics.com/assets/docs/install-sdk/url-scheme.png)
+    
     
 3. Add Taplytics URL Type in XCode's Build Info panel, with Identifier: com.taplytics, add your Taplytics URL Scheme from above.
 
