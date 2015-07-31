@@ -22,16 +22,16 @@ First, you'll want to install our SDK inside your XCode project.
         ```
 
     - Run pod install:
-
+    
         ```
         pod install
         ```
-
+    
     - Open your project's .xcworkspace file
-
+    
 2. Initialize the SDK by adding an import and the following line of code with your API key to your `UIApplicationDelegate`.
 
-
+    
     ```objc
     #import <Taplytics/Taplytics.h>
 
@@ -48,7 +48,7 @@ First, you'll want to install our SDK inside your XCode project.
 1. [Download the SDK / clone into your app.](https://github.com/taplytics/taplytics-ios-sdk)
 2. Load the Taplytics framework into your app.
 3. Add the required frameworks:
-
+    
     ```
     CFNetwork.framework
     Security.framework
@@ -58,10 +58,10 @@ First, you'll want to install our SDK inside your XCode project.
     JavaScriptCore.framework
     libicucore.dylib
     ```
-
+    
 4. Add the `-ObjC` Linker flag to your project settings.
 5. Initialize the SDK by adding a line of code with your API key in your `UIApplicationDelegate`.
-
+    
     ```objc
     #import <Taplytics/Taplytics.h>
     ...
@@ -71,12 +71,16 @@ First, you'll want to install our SDK inside your XCode project.
         ...
     }
     ```
+    
+#### Install Using Segment
+The Taplytics SDK can also be installed via Segment. You can find install instructions [here](https://taplytics.com/docs/segment-integration)
+
 
 ---
 
 ### App Linking
 
-Secondly, (though, optionally) you can implement app linking, which will allow you to pair your device to Taplytics via a link sent by email or text. App Linking is an easy way for your team to pair any build of your app to Taplytics.
+Secondly, (though, optionally) you can implement app linking, which will allow you to pair your device to Taplytics via a link sent by email or text. App Linking is an easy way for your team to pair any build of your app to Taplytics. 
 
 1. First ensure that `application:openURL:` method is implemented in your `UIApplicationDelegate`
 
@@ -85,11 +89,12 @@ Secondly, (though, optionally) you can implement app linking, which will allow y
         return NO;
     }
     ```
-
+    
 2. [Get your Taplytics URL Scheme from Taplytics' Settings](https://taplytics.com/dashboard)
 
     ![Image of URL Scheme](http://taplytics.com/assets/docs/install-sdk/url-scheme.png)
-
+    
+    
 3. Add Taplytics URL Type in XCode's Build Info panel, with Identifier: com.taplytics, add your Taplytics URL Scheme from above.
 
     ![Image Of XCode build info](http://taplytics.com/assets/docs/install-sdk/app-link.png)
@@ -175,9 +180,6 @@ If you already have Analytics events instrumented with another Analytics source 
 - [Localytics](https://www.localytics.com/)
 - [Parse](https://www.parse.com/)
 - [Apsalar](https://apsalar.com/)
-- [Crashlytics Ansers](http://try.crashlytics.com/answers/)
-- [KISSMetrics](https://www.kissmetrics.com/products)
-- [Heap](https://heapanalytics.com/)
 
 #### Disabling Automatic Tracking
 
@@ -197,9 +199,6 @@ You can disable automatic tracking for any of the below constants by adding them
 |TaplyticsDisableSourceApsalar | Apsalar Analytics event tracking |
 |TaplyticsDisableSourceAdobe | Adobe Analytics event tracking |
 |TaplyticsDisableSourceLocalytics | Localytics Analytics event tracking |
-|TaplyticsDisableSourceCrashlytics | Crashlytics Answers Analytics event tracking |
-|TaplyticsDisableSourceKISSMetrics | KISSMetrics Analytics event tracking |
-|TaplyticsDisableSourceHeap | Heap Analytics event tracking |
 |TaplyticsDisableUITableViewSW | UITableView tracking |
 |TaplyticsDisableUICollectionViewSW | UICollectionView tracking |
 |TaplyticsDisableUIPageViewSW | UIPageView tracking |
@@ -214,7 +213,7 @@ For example:
 
 #### Backgound Session Time
 
-Taplytics automatically tracks sessions for you. The Taplytics SDK keeps track of the last activity timestamp in your app (app activity is considered a view change, button click, or Taplytics event logged), and when your app returns from background if the time since last activity is greater then 10 minutes we create a new session for you. If you would like the session background time something other then 10 minutes you can se it as a start option:
+Taplytics automatically tracks sessions for you. The Taplytics SDK keeps track of the last activity timestamp in your app (app activity is considered a view change, button click, or Taplytics event logged), and when your app returns from background if the time since last activity is greater then 10 minutes we create a new session for you. If you would like the session background time something other then 10 minutes you can se it as a start option: 
 
 ```obc
 [Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{TaplyticsOptionSessionBackgroundTime:@10}];
@@ -241,3 +240,4 @@ You can also track your own custom Analytics events to Taplytics using the `logE
 ### Experiment Information Postbacks
 
 If you choose to, the Taplytics SDK can also send the running Experiment/Variation information to a supported Analytics source. [Check out our docs](https://taplytics.com/docs/guides/third-party-integration-setup) for details.
+
