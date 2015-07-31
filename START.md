@@ -166,8 +166,6 @@ The following events and general information are automatically tracked by Taplyt
 - Push Notification Authorized/Denied
 - Push Notification Seen/Opened
 
-
-
 #### External Analytics Sources
 
 If you already have Analytics events instrumented with another Analytics source Taplytics will also automatically pull in the events from the following sources:
@@ -180,6 +178,9 @@ If you already have Analytics events instrumented with another Analytics source 
 - [Localytics](https://www.localytics.com/)
 - [Parse](https://www.parse.com/)
 - [Apsalar](https://apsalar.com/)
+- [Crashlytics Ansers](http://try.crashlytics.com/answers/)
+- [KISSMetrics](https://www.kissmetrics.com/products)
+- [Heap](https://heapanalytics.com/)
 
 #### Disabling Automatic Tracking
 
@@ -199,6 +200,9 @@ You can disable automatic tracking for any of the below constants by adding them
 |TaplyticsDisableSourceApsalar | Apsalar Analytics event tracking |
 |TaplyticsDisableSourceAdobe | Adobe Analytics event tracking |
 |TaplyticsDisableSourceLocalytics | Localytics Analytics event tracking |
+|TaplyticsDisableSourceCrashlytics | Crashlytics Answers Analytics event tracking |
+|TaplyticsDisableSourceKISSMetrics | KISSMetrics Analytics event tracking |
+|TaplyticsDisableSourceHeap | Heap Analytics event tracking |
 |TaplyticsDisableUITableViewSW | UITableView tracking |
 |TaplyticsDisableUICollectionViewSW | UICollectionView tracking |
 |TaplyticsDisableUIPageViewSW | UIPageView tracking |
