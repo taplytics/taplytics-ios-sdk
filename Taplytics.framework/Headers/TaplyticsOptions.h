@@ -33,6 +33,7 @@ extern NSString *const TaplyticsDisableSourceParse;
 extern NSString *const TaplyticsDisableSourceApsalar;
 extern NSString *const TaplyticsDisableSourceAdobe;
 extern NSString *const TaplyticsDisableSourceLocalytics;
+extern NSString *const TaplyticsDisableSourceOptimizely;
 extern NSString *const TaplyticsDisableSourceCrashlytics;
 extern NSString *const TaplyticsDisableSourceKISSMetrics;
 extern NSString *const TaplyticsDisableSourceHeap;
