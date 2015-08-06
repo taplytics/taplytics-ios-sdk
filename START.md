@@ -112,8 +112,8 @@ The possible fields are:
 |---        |---          |
 |email      |   NSString    |
 |user_id    |   NSString    |
-|firstname  |   NSString    |
-|lastname   |   NSString    |
+|firstName  |   NSString    |
+|lastName   |   NSString    |
 |name       |   NSString    |
 |age        |   NSNumber    |
 |gender     |   NSString    |
