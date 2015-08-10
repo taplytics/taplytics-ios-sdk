@@ -212,7 +212,7 @@ You can disable automatic tracking for any of the below constants by adding them
 For example:
 
 ```obc
-[Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{@"disable":@[TaplyticsOptionTrackLocation]}];
+[Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{TaplyticsOptionDisable:@[TaplyticsOptionTrackLocation]}];
 ```
 
 #### Backgound Session Time
