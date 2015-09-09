@@ -50,13 +50,9 @@ First, you'll want to install our SDK inside your XCode project.
 3. Add the required frameworks:
     
     ```
-    CFNetwork.framework
-    Security.framework
     CoreTelephony.framework
     SystemConfiguration.framework
-    MobileCoreServices.framework
     JavaScriptCore.framework
-    libicucore.dylib
     ```
     
 4. Add the `-ObjC` Linker flag to your project settings.
