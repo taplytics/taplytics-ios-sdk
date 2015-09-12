@@ -1,19 +1,21 @@
 //
 //  Taplytics.h
-//  Taplytics v2.5.4
+//  Taplytics v2.6.0
 //
-//  Copyright (c) 2014 Syrp Inc. All rights reserved.
+//  Copyright (c) 2015 Taplytics Inc. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import "TaplyticsOptions.h"
+#import "TaplyticsVar.h"
+
+typedef void(^TLCodeBlock)(void);
 
 typedef void(^TLExperimentBlock)(NSDictionary *variables);
 
 typedef void(^TLVariationBlock)(NSString* variationName, NSDictionary *variables);
 
 typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsAndVariations);
-
 
 @protocol TaplyticsDelegate <NSObject>
 
@@ -31,6 +33,8 @@ typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsA
 
 
 @interface Taplytics : NSObject
+
+#pragma mark - Starting Taplytics
 
 /**
  Start the Taplytics SDK with your api key. the api key can be found in the 'project settings' page. 
@@ -68,18 +72,6 @@ typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsA
  */
 + (void)startTaplyticsAPIKey:(NSString*)apiKey options:(NSDictionary*)options;
 
-/**
- Updates Taplytics configuration in a background fetch, only available in iOS 7. It is HIGHLY recommended to implement background fetch
- in 'application:performFetchWithCompletionHandler:' in your UIApplicationDelegate, to allow Taplytics to update its configuration regularly.
- For Example:
- 
- - (void)application:(UIApplication *)app performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completeBlock {
-    [Taplytics performBackgroundFetch:completeBlock];
- }
- 
- @param completionBlock Completion block called when fetch is complete, returns on main thread.
- */
-+ (void)performBackgroundFetch:(void(^)(UIBackgroundFetchResult result))completionBlock NS_AVAILABLE_IOS(7_0);
 
 /**
  Optionally set the taplytics delegate when you need to know when a experiment has changed. For example if you are testing 
@@ -87,6 +79,28 @@ typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsA
  @param delegate The delegate for the receiver. The delegate must implement the TaplyticsDelegate protocol.
  */
 + (void)setTaplyticsDelegate:(id<TaplyticsDelegate>)delegate;
+
+#pragma mark - Code Experiments
+
+/**
+ Run a code block that can be attached to any experiment through the Taplytics website. The code block will either be
+ run or not run based on the configuration of the experiment through Taplytics.
+ 
+ On the first launch of your app the execution will be delayed and will be called asynchronously on the main thread
+ once the Taplytics configuration has been loaded, but before the launch image is hidden.
+ 
+ When testing, implement the TaplyticsDelegate to run your code block again to see the feature enabled, otherwise it will only be seen
+ when you enable the experiment containing the code block and your device falls into the segmentation.
+ 
+ [Taplytics runCodeBlock:@"enableFeature" forBlock:^{
+    // enable your feature here
+ }];
+ 
+ @param name unique name of the codeblock
+ @param codeBlock the code block will be called depending on the rules setup by the experiment it is attached to. returns on main thread.
+ */
+
++ (void)runCodeBlock:(NSString*)name forBlock:(TLCodeBlock)codeBlock;
 
 /**
  Run a code experiment defined by experimentName, one baseline or variation block will be run synchronously.
@@ -108,7 +122,10 @@ typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsA
  @param baselineBlock Baseline block called if experiment is in baseline variation. Returns on incoming thread if synchronous, returns on main thread if asynchronous.
  @param variationNamesAndBlocks NSDictionary with keys of variation names and values of variation blocks. Returns on incoming thread if synchronous, returns on main thread if asynchronous.
  */
-+ (void)runCodeExperiment:(NSString*)experimentName withBaseline:(TLExperimentBlock)baselineBlock variations:(NSDictionary*)variationNamesAndBlocks;
++ (void)runCodeExperiment:(NSString*)experimentName
+             withBaseline:(TLExperimentBlock)baselineBlock
+               variations:(NSDictionary*)variationNamesAndBlocks
+                DEPRECATED_MSG_ATTRIBUTE("Use [Taplytics runCodeBlock:] instead, codeblocks now reusable between experiments");
 
 /**
  Use this method when running code experiments in Swift, due to how blocks/closures are handled in Swift 
@@ -137,21 +154,49 @@ typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsA
  @param baselineBlock Baseline block called if experiment is in baseline variation. Returns on incoming thread if synchronous, returns on main thread if asynchronous.
  @param variationBlock Variation block called when the experiment is running a variation. Returns on incoming thread if synchronous, returns on main thread if asynchronous.
  */
-+ (void)runCodeExperiment:(NSString*)experimentName forBaseline:(TLExperimentBlock)baselineBlock forVariation:(TLVariationBlock)variationBlock;
++ (void)runCodeExperiment:(NSString*)experimentName
+              forBaseline:(TLExperimentBlock)baselineBlock
+             forVariation:(TLVariationBlock)variationBlock
+                DEPRECATED_MSG_ATTRIBUTE("Use [Taplytics runCodeBlock:] instead, codeblocks now reusable between experiments");
+
+#pragma mark - Event Logging
 
 /**
- Get a NSDictionary of all running experiments and their current variation. This block will return async on the main thread once the experiment
- configuration has loaded from our servers, or synchronously if the configuration has already loaded. Example of a NSDictionary that is returned:
+ Log an event to Taplytics, these events can be used as goals in your experiments.
  
- NSDictionary* experimentsAndVariations = @{
-    @"Experiment 1": @"baseline",
-    @"Experiment 2": @"Variation 1"
- };
- 
- @param block This block will be called back with a NSDictionary with key value of experiment name and value of it's variation name. Returns on main thread.
+ @param eventName the name of the event
  */
++ (void)logEvent:(NSString*)eventName;
 
-+ (void)getRunningExperimentsAndVariations:(TLRunningExperimentsAndVariationsBlock)block;
+/**
+ Log an event to Taplytics with an optional number value and optional metadata, these events can be used as goals in your experiments.
+ 
+ @param eventName the name of the event
+ @param value an optional number value to quantify your event
+ @param metaData an optional dictionary of metaData to attach to your event. Keep the values of this dictionary flat.
+ @warning the metaData can only be values allowed by NSJSONSerialization.
+ */
++ (void)logEvent:(NSString *)eventName value:(NSNumber*)value metaData:(NSDictionary*)metaData;
+
+/**
+ Log revenue to Taplytics with a revenue value, these events can be used as goals in your experiments.
+ 
+ @param eventName the name of the revenue event
+ @param value an optional number value to quantify your event
+ */
++ (void)logRevenue:(NSString*)eventName revenue:(NSNumber*)value;
+
+/**
+ Log revenue to Taplytics with a revenue value and optional metadata, these events can be used as goals in your experiments.
+ 
+ @param eventName the name of the revenue event
+ @param value an optional number value to quantify your event
+ @param metaData an optional dictionary of metaData to attach to your event. Keep the values of this dictionary flat.
+ @warning the metaData can only be values allowed by NSJSONSerialization.
+ */
++ (void)logRevenue:(NSString*)eventName revenue:(NSNumber*)value metaData:(NSDictionary*)metaData;
+
+#pragma mark - User Attributes
 
 /**
  Settings User Attributes allows for submitting mutiple user attributes with custom values. 
@@ -178,6 +223,22 @@ typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsA
 + (void)setUserAttributes:(NSDictionary*)attributes;
 
 /**
+ This method will reset the User to a new empty user, this method is intended to be used when your user logs out of an account. 
+ This method will also disable sending push notifications to this device for the previous user. 
+ Call registerPushNotifications again to register push notifications for the new user.
+ @param callback called when Taplytics has completed resetting your user.
+ */
++ (void)resetUser:(void(^)(void))callback;
+
+/**
+ This method will return the current user attributes for the user.
+ @param callback NSDictionary of user attributes returned when Taplytics has loaded properties from our servers.
+ */
++ (void)getUserAttributes:(void(^)(NSDictionary* userAttributes))callback;
+
+#pragma mark - Push Notifications
+
+/**
  Register for push notification access, this method will show the iOS alert asking for access to send push notifications.
  This method will register for Badge, Sound, and Alert notification types
  */
@@ -201,54 +262,33 @@ typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsA
  */
 + (BOOL)isUserRegisteredForPushNotifications;
 
-/**
- This method will reset the User to a new empty user, this method is intended to be used when your user logs out of an account. 
- This method will also disable sending push notifications to this device for the previous user. 
- Call registerPushNotifications again to register push notifications for the new user.
- @param callback called when Taplytics has completed resetting your user.
- */
-+ (void)resetUser:(void(^)(void))callback;
+#pragma mark - Utility Functions
 
 /**
- This method will return the current user attributes for the user.
- @param callback NSDictionary of user attributes returned when Taplytics has loaded properties from our servers.
- */
-+ (void)getUserAttributes:(void(^)(NSDictionary* userAttributes))callback;
-
-/**
- Log an event to Taplytics, these events can be used as goals in your experiments.
+ Get a NSDictionary of all running experiments and their current variation. This block will return async on the main thread once the experiment
+ configuration has loaded from our servers, or synchronously if the configuration has already loaded. Example of a NSDictionary that is returned:
  
- @param eventName the name of the event
-*/
-+ (void)logEvent:(NSString*)eventName;
-
-/** 
- Log an event to Taplytics with an optional number value and optional metadata, these events can be used as goals in your experiments.
+ NSDictionary* experimentsAndVariations = @{
+ @"Experiment 1": @"baseline",
+ @"Experiment 2": @"Variation 1"
+ };
  
- @param eventName the name of the event
- @param value an optional number value to quantify your event
- @param metaData an optional dictionary of metaData to attach to your event. Keep the values of this dictionary flat.
- @warning the metaData can only be values allowed by NSJSONSerialization.
-*/
-+ (void)logEvent:(NSString *)eventName value:(NSNumber*)value metaData:(NSDictionary*)metaData;
+ @param block This block will be called back with a NSDictionary with key value of experiment name and value of it's variation name. Returns on main thread.
+ */
++ (void)getRunningExperimentsAndVariations:(TLRunningExperimentsAndVariationsBlock)block;
 
 /**
- Log revenue to Taplytics with a revenue value, these events can be used as goals in your experiments.
+ Updates Taplytics configuration in a background fetch. It is HIGHLY recommended to implement background fetch
+ in 'application:performFetchWithCompletionHandler:' in your UIApplicationDelegate, to allow Taplytics to update its configuration regularly.
+ For Example:
  
- @param eventName the name of the revenue event
- @param value an optional number value to quantify your event
- */
-+ (void)logRevenue:(NSString*)eventName revenue:(NSNumber*)value;
-
-/**
- Log revenue to Taplytics with a revenue value and optional metadata, these events can be used as goals in your experiments.
+ - (void)application:(UIApplication *)app performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completeBlock {
+ [Taplytics performBackgroundFetch:completeBlock];
+ }
  
- @param eventName the name of the revenue event
- @param value an optional number value to quantify your event
- @param metaData an optional dictionary of metaData to attach to your event. Keep the values of this dictionary flat.
- @warning the metaData can only be values allowed by NSJSONSerialization.
+ @param completionBlock Completion block called when fetch is complete, returns on main thread.
  */
-+ (void)logRevenue:(NSString*)eventName revenue:(NSNumber*)value metaData:(NSDictionary*)metaData;
++ (void)performBackgroundFetch:(void(^)(UIBackgroundFetchResult result))completionBlock;
 
 @end
 

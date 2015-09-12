@@ -6,15 +6,19 @@
 	<dict>
 		<key>Headers/Taplytics.h</key>
 		<data>
-		3v8PwOhsyuDlyFltPaxE2d0kgRI=
+		IwOhVH+fVHzgVjVoCCA6waNq2Ds=
 		</data>
 		<key>Headers/TaplyticsOptions.h</key>
 		<data>
 		6jGs0MSkM1yHUImByshsoYlJrpk=
 		</data>
+		<key>Headers/TaplyticsVar.h</key>
+		<data>
+		oO2syKV9F49vNIT/phL0nD9t4n8=
+		</data>
 		<key>Info.plist</key>
 		<data>
-		Kvz79qNnrgaQNPbt4T8zsuJxVIA=
+		q6VV072xj/vm8ziz1MxggQY3KZc=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -25,11 +29,15 @@
 	<dict>
 		<key>Headers/Taplytics.h</key>
 		<data>
-		3v8PwOhsyuDlyFltPaxE2d0kgRI=
+		IwOhVH+fVHzgVjVoCCA6waNq2Ds=
 		</data>
 		<key>Headers/TaplyticsOptions.h</key>
 		<data>
 		6jGs0MSkM1yHUImByshsoYlJrpk=
+		</data>
+		<key>Headers/TaplyticsVar.h</key>
+		<data>
+		oO2syKV9F49vNIT/phL0nD9t4n8=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
