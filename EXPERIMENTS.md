@@ -10,11 +10,11 @@ Creating experiments are easy using Taplytics. You can either use our visual edi
 
 ## Dynamic Variables
 
-Taplytics Variables are dynamic variables that can be used to change content or functionality of your app dynamically from the Taplytics website. Variables are re-useable between experiments and are defined by their name and a default value that is used when there is no internet connection or when variables are not attached to any experiments.
+Taplytics Variables are dynamic variables that can be used to change content or functionality of your app dynamically from the Taplytics website. Variables are re-useable between experiments and are defined with a name and default value that is used when there is no internet connection or when variables are not currently attached to any experiments.
  
-Variables should always implement the update code block, the value of the variable can be change asynchronously once experiment properties are loaded from Taplytics Servers, but always called before your app's launch image is hidden.
+Variables should always implement the update code block, the value of the variable can be changed asynchronously once experiment properties are loaded from Taplytics Servers, but always called before your app's launch image is hidden.
  
-Variables accept NSString, NSNumber, and Booleans casted into NSNumbers as values.
+Variables can be NSString, NSNumber, and Booleans casted into NSNumbers.
  
 For example using a NSString to set label text:
  
@@ -50,7 +50,7 @@ Example of Using a Boolean casted as NSNumber:
 
 Taplytics not only lets you run visual experiments with no code needed, the SDK also offers a code-based solution to running experiments in your app.
 
-Code Blocks allow you to run different variations of your app with simple code blocks. Code blocks are linked to Experiments through the Taplytics website. The code block will be executed based on the configuration of the experiment through the Taplytics website.
+Code Blocks allow you to run different variations of your app with simple code modifications. Code blocks are linked to Experiments through the Taplytics website very much the same way that Dynamic Variables are. A code block will be executed based on the configuration of the experiment through the Taplytics website.
 
 Objective-C:
 
@@ -68,9 +68,9 @@ Taplytics.runCodeBlock("enableFeature", forBlock: {
 })
 ```
     
-#### Testing Code Experiments
+#### Previewing Code Experiments
 
-Implementing the TaplyticsDelegate is not necessary to properly run code-based experiments. But with code experiments you will only see the changes when the runCodeExperiment block is executed, so when you switch between variations, you might not see changes until the view has been reloaded. If you would like to see these changes when you change variations (for example when you shake a development build and choose a variation to test), you will have to implement the TaplyticsDelegate.
+Implementing the TaplyticsDelegate is not necessary to properly run code-based experiments in a live environment, but with code experiments you will only see the changes when the runCodeExperiment block is executed. This means that when you are in a development environment and you switch between variations, you might not see changes until the view has been reloaded. If you would like to see these changes when you change variations (for example when you shake a development build to pull up the Taplytics Menu and choose a variation to test), you will have to implement the TaplyticsDelegate.
 
 1. Add the TaplyticsDelegate to your Class
 
