@@ -2,62 +2,70 @@ Creating experiments are easy using Taplytics. You can either use our visual edi
 
 | Table of Contents |
 | ----------------- |
+| [Dynamic Variables](#dynamic-variables) |
 | [Code Experiments](#code-experiments) |
 | [Visual Editing](#visual-editing) |
 | [First-view Experiments](#delay-load) |
 | [List Running Experiments](#running-experiments) |
 
+## Dynamic Variables
+
+Taplytics Variables are dynamic variables that can be used to change content or functionality of your app dynamically from the Taplytics website. Variables are re-useable between experiments and are defined by their name and a default value that is used when there is no internet connection or when variables are not attached to any experiments.
+ 
+Variables should always implement the update code block, the value of the variable can be change asynchronously once experiment properties are loaded from Taplytics Servers, but always called before your app's launch image is hidden.
+ 
+Variables accept NSString, NSNumber, and Booleans casted into NSNumbers as values.
+ 
+For example using a NSString to set label text:
+ 
+```objc
+TaplyticsVar *var = [TaplyticsVar taplyticsVarWithName:@"stringVar" defaultValue:@"Hello World" updatedBlock:^(NSObject* value) {
+    // updatedBlock will be called when the value is updated.
+    if (value)
+        _label.text = (NSString*)value;
+}];
+ 
+// variables can also use the value property to access the value.
+_label.text = (NSString*)var.value;
+```
+Example of Using a NSNumber: 
+ 
+```objc
+[TaplyticsVar taplyticsVarWithName:@"numberOfCells" defaultValue:@10 updatedBlock:^(NSObject* value) {
+    if (value)
+        [weakSelf setNumberOfCells:value];
+}];
+```
+
+Example of Using a Boolean casted as NSNumber:
+
+```objc 
+[TaplyticsVar taplyticsVarWithName:@"useNewCheckout" defaultValue:@(NO) updatedBlock:^(NSObject* value) {
+    if (value)
+        [weakSelf useNewCheckout:[(NSNumber*)value boolValue]];
+}];
+```
 
 ## Code Experiments
 
 Taplytics not only lets you run visual experiments with no code needed, the SDK also offers a code-based solution to running experiments in your app.
 
-Code Experiments allow you to run different variations of your app with simple code blocks. You can also set different variable values for each variation to be returned in the code blocks. 
+Code Blocks allow you to run different variations of your app with simple code blocks. Code blocks are linked to Experiments through the Taplytics website. The code block will be executed based on the configuration of the experiment through the Taplytics website.
 
-Note that the Dictionary of variables can be empty, if your app loads for the first time and is unable to download properties from Taplytics servers, the baseline block will be called with an empty Dictionary. This will  cause all your code variables to be null, it is good practice to set a default value as shown below.
+Objective-C:
 
-#### Objective-C Experiments
-
-For example, an experiment named "Code Experiment #1" with a baseline block, and two variation blocks. Within each block we can get a `numberValue` variable from the `variables` NSDictionary, variables can have a different values set for each variation.
-    
 ```objc
-[Taplytics runCodeExperiment:@"Code Experiment #1" withBaseline:^(NSDictionary *variableDic) {
-    // code variables can be null
-    NSNumber* numberValue = variableDic[@"numberValue"] ? variableDic[@"numberValue"] : @0; 
-    // Insert baseline experiment code here
-} variations:@{@"Variation 1": ^(NSDictionary *variableDic) {
-    // code variables can be null
-    NSNumber* numberValue = variableDic[@"numberValue"] ? variableDic[@"numberValue"] : @1; 
-    // Insert Variation 1 variation code here
-}, @"Variation 2": ^(NSDictionary *variableDic) {
-    // code variables can be null
-    NSNumber* numberValue = variableDic[@"numberValue"] ? variableDic[@"numberValue"] : @2; 
-    // Insert Variation 2 variation code here
-}}];
+[Taplytics runCodeBlock:@"enableFeature" forBlock:^{
+    // enable your feature here
+}];
 ```
 
-#### Swift Experiments
-
-Due to how blocks/closures are handled in Swift, passing blocks/closures in an NSDictioary as we do in `runCodeExperiment:withBaseline:variations:` is not well supported. The `runCodeExperiment:forBaseline:forVariation:` method handles the same functionality for Swift code.
-
-For example the same code experiment in Objective-C from above, using Swift:
+Swift: 
 
 ```swift
-Taplytics.runCodeExperiment("Code Experiment #1",
-    forBaseline: { variables in
-        let numberValue: NSNumber? = variables?["numberValue"] as? NSNumber // can be null
-        // Insert baseline experiment code here
-    },
-    forVariation: { variationName, variables in
-        let numberValue: NSNumber? = variables?["numberValue"] as? NSNumber // can be null
-        if variationName == "Variation 1" {
-            // Insert Variation 1 variation code here
-        }
-        else if variationName == "Variation 2" {
-            // Insert Variation 2 variation code here
-        }
-    }
-)
+Taplytics.runCodeBlock("enableFeature", forBlock: {
+    // enable your feature here
+})
 ```
     
 #### Testing Code Experiments
@@ -80,11 +88,9 @@ Implementing the TaplyticsDelegate is not necessary to properly run code-based e
     }
     
     - (void)runMyCodeExperiment {
-        [Taplytics runCodeExperiment:@"My Code Experiment" withBaseline:^(NSDictionary *variables) {
-            //  Code for baseline
-        } variations:@{@"variation 1": ^(NSDictionary *variables) {
-            // Code for variation 1
-        }}];
+        [Taplytics runCodeBlock:@"enableFeature" forBlock:^{
+            // enable your feature here
+        }];
     }
     
     // TaplyticsDelegate
