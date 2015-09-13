@@ -2,13 +2,15 @@ Creating experiments are easy using Taplytics. You can either use our visual edi
 
 | Table of Contents |
 | ----------------- |
-| [Dynamic Variables](#dynamic-variables) |
+| [Dynamic Variables & Code Blocks](#dynamic-variables-&-code-blocks) |
 | [Code Experiments](#code-experiments) |
 | [Visual Editing](#visual-editing) |
 | [First-view Experiments](#delay-load) |
 | [List Running Experiments](#running-experiments) |
 
-## Dynamic Variables
+## Dynamic Variables & Code Blocks
+
+###Dynamic Variables
 
 Taplytics Variables are dynamic variables that can be used to change content or functionality of your app dynamically from the Taplytics website. Variables are re-useable between experiments and are defined with a name and default value that is used when there is no internet connection or when variables are not currently attached to any experiments.
  
@@ -46,7 +48,7 @@ Example of Using a Boolean casted as NSNumber:
 }];
 ```
 
-## Code Experiments
+### Code Blocks
 
 Taplytics not only lets you run visual experiments with no code needed, the SDK also offers a code-based solution to running experiments in your app.
 
@@ -68,6 +70,8 @@ Taplytics.runCodeBlock("enableFeature", forBlock: {
 })
 ```
     
+## Code Experiments (Deprecated)
+
 #### Previewing Code Experiments
 
 Implementing the TaplyticsDelegate is not necessary to properly run code-based experiments in a live environment, but with code experiments you will only see the changes when the runCodeExperiment block is executed. This means that when you are in a development environment and you switch between variations, you might not see changes until the view has been reloaded. If you would like to see these changes when you change variations (for example when you shake a development build to pull up the Taplytics Menu and choose a variation to test), you will have to implement the TaplyticsDelegate.
