@@ -1,4 +1,4 @@
-Creating experiments are easy using Taplytics. You can either use our visual editor or create code-based experiments. You can find documentation on how to do this below.
+Creating experiments is easy using Taplytics. You can either use our visual editor or create code-based experiments. You can find documentation on how to do this below.
 
 | Table of Contents |
 | ----------------- |
@@ -10,11 +10,18 @@ Creating experiments are easy using Taplytics. You can either use our visual edi
 
 ## Dynamic Variables & Code Blocks
 
+**To see and modify these variables or blocks on the dashboard, the app must be launched and this code containing the variable or block must be navigated to a least once.**
+
+The code below is used to send the information of the variable or block to Taplytics, so it will appear on the dashboard.
+
 ###Dynamic Variables
 
-Taplytics Variables are dynamic variables that can be used to change content or functionality of your app dynamically from the Taplytics website. Variables are re-useable between experiments and are defined with a name and default value that is used when there is no internet connection or when variables are not currently attached to any experiments.
+Taplytics variables are dynamic variables that can be used to change content or functionality of your app dynamically from the Taplytics website. Variables are re-useable between experiments and are instantiated with three variables:
+
+1. Variable name (String)
+2. Default Value
  
-Variables should always implement the update code block, the value of the variable can be changed asynchronously once experiment properties are loaded from Taplytics Servers, but always called before your app's launch image is hidden.
+*Variables should always implement the update code block, the value of the variable can be changed asynchronously once experiment properties are loaded from Taplytics Servers, but always called before your app's launch image is hidden.
  
 Variables can be NSString, NSNumber, and Booleans casted into NSNumbers.
  
@@ -50,11 +57,11 @@ Example of Using a Boolean casted as NSNumber:
 
 ### Code Blocks
 
-Taplytics not only lets you run visual experiments with no code needed, the SDK also offers a code-based solution to running experiments in your app.
+Similar to Dynamic Variables, Taplytics has an option for 'Code Blocks'. Code blocks are linked to Experiments through the Taplytics website very much the same way that Dynamic Variables are, and will be executed based on the configuration of the experiment through the Taplytics website. A Code Block is a callback that can be enabled or disabled depending on the variation. If enabled, the code within the callback will be executed. If disabled, the variation will not get the callback.
 
-Code Blocks allow you to run different variations of your app with simple code modifications. Code blocks are linked to Experiments through the Taplytics website very much the same way that Dynamic Variables are. A code block will be executed based on the configuration of the experiment through the Taplytics website.
+A Code Block can be used alongside as many other Code Blocks as you would like to determine a combination that yields the best results. Perhaps there are three different Code Blocks on one view. This means there could be 8 different combinations of Code Blocks being enabled / disabled on that view if you'd like.
 
-Objective-C:
+Example Using Objective-C:
 
 ```objc
 [Taplytics runCodeBlock:@"enableFeature" forBlock:^{
@@ -62,7 +69,7 @@ Objective-C:
 }];
 ```
 
-Swift: 
+Example Using Swift: 
 
 ```swift
 Taplytics.runCodeBlock("enableFeature", forBlock: {
@@ -71,6 +78,60 @@ Taplytics.runCodeBlock("enableFeature", forBlock: {
 ```
     
 ## Code Experiments (Deprecated)
+
+#### Setup
+
+To set up a code-based experiment in Taplytics, please refer to the [Taplytics code-based experiment docs](https://taplytics.com/docs/guides/code-experiments).
+
+#### Usage
+
+Taplytics automatically generates the base needed for your code experiment. Paste it into the relevant section of your app, and apply the variables as necessary.
+
+*Note that the Dictionary of variables can be empty, if your app loads for the first time and is unable to download properties from Taplytics servers, the baseline block will be called with an empty Dictionary. This will  cause all your code variables to be null, it is good practice to set a default value as shown below.
+
+#### Objective-C Experiments
+
+For example, an experiment named "Code Experiment #1" with a baseline block, and two variation blocks. Within each block we can get a `numberValue` variable from the `variables` NSDictionary, variables can have a different values set for each variation.
+    
+```objc
+[Taplytics runCodeExperiment:@"Code Experiment #1" withBaseline:^(NSDictionary *variableDic) {
+    // code variables can be null
+    NSNumber* numberValue = variableDic[@"numberValue"] ? variableDic[@"numberValue"] : @0; 
+    // Insert baseline experiment code here
+} variations:@{@"Variation 1": ^(NSDictionary *variableDic) {
+    // code variables can be null
+    NSNumber* numberValue = variableDic[@"numberValue"] ? variableDic[@"numberValue"] : @1; 
+    // Insert Variation 1 variation code here
+}, @"Variation 2": ^(NSDictionary *variableDic) {
+    // code variables can be null
+    NSNumber* numberValue = variableDic[@"numberValue"] ? variableDic[@"numberValue"] : @2; 
+    // Insert Variation 2 variation code here
+}}];
+```
+
+#### Swift Experiments
+
+Due to how blocks/closures are handled in Swift, passing blocks/closures in an NSDictioary as we do in `runCodeExperiment:withBaseline:variations:` is not well supported. The `runCodeExperiment:forBaseline:forVariation:` method handles the same functionality for Swift code.
+
+For example the same code experiment in Objective-C from above, using Swift:
+
+```swift
+Taplytics.runCodeExperiment("Code Experiment #1",
+    forBaseline: { variables in
+        let numberValue: NSNumber? = variables?["numberValue"] as? NSNumber // can be null
+        // Insert baseline experiment code here
+    },
+    forVariation: { variationName, variables in
+        let numberValue: NSNumber? = variables?["numberValue"] as? NSNumber // can be null
+        if variationName == "Variation 1" {
+            // Insert Variation 1 variation code here
+        }
+        else if variationName == "Variation 2" {
+            // Insert Variation 2 variation code here
+        }
+    }
+)
+```
 
 #### Previewing Code Experiments
 
@@ -130,7 +191,7 @@ Or increase the maximum wait time to 10 seconds:
 
 ## Running Experiments
 
-The Taplytics SDK can tell you what experiments and variations are currently running. The block can return asynchronously once Taplytics properties have loaded. The block will return a `NSDictionary` with experiment names as the key value, and variation names as the value.
+If you would like to see which variations and experiments are running on a given device, there exists a `getRunningExperimentsAndVariations()` function which provides a callback with the current experiments and their running variation. An example:
 
 ```obc
 [Taplytics getRunningExperimentsAndVariations:^(NSDictionary *experimentsAndVariations) {
@@ -141,3 +202,4 @@ The Taplytics SDK can tell you what experiments and variations are currently run
     //};
 }];
 ```
+NOTE: The block can return asynchronously once Taplytics properties have loaded. The block will return a `NSDictionary` with experiment names as the key value, and variation names as the value.
