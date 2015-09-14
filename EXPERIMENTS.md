@@ -2,8 +2,8 @@ Creating experiments is easy using Taplytics. You can either use our visual edit
 
 | Table of Contents |
 | ----------------- |
-| [Dynamic Variables & Code Blocks](#dynamic-variables-&-code-blocks) |
-| [Code Experiments](#code-experiments) |
+| [Dynamic Variables & Code Blocks](#dynamic-variables--code-blocks) |
+| [Code Experiments](#code-experiments-deprecated) |
 | [Visual Editing](#visual-editing) |
 | [First-view Experiments](#delay-load) |
 | [List Running Experiments](#running-experiments) |
