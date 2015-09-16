@@ -89,8 +89,9 @@ typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsA
  On the first launch of your app the execution will be delayed and will be called asynchronously on the main thread
  once the Taplytics configuration has been loaded, but before the launch image is hidden.
  
- When testing, implement the TaplyticsDelegate to run your code block again to see the feature enabled, otherwise it will only be seen
- when you enable the experiment containing the code block and your device falls into the segmentation.
+ The code block will only be run once, so in testing, when you want to switch between variations you will want to implement
+ the TaplyticsDelegate to run your code block again to see the feature enabled. If you don't implement the TaplyticsDelegate
+ you will only be able to see the code block run specifically when your device falls into the relevant segmentation.
  
  [Taplytics runCodeBlock:@"enableFeature" forBlock:^{
     // enable your feature here
