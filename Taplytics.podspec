@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'Taplytics'
-  s.version      = '2.6.0'
+  s.version      = '2.6.2'
   s.author       = { 'Taplytics' => 'help@taplytics.com' }
   s.license      = { :type => 'Commercial', :text => 'See http://taplytics.com/terms' }
   s.homepage     = 'http://taplytics.com'
@@ -9,7 +9,6 @@ Pod::Spec.new do |s|
   s.source = { :git => 'https://github.com/taplytics/taplytics-ios-sdk.git', :tag => "#{s.version}" }
   s.platform = :ios, '7.0'
   s.frameworks = 'CoreTelephony', 'SystemConfiguration', 'JavaScriptCore'
-  s.requires_arc = true
   s.preserve_paths = 'Taplytics.framework'
   s.public_header_files = "Taplytics.framework/**/*.h"
   s.vendored_frameworks = "Taplytics.framework"
