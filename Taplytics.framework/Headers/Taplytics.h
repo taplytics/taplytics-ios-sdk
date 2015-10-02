@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v2.6.2
+//  Taplytics v2.7.0
 //
 //  Copyright (c) 2015 Taplytics Inc. All rights reserved.
 //
@@ -89,8 +89,9 @@ typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsA
  On the first launch of your app the execution will be delayed and will be called asynchronously on the main thread
  once the Taplytics configuration has been loaded, but before the launch image is hidden.
  
- When testing, implement the TaplyticsDelegate to run your code block again to see the feature enabled, otherwise it will only be seen
- when you enable the experiment containing the code block and your device falls into the segmentation.
+ The code block will only be run once, so in testing, when you want to switch between variations you will want to implement
+ the TaplyticsDelegate to run your code block again to see the feature enabled. If you don't implement the TaplyticsDelegate
+ you will only be able to see the code block run specifically when your device falls into the relevant segmentation.
  
  [Taplytics runCodeBlock:@"enableFeature" forBlock:^{
     // enable your feature here
@@ -239,16 +240,23 @@ typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsA
 #pragma mark - Push Notifications
 
 /**
- Register for push notification access, this method will show the iOS alert asking for access to send push notifications.
+ Register for push notification access, this method will show the iOS permissions alert asking for access to send push notifications.
  This method will register for Badge, Sound, and Alert notification types
  */
 + (void)registerPushNotifications;
 
 /**
- Register for push notification access, this method will show the iOS alert asking for access to send push notifications.
+ Register for push notification access, this method will show the iOS permissions alert asking for access to send push notifications.
  @param types accepts both UIUserNotificationType (iOS 8) or UIRemoteNotificationType
  */
 + (void)registerPushNotificationsWithTypes:(NSInteger)types;
+
+/**
+ Registers for location access, this method will show the iOS permissions alert asking for location access. 
+ Location permissions are required for location based push notifications. We request kCLAuthorizationStatusAuthorizedAlways access
+ so that we can monitor regions for your location based push notifications.
+ */
++ (void)registerLocationAccess;
 
 /**
  Register for push notification access, this method will show the iOS alert asking for access to send push notifications.
