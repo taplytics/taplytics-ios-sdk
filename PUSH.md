@@ -45,6 +45,17 @@ Please Note that calling this function will show the permission dialog to the us
 [Taplytics registerPushNotifications];
 ```
 
+### Register for Location Permissions
+
+For automated push campaigns using location based regions you will need to add the `CoreLocation` framework to your app, and request location permissions from your users. Taplytics will automatically update and manage the monitored regions on your device for your automated push campaigns.
+
+You can handle asking for location permissions yourself, or you can use our provided method as seen below. But make sure that you request `AuthorizedAlways` permissions so that we can set regions.
+
+```objc 
+// We will request AuthorizedAlways access to be able to set monitored regions
+[Taplytics registerLocationAccess];
+```
+
 ---
 
 ## 2. Receiving Push Notifications
