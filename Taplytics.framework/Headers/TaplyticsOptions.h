@@ -37,4 +37,5 @@ extern NSString *const TaplyticsDisableSourceLocalytics;
 extern NSString *const TaplyticsDisableSourceOptimizely;
 extern NSString *const TaplyticsDisableSourceCrashlytics;
 extern NSString *const TaplyticsDisableSourceKISSMetrics;
+extern NSString *const TaplyticsDisableSourceMParticle;
 extern NSString *const TaplyticsDisableSourceHeap;
