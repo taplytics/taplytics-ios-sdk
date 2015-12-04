@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v2.7.24
+//  Taplytics v2.8.0
 //
 //  Copyright (c) 2015 Taplytics Inc. All rights reserved.
 //
@@ -16,6 +16,9 @@ typedef void(^TLExperimentBlock)(NSDictionary *variables);
 typedef void(^TLVariationBlock)(NSString* variationName, NSDictionary *variables);
 
 typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsAndVariations);
+
+typedef void(^TLPropertiesLoadedBlock)(BOOL loaded);
+
 
 @protocol TaplyticsDelegate <NSObject>
 
@@ -271,6 +274,19 @@ typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary *experimentsA
 + (BOOL)isUserRegisteredForPushNotifications;
 
 #pragma mark - Utility Functions
+
+/**
+ @return if Taplytics is currently loading properties from our servers
+ */
++ (BOOL)isLoadingPropertiesFromServer;
+
+/**
+ This block will be called asynchronously when the SDK has loaded properties from the server, or return synchronously if properties have already been loaded.
+ 
+ @param properties loaded callback block
+ */
++ (void)propertiesLoadedCallback:(TLPropertiesLoadedBlock)block;
+
 
 /**
  Get a NSDictionary of all running experiments and their current variation. This block will return async on the main thread once the experiment

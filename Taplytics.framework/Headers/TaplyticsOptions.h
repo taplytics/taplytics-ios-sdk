@@ -39,3 +39,4 @@ extern NSString *const TaplyticsDisableSourceCrashlytics;
 extern NSString *const TaplyticsDisableSourceKISSMetrics;
 extern NSString *const TaplyticsDisableSourceMParticle;
 extern NSString *const TaplyticsDisableSourceHeap;
+extern NSString *const TaplyticsDisableSourceAmplitude;
