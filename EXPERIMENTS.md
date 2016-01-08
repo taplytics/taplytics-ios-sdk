@@ -16,44 +16,64 @@ The code below is used to send the information of the variable or block to Taply
 
 ###Dynamic Variables
 
-Taplytics variables are dynamic variables that can be used to change content or functionality of your app dynamically from the Taplytics website. Variables are re-useable between experiments and are instantiated with three variables:
+Taplytics variables are values in your app that are controlled by experiments. Changing the values can update the content or functionality of your app. Variables are reusable between experiments and operate in one of two modes: synchronous or asynchronous.
+
+####Synchronous
+
+Synchronous variables are guaranteed to have the same value for the entire session and will have that value immediately after construction. 
+
+Due to the synchronous nature of the variable, if it is used before the experiments have been loaded from Taplytics servers (for example on the first launch of your app), it's value will be the default value rather than the value set for that experiment. This could taint the results of the experiment. In order to prevent this you can ensure that the experiments are loaded before using the variable. This can be done using the `propertiesLoadedCallback:` method, as an example: 
+
+```objc
+[Taplytics propertiesLoadedCallback:^(BOOL loaded) {
+    [self loadTLVariables];
+}];
+```
+
+Synchronous variables take two parameters in its constructor:
 
 1. Variable name (String)
 2. Default Value
- 
-*Variables should always implement the update code block, the value of the variable can be changed asynchronously once experiment properties are loaded from Taplytics Servers, but always called before your app's launch image is hidden.
- 
-Variables can be NSString, NSNumber, and Booleans casted into NSNumbers.
- 
-For example using a NSString to set label text:
- 
+
+The type of the variable is defined by the type of the Default Value, and can be a `NSString`, `NSNumber` or a `Boolean` casted to a `NSNumber`. 
+
+For example, using a variable of type `String`, using its value to get the value of the variable:
 ```objc
-TaplyticsVar *var = [TaplyticsVar taplyticsVarWithName:@"stringVar" defaultValue:@"Hello World" updatedBlock:^(NSObject* value) {
-    // updatedBlock will be called when the value is updated.
-    if (value)
-        _label.text = (NSString*)value;
-}];
- 
-// variables can also use the value property to access the value.
-_label.text = (NSString*)var.value;
+TaplyticsVar* stringVar = [TaplyticsVar taplyticsSyncVarWithName:@"stringVar" defaultValue:@"string"];
+NSString* string = (NSString*)stringVar.value;
 ```
-Example of Using a NSNumber: 
  
+Using a casted `Boolean` to a `NSNumber`:
+
 ```objc
-[TaplyticsVar taplyticsVarWithName:@"numberOfCells" defaultValue:@10 updatedBlock:^(NSObject* value) {
-    if (value)
-        [weakSelf setNumberOfCells:value];
+TaplyticsVar* boolVar = [TaplyticsVar taplyticsSyncVarWithName:@"boolVar" defaultValue:@(YES)];
+BOOL boolean = [(NSNumber*)boolVar.value boolValue];
+```
+
+####Asynchronous
+
+Asynchronous variables take care of insuring that the experiments have been loaded before returning a value. This removes any danger of tainting the results of your experiment with bad data. What comes with the insurance of using the correct value is the possibility that the value will not be set immediately. If the variable is constructed *before* the experiments are loaded, you won't have the correct value until the experiments have finished loading. If the experiments fail to load, then you will be given the default value, as specified in the variables constructor.
+
+Asynchronous variables take three parameters in its constructor:
+
+1. Variable name (String)
+2. Default Value
+3. TLVarBlock
+
+Just as for synchronous variables the type of the variable is defined by the type of the default value, and can be a `NSString`, `NSNumber` or a `Boolean` casted to a `NSNumber`. 
+
+For example, using a variable of type `NSNumber`:
+
+```objc
+__weak id weakSelf = self;
+[TaplyticsVar taplyticsVarWithName:@"numVar" defaultValue:@(1) updatedBlock:^(NSObject *value) {
+    if (value && weakSelf) {
+        NSNumber* num = (NSNumber*)value;
+    }
 }];
 ```
 
-Example of Using a Boolean casted as NSNumber:
-
-```objc 
-[TaplyticsVar taplyticsVarWithName:@"useNewCheckout" defaultValue:@(NO) updatedBlock:^(NSObject* value) {
-    if (value)
-        [weakSelf useNewCheckout:[(NSNumber*)value boolValue]];
-}];
-```
+When the variable's value has been updated, the updated block will be called with that updated value.
 
 ### Code Blocks
 
