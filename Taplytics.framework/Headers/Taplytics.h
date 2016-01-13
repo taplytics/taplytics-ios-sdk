@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v2.9.2
+//  Taplytics v2.9.4
 //
 //  Copyright (c) 2015 Taplytics Inc. All rights reserved.
 //
@@ -283,7 +283,7 @@ typedef void(^TLPropertiesLoadedBlock)(BOOL loaded);
 /**
  This block will be called asynchronously when the SDK has loaded properties from the server, or return synchronously if properties have already been loaded.
  
- @param properties loaded callback block
+ @param block loaded callback block
  */
 + (void)propertiesLoadedCallback:(TLPropertiesLoadedBlock)block;
 

@@ -56,12 +56,12 @@ typedef void(^TLVarBlock)(NSObject* value);
 @interface TaplyticsVar : NSObject
 
 /**
- @param value the value of the Taplytics Variable
+ value the value of the Taplytics Variable
  */
 @property (nonatomic, readonly, strong) NSObject* value;
 
 /**
- @param isSynchronous defines if the variable is a synchronous variable or async variable
+ isSynchronous defines if the variable is a synchronous variable or async variable
  */
 @property (nonatomic, readonly) BOOL isSynchronous;
 
