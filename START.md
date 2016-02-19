@@ -184,7 +184,7 @@ You can disable automatic tracking for any of the below constants by adding them
 
 |Constant  |Description         |
 |---        |---          |
-|TaplyticsDisableTrackLocation | location tracking |
+|TaplyticsDisableTrackLocation | location tracking via GPS |
 |TaplyticsDisableTrackSocialSignIn | social sign in access alert tracking |
 |TaplyticsDisableTrackiAdInstallation |  app install from iAd    |
 |TaplyticsDisableTrackPhotoLibraryAccess |   photo library access alert tracking |
