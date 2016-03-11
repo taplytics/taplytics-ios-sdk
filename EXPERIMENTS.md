@@ -14,11 +14,11 @@ Creating experiments is easy using Taplytics. You can either use our visual edit
 
 The code below is used to send the information of the variable or block to Taplytics, so it will appear on the dashboard.
 
-###Dynamic Variables
+### Dynamic Variables
 
 Taplytics variables are values in your app that are controlled by experiments. Changing the values can update the content or functionality of your app. Variables are reusable between experiments and operate in one of two modes: synchronous or asynchronous.
 
-####Synchronous
+#### Synchronous
 
 Synchronous variables are guaranteed to have the same value for the entire session and will have that value immediately after construction. 
 
@@ -50,7 +50,7 @@ TaplyticsVar* boolVar = [TaplyticsVar taplyticsSyncVarWithName:@"boolVar" defaul
 BOOL boolean = [(NSNumber*)boolVar.value boolValue];
 ```
 
-####Asynchronous
+#### Asynchronous
 
 Asynchronous variables take care of insuring that the experiments have been loaded before returning a value. This removes any danger of tainting the results of your experiment with bad data. What comes with the insurance of using the correct value is the possibility that the value will not be set immediately. If the variable is constructed *before* the experiments are loaded, you won't have the correct value until the experiments have finished loading. If the experiments fail to load, then you will be given the default value, as specified in the variables constructor.
 
