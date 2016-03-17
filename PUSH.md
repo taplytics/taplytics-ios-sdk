@@ -74,7 +74,7 @@ All devices that fall into the Development environment, Taplytics will use the [
 
 #### Production Bucketing
 
-If the app is built using a [Distribution Provisioning Profile](https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/TestingYouriOSApp/TestingYouriOSApp.html), we bucket the device into the Development environment. Note that this means that if you're distributing Ad-Hoc or Enterprise builds through a service like [Testflight](https://developer.apple.com/testflight/) or [Hockeyapp](http://hockeyapp.net/features/), then all those devices running those builds will fall into the Production environment. You can change this by forcing an environment.
+If the app is built using a [Distribution Provisioning Profile](https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/TestingYouriOSApp/TestingYouriOSApp.html), we bucket the device into the Production environment. Note that this means that if you're distributing Ad-Hoc or Enterprise builds through a service like [Testflight](https://developer.apple.com/testflight/) or [Hockeyapp](http://hockeyapp.net/features/), then all those devices running those builds will fall into the Production environment. You can change this by forcing an environment.
 
 All devices that fall into the Production environment, Taplytics will use the [Production Push Notification Certificate](https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/ConfiguringPushNotifications/ConfiguringPushNotifications.html) to attempt to send push notifications to your devices.
 
