@@ -65,15 +65,36 @@ Just as for synchronous variables the type of the variable is defined by the typ
 For example, using a variable of type `NSNumber`:
 
 ```objc
-__weak id weakSelf = self;
-[TaplyticsVar taplyticsVarWithName:@"numVar" defaultValue:@(1) updatedBlock:^(NSObject *value) {
-    if (value && weakSelf) {
+// In your Interface
+@property (nonatomic, strong) TaplyticsVar* tlVar;
+
+// Using the variable in your code:
+self.tlVar = [TaplyticsVar taplyticsVarWithName:@"numVar" defaultValue:@(1) updatedBlock:^(NSObject *value) {
+    if (value) {
         NSNumber* num = (NSNumber*)value;
     }
 }];
 ```
 
-When the variable's value has been updated, the updated block will be called with that updated value.
+When the variable's value has been updated, the updated block will be called with that updated value. Note that we only store a weak refrence to your variables, for the updated block to work correctly you will need to store a strong refrence to the variable object.
+
+#### Testing Dynamic Variables
+
+When testing dynamic variables in live update mode you can change the values on the fly via the taplytics interface and you can switch variations with the shake menu on the device.
+
+**Important Note:** When testing synchronous dynamic variables you must initialize the variable again to see the new value, as there are no callbacks which occur when the variable is updated with a new value.
+
+This can be achieved by using a properties loaded callback. Here is an example for updating a label:
+
+```objc
+__weak id weakSelf = self;
+[Taplytics propertiesLoadedCallback:^(BOOL loaded) {
+    TaplyticsVar* var = [TaplyticsVar taplyticsSyncVarWithName:@"stringVar" defaultValue:@"defaultValue"];
+    if (weakSelf && weakSelf.label) {
+        weakSelf.label.text = var.value;
+    }
+}];
+```
 
 ### Code Blocks
 
