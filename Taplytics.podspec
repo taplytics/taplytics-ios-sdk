@@ -10,6 +10,6 @@ Pod::Spec.new do |s|
   s.platform = :ios, '7.0'
   s.frameworks = 'CoreTelephony', 'SystemConfiguration', 'JavaScriptCore'
   s.preserve_paths = 'Taplytics.framework'
-  s.public_header_files = "Taplytics.framework/**/*.h"
+  s.source_files = s.public_header_files = "Taplytics.framework/**/*.h"
   s.vendored_frameworks = "Taplytics.framework"
 end
