@@ -33,8 +33,7 @@ First, you'll want to install our SDK inside your XCode project.
 
     ```objc
     #import <Taplytics/Taplytics.h>
-
-
+    ...
     - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
         ...
         [Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here"];
