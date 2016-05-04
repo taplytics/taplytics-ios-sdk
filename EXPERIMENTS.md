@@ -204,6 +204,20 @@ Implementing the TaplyticsDelegate is not necessary to properly run code-based e
         [self runMyCodeExperiment];
     }
     ```
+---
+
+## Testing Specific Experiments
+
+To test/QA specific experiment and varation combinations use the `TaplyticsOptionTestExperiments` start option with a  `NSDictionary` containing keys of the experiment names, and values of variation names (or `baseline`).
+
+```objc
+[Taplytics startTaplyticsAPIKey:@"API_KEY" options:@{
+    TaplyticsOptionTestExperiments: @{
+        @"Experiment 1": @"Variation 1",
+        @"Experiment 2": @"baseline"
+    }
+}];
+```
 
 ---
 
