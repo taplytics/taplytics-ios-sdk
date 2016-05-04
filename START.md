@@ -31,7 +31,6 @@ First, you'll want to install our SDK inside your XCode project.
     
 2. Initialize the SDK by adding an import and the following line of code with your API key to your `UIApplicationDelegate`.
 
-    
     ```objc
     #import <Taplytics/Taplytics.h>
 
@@ -129,6 +128,30 @@ For example:
         @"paidSubscriber": @YES,
         @"purchases": @3,
         @"totalRevenue": @42.42
+    }
+}];
+```
+
+_NOTE: The `customData` field is limited to 500kb of JSON string data._
+
+### User Attributes on First Launch
+
+User Attributes set before the `startTaplyticsAPIKey:` is called will be used for experiment segmentation. Any attributes that are set after will not be used for experiment segmentation until the next session of the app.
+
+```objc
+// This custom data will be used for segmentation on the first session of the app.
+[Taplytics setUserAttributes:@{
+    @"customData": @{
+        @"paid_user": @YES
+    }
+}];
+    
+[Taplytics startTaplyticsAPIKey:@"API_KEY"];
+
+// This custom data will only take effect on the second session of the app.
+[Taplytics setUserAttributes:@{
+    @"customData": @{
+        @"demo_account": @NO
     }
 }];
 ```
@@ -234,6 +257,8 @@ You can also track your own custom Analytics events to Taplytics using the `logE
 // Log Revenue
 [Taplytics logRevenue:@"Purchase" value:@10.25 metaData:@{@"Item":@"blueSweater"}];
 ```
+
+_NOTE: event metaData is limited to 50kb of JSON string data._
 
 ---
 
