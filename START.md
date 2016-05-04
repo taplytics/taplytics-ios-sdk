@@ -32,13 +32,13 @@ First, you'll want to install our SDK inside your XCode project.
 2. Initialize the SDK by adding an import and the following line of code with your API key to your `UIApplicationDelegate`.
 
     ```objc
-    #import <Taplytics/Taplytics.h>
-    ...
-    - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+        #import <Taplytics/Taplytics.h>
         ...
-        [Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here"];
-        ...
-    }
+        - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+            ...
+            [Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here"];
+            ...
+        }
     ```
 
 #### Manual Installation
