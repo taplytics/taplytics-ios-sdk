@@ -135,10 +135,10 @@ _NOTE: The `customData` field is limited to 500kb of JSON string data._
 
 ### User Attributes on First Launch
 
-User Attributes set before the `startTaplyticsAPIKey:` is called will be used for experiment segmentation. Any attributes that are set after will not be used for experiment segmentation until the next session of the app.
+User Attributes set before `startTaplyticsAPIKey:` is called, will be used for experiment segmentation on the first session of your app. Any attributes that are set after `startTaplyticsAPIKey:` is called will not be used for experiment segmentation until the next session of your app.
 
 ```objc
-// This custom data will be used for segmentation on the first session of the app.
+// These custom data values will be used for segmentation on the first session of the app.
 [Taplytics setUserAttributes:@{
     @"customData": @{
         @"paid_user": @YES
@@ -147,7 +147,7 @@ User Attributes set before the `startTaplyticsAPIKey:` is called will be used fo
     
 [Taplytics startTaplyticsAPIKey:@"API_KEY"];
 
-// This custom data will only take effect on the second session of the app.
+// These custom data values will only take effect on the second session of the app.
 [Taplytics setUserAttributes:@{
     @"customData": @{
         @"demo_account": @NO
