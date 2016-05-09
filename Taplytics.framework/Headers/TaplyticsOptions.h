@@ -13,6 +13,7 @@ extern NSString *const TaplyticsOptionSessionBackgroundTime;
 extern NSString *const TaplyticsOptionPushSandbox;
 extern NSString *const TaplyticsOptionTestExperiments;
 extern NSString *const TaplyticsOptionDisable;
+extern NSString *const TaplyticsOptionDisableBorders;
 
 extern NSString *const TaplyticsDisablePushNotifications;
 extern NSString *const TaplyticsDisableLocationRegions;
