@@ -196,7 +196,7 @@ If you already have Analytics events instrumented with another Analytics source 
 - [Localytics](https://www.localytics.com/)
 - [Parse](https://www.parse.com/)
 - [Apsalar](https://apsalar.com/)
-- [Crashlytics Ansers](http://try.crashlytics.com/answers/)
+- [Crashlytics Answers](http://try.crashlytics.com/answers/)
 - [KISSMetrics](https://www.kissmetrics.com/products)
 - [Heap](https://heapanalytics.com/)
 
