@@ -232,14 +232,14 @@ On the first launch of your app, the Taplytics SDK will show your iOS launch ima
 
 If you would like to disable showing the launch image:
 
-```obc
-[Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{@"delayLoad":@0}];
+```objc
+[Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{TaplyticsOptionDelayLoad:@0}];
 ```
 
 Or increase the maximum wait time to 10 seconds:
 
-```obc
-[Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{@"delayLoad":@10}];
+```objc
+[Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{TaplyticsOptionDelayLoad:@10}];
 ```
 
 ---
@@ -248,7 +248,7 @@ Or increase the maximum wait time to 10 seconds:
 
 If you would like to see which variations and experiments are running on a given device, there exists a `getRunningExperimentsAndVariations()` function which provides a callback with the current experiments and their running variation. An example:
 
-```obc
+```objc
 [Taplytics getRunningExperimentsAndVariations:^(NSDictionary *experimentsAndVariations) {
     // For example: 
     // NSDictionary* experimentsAndVariations = @{
