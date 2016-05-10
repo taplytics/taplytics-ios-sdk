@@ -229,7 +229,7 @@ You can disable automatic tracking for any of the below constants by adding them
 
 For example:
 
-```obc
+```objc
 [Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{TaplyticsOptionDisable:@[TaplyticsOptionTrackLocation]}];
 ```
 
@@ -237,7 +237,7 @@ For example:
 
 Taplytics automatically tracks sessions for you. The Taplytics SDK keeps track of the last activity timestamp in your app (app activity is considered a view change, button click, or Taplytics event logged), and when your app returns from background if the time since last activity is greater then 10 minutes we create a new session for you. If you would like the session background time something other then 10 minutes you can se it as a start option: 
 
-```obc
+```objc
 [Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{TaplyticsOptionSessionBackgroundTime:@10}];
 ```
 
@@ -265,3 +265,31 @@ _NOTE: event metaData is limited to 50kb of JSON string data._
 
 If you choose to, the Taplytics SDK can also send the running Experiment/Variation information to a supported Analytics source. [Check out our docs](https://taplytics.com/docs/guides/third-party-integration-setup) for details.
 
+---
+
+### Start Options
+
+Start options allow you to control how certain SDK features function, and enable or disable features.
+
+|Start Option |Description |
+|---        |---          |
+|TaplyticsOptionDelayLoad | Controls the maximum time the SDK will show your launch image for. [More details](https://github.com/taplytics/taplytics-ios-sdk/blob/master/EXPERIMENTS.md#delay-load). |
+|TaplyticsOptionLaunchImageType | If you are using a xib as a launch image set the value as `@"xib"`. This will stop the caught exception that occurs for xib based launch images. |
+|TaplyticsOptionShowShakeMenu | To disable the shake menu from showing up in development mode, set to `@NO` |
+|TaplyticsOptionTestExperiments | To test specific experiments, pass in the experiment name/variation name as the key/values of a NSDictionary. [More details](https://github.com/taplytics/taplytics-ios-sdk/blob/master/EXPERIMENTS.md#testing-specific-experiments). |
+|TaplyticsOptionDisableBorders | To disable all Taplytics borders in development mode, set to `@YES` |
+
+Example: 
+
+```objc
+[Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{
+	TaplyticsOptionDelayLoad: @6,
+	TaplyticsOptionLaunchImageType: @"xib",
+	TaplyticsOptionShowShakeMenu: @NO,
+	TaplyticsOptionDisableBorders: @YES,
+	TaplyticsOptionTestExperiments: @{
+		@"Experiment 1": @"Variation 1",
+   		@"Experiment 2": @"baseline"
+	}
+}];
+```
