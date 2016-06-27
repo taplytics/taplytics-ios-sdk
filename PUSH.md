@@ -56,6 +56,12 @@ You can handle asking for location permissions yourself, or you can use our prov
 [Taplytics registerLocationAccess];
 ```
 
+In order to allow the iOS location manager to successfully display a location request dialog to the user, the following properties must be added to the application's Plist settings:
+```objc
+NSLocationAlwaysUsageDescription
+NSLocationWhenInUseUsageDescription
+```
+
 ---
 
 ## 2. Receiving Push Notifications
