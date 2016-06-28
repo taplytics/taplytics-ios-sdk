@@ -62,6 +62,8 @@ NSLocationAlwaysUsageDescription
 NSLocationWhenInUseUsageDescription
 ```
 
+These values will be used by the OS to display the reason for requesting location access.
+
 ---
 
 ## 2. Receiving Push Notifications
