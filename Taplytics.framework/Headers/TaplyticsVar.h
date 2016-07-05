@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void(^TLVarBlock)(NSObject* value);
+typedef void(^TLVarBlock)(NSObject* _Nullable value);
 
 /**
  Taplytics Variables are dynamic variables that can be used to change content or functionality of your app dynamically
@@ -58,7 +58,7 @@ typedef void(^TLVarBlock)(NSObject* value);
 /**
  value the value of the Taplytics Variable
  */
-@property (nonatomic, readonly, strong) NSObject* value;
+@property (nonatomic, readonly, strong) NSObject* _Nullable value;
 
 /**
  isSynchronous defines if the variable is a synchronous variable or async variable
@@ -71,7 +71,7 @@ typedef void(^TLVarBlock)(NSObject* value);
  @param name the name of the Taplytics Variable
  @param defaultValue the defualt value to be used and when not modified by a Taplytics Experiment or when experiments are not loaded before use
  */
- + (instancetype)taplyticsSyncVarWithName:(NSString *)name defaultValue:(NSObject*)defaultValue;
+ + (nonnull instancetype)taplyticsSyncVarWithName:(nonnull NSString *)name defaultValue:(nonnull NSObject*)defaultValue;
 
 /**
  Get instance of Taplytics Variable with name and default value. Updates to its value are notified using the updatedBlock.
@@ -82,7 +82,7 @@ typedef void(^TLVarBlock)(NSObject* value);
  @param codeBlock the update code block called when the Taplytics Variable's value is updated.
  */
 
-+ (instancetype)taplyticsVarWithName:(NSString *)name defaultValue:(NSObject*)defaultValue updatedBlock:(TLVarBlock)codeBlock;
++ (nonnull instancetype)taplyticsVarWithName:(nonnull NSString *)name defaultValue:(nonnull NSObject*)defaultValue updatedBlock:(nullable TLVarBlock)codeBlock;
 
 @end
 
