@@ -72,9 +72,9 @@ The Taplytics SDK can also be installed via Segment. You can find install instru
 
 ---
 
-### App Linking
+### Advanced Pairing
 
-Secondly, (though, optionally) you can implement app linking, which will allow you to pair your device to Taplytics via a link sent by email or text. App Linking is an easy way for your team to pair any build of your app to Taplytics. 
+Secondly, (though, optionally) you can implement Advanced Pairing, which will allow you to pair your device to Taplytics via a link sent by email or text. Advanced Pairing is an easy way for your team to pair any build of your app to Taplytics. 
 
 1. First ensure that `application:openURL:` method is implemented in your `UIApplicationDelegate`
 
