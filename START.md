@@ -131,7 +131,7 @@ For example:
 }];
 ```
 
-_NOTE: The `customData` field is limited to 500kb of JSON string data._
+_NOTE: The `customData` field is limited to 50kb of JSON string data._
 
 ### User Attributes on First Launch
 
