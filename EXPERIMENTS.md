@@ -65,7 +65,7 @@ Just as for synchronous variables the type of the variable is defined by the typ
 For example, using a variable of type `NSNumber`:
 
 ```objc
-// In your Interface
+// In your Interface create a strong reference to the variable
 @property (nonatomic, strong) TaplyticsVar* tlVar;
 
 // Using the variable in your code:
