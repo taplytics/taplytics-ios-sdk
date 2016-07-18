@@ -20,29 +20,28 @@ typedef void(^TLVarBlock)(NSObject* _Nullable value);
  
  Variables accept NSString, NSNumber, and Booleans casted into NSNumbers as values.
  
- For example using a NSString to set label text:
+ For example using a NSNumber:
  
- __weak id weakSelf = self;
- [TaplyticsVar taplyticsVarWithName:@"stringVar" defaultValue:@"Hello World" updatedBlock:^(NSObject* value) {
-    // updatedBlock will be called when the value is updated.
-    if (value && weakSelf)
-        weakSelf.label.text = (NSString*)value;
- }];
+ // In your Interface create a strong reference to the variable
+ @property (nonatomic, strong) TaplyticsVar* tlVar;
  
- Example of Using a NSNumber: 
- 
- __weak id weakSelf = self;
- [TaplyticsVar taplyticsVarWithName:@"numberOfCells" defaultValue:@10 updatedBlock:^(NSObject* value) {
-    if (value && weakSelf)
-        [weakSelf setNumberOfCells:value];
+ // Using the variable in your code:
+ self.tlVar = [TaplyticsVar taplyticsVarWithName:@"numVar" defaultValue:@(1) updatedBlock:^(NSObject *value) {
+     if (value) {
+         NSNumber* num = (NSNumber*)value;
+     }
  }];
 
  Example of Using a Boolean casted as NSNumber:
  
+ // In your Interface, create a strong reference to the variable
+ @property (nonatomic, strong) TaplyticsVar* tlVar;
+ 
  __weak id weakSelf = self;
  [TaplyticsVar taplyticsVarWithName:@"useNewCheckout" defaultValue:@(NO) updatedBlock:^(NSObject* value) {
-    if (value && weakSelf)
+     if (value && weakSelf) {
         [weakSelf useNewCheckout:[(NSNumber*)value boolValue]];
+     }
  }];
  
  You can also use synchronous variables using the following, however you may need to implement callbacks to be able to test synchronous variables.
