@@ -17,7 +17,6 @@ First, you'll want to install our SDK inside your XCode project.
     - Add a `Podfile` to the root of your project directory with the following:
 
         ```ruby
-        platform :ios, '7.0'
         pod 'Taplytics'
         ```
 
