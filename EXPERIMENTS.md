@@ -98,7 +98,9 @@ __weak id weakSelf = self;
 
 ### Code Blocks
 
-Similar to Dynamic Variables, Taplytics has an option for *Code Blocks*. Code Blocks are linked to Experiments through the Taplytics website very much the same way that Dynamic Variables are, and will be executed based on the configuration of the experiment through the Taplytics website. A Code Block is a callback that can be enabled or disabled depending on the variation. If the Code Block is enabled for the current variation, the code within the callback will be executed asynchronously when Taplytics properties are loaded. If the Code Block is disabled for the current variation, the callback will not be executed.
+Similar to Dynamic Variables, Taplytics has an option for **Code Blocks**. Code Blocks are linked to Experiments through the Taplytics website very much the same way that Dynamic Variables are, and will be executed based on the configuration of the experiment through the Taplytics website. 
+
+A Code Block is a callback that can be enabled or disabled depending on the variation. If the Code Block is enabled for the current variation, the code within the callback will be executed asynchronously when Taplytics properties are loaded. If the Code Block is disabled for the current variation, the callback will not be executed.
 
 A Code Block can be used alongside as many other Code Blocks as you would like to determine a combination that yields the best results. Perhaps there are three different Code Blocks on one view. This means there could be 8 different combinations of Code Blocks being enabled / disabled on that view if you'd like.
 
