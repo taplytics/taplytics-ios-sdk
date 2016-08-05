@@ -76,7 +76,7 @@ self.tlVar = [TaplyticsVar taplyticsVarWithName:@"numVar" defaultValue:@(1) upda
 }];
 ```
 
-When the variable's value has been updated, the updated block will be called with that updated value. Note that we only store a weak refrence to your variables, for the updated block to work correctly you will need to store a strong refrence to the variable object.
+When the variable's value has been updated, the updated block will be called with that updated value. Note that we only store a weak reference to your variables, for the updated block to work correctly you will need to store a strong reference to the variable object.
 
 #### Testing Dynamic Variables
 
@@ -184,7 +184,7 @@ Implementing the TaplyticsDelegate is not necessary to properly run code-based e
     #import <Taplytics/Taplytics.h>
     @interface SampleViewController : ViewController <TaplyticsDelegate>
     ```
-2. Add the `taplyticsExperimentChanged:experimentName:variationName:` method to your Class and register the delegate with Taplytics using `setTaplyticsDelegate:`. Then call your code experiment again from that method. This delegate method will be called everytime the current variation is changed on the website or the shake menu.
+2. Add the `taplyticsExperimentChanged:experimentName:variationName:` method to your Class and register the delegate with Taplytics using `setTaplyticsDelegate:`. Then call your code experiment again from that method. This delegate method will be called every time the current variation is changed on the website or the shake menu.
 
     ```objc
     - (void)viewDidLoad {
@@ -208,7 +208,7 @@ Implementing the TaplyticsDelegate is not necessary to properly run code-based e
 
 ## Testing Specific Experiments
 
-To test/QA specific experiment and varation combinations use the `TaplyticsOptionTestExperiments` start option with a  `NSDictionary` containing keys of the experiment names, and values of variation names (or `baseline`).
+To test/QA specific experiment and variation combinations use the `TaplyticsOptionTestExperiments` start option with a  `NSDictionary` containing keys of the experiment names, and values of variation names (or `baseline`).
 
 ```objc
 [Taplytics startTaplyticsAPIKey:@"API_KEY" options:@{

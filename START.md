@@ -232,7 +232,7 @@ For example:
 [Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{TaplyticsOptionDisable:@[TaplyticsOptionTrackLocation]}];
 ```
 
-#### Backgound Session Time
+#### Background Session Time
 
 Taplytics automatically tracks sessions for you. The Taplytics SDK keeps track of the last activity timestamp in your app (app activity is considered a view change, button click, or Taplytics event logged), and when your app returns from background if the time since last activity is greater then 10 minutes we create a new session for you. If you would like the session background time something other then 10 minutes you can se it as a start option: 
 

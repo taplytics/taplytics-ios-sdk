@@ -72,7 +72,7 @@ To be able to send your users Push Notifications, we'll need you to upload your 
 
 ### Environments (Development and Production)
 
-In order to seperate your development devices and production devices, Taplytics automatically buckets devices into Development and Production buckets. We do this by looking at the provisioning profile that the app was built with.
+In order to separate your development devices and production devices, Taplytics automatically buckets devices into Development and Production buckets. We do this by looking at the provisioning profile that the app was built with.
 
 #### Development Bucketing
 
@@ -94,10 +94,10 @@ Here's how you can achieve setting the Push environment:
 
 ```objc
 
-// To bucket everyting into Production:
+// To bucket everything into Production:
 [Taplytics startTaplyticsAPIKey:@"SDK_TOKEN_HERE" options:@{@"pushSandbox":@0}];
 
-// To bucket everyting into Development:
+// To bucket everything into Development:
 [Taplytics startTaplyticsAPIKey:@"SDK_TOKEN_HERE" options:@{@"pushSandbox":@1}];
 ```
 
