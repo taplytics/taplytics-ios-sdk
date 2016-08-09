@@ -78,10 +78,10 @@ typedef void(^TLVarBlock)(NSObject* _Nullable value);
  @param name the name of the Taplytics Variable
  @param defaultValue the default value to be used when not modified by a Taplytics Experiment. 
  Can be NSString, NSNumber, or a Boolean casted as NSNumber
- @param codeBlock the update code block called when the Taplytics Variable's value is updated.
+ @param updatedBlock the update code block called when the Taplytics Variable's value is updated.
  */
 
-+ (nonnull instancetype)taplyticsVarWithName:(nonnull NSString *)name defaultValue:(nonnull NSObject*)defaultValue updatedBlock:(nullable TLVarBlock)codeBlock;
++ (nonnull instancetype)taplyticsVarWithName:(nonnull NSString *)name defaultValue:(nonnull NSObject*)defaultValue updatedBlock:(nullable TLVarBlock)updatedBlock;
 
 @end
 

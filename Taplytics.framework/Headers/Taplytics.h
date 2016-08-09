@@ -24,8 +24,8 @@ typedef void(^TLPropertiesLoadedBlock)(BOOL loaded);
 
 @optional
 /** 
- Delegate method called when an experiment is changed, use this to call runCodeExperiment:withBaseline:variations: again
- in your code to test and visually see the different code experiments. Only necessary for code experiments, visual experiments
+ Delegate method called when an experiment is changed, use this to call runCodeBlock:forBlock: again
+ in your code to test and visually see the different code experiments. Only necessary for code blocks, visual experiments
  will update themselves.
  @param experimentName The name of the experiment
  @param variationName The name of the experiment variation, nil if Baseline
@@ -105,63 +105,6 @@ typedef void(^TLPropertiesLoadedBlock)(BOOL loaded);
  */
 
 + (void)runCodeBlock:(nonnull NSString*)name forBlock:(nonnull TLCodeBlock)codeBlock;
-
-/**
- Run a code experiment defined by experimentName, one baseline or variation block will be run synchronously.
- On the first launch of your app the execution will be delayed and will be called asynchronously on the main thread
- once the Taplytics configuration has been loaded, but before the launch image is hidden.
- 
- If no experiment has been defined or no configuration has been loaded the baseline block will be called. 
- Variation blocks are defined in a NSDictionary with a key of the variation name, and a value of TLExperimentBlock. For Example:
- 
- [Taplytics runCodeExperiment:@"testExperiment" withBaseline:^(NSDictionary *variables) {
- 
- } variations:@{@"variation1": ^(NSDictionary *variables) {
- 
- }, @"variation2": ^(NSDictionary *variables) {
- 
- }}];
- 
- @param experimentName Name of the experiment to run
- @param baselineBlock Baseline block called if experiment is in baseline variation. Returns on incoming thread if synchronous, returns on main thread if asynchronous.
- @param variationNamesAndBlocks NSDictionary with keys of variation names and values of variation blocks. Returns on incoming thread if synchronous, returns on main thread if asynchronous.
- */
-+ (void)runCodeExperiment:(nonnull NSString*)experimentName
-             withBaseline:(nullable TLExperimentBlock)baselineBlock
-               variations:(nullable NSDictionary*)variationNamesAndBlocks
-                DEPRECATED_MSG_ATTRIBUTE("Use [Taplytics runCodeBlock:] instead, codeblocks now reusable between experiments");
-
-/**
- Use this method when running code experiments in Swift, due to how blocks/closures are handled in Swift 
- passing blocks/closures in an NSDictioary is not supported well. This method will return to either the baselineBlock
- or the variationBlock with the variation's name. The blocks are called in the same manner as explained in 
- runCodeExperiment:withBaseline:variations:
- 
- Using this method in Swift:
- Taplytics.runCodeExperiment("testExperiment",
-    forBaseline: { variables in
-        let myVar0: NSNumber? = variables?["var"] as? NSNumber
-        println("Baseline, variable: \(myVar0)")
-    },
-    forVariation: { variationName, variables in
-        let myVar0: NSNumber? = variables?["var"] as? NSNumber
-        if variationName == "variation1" {
-            println("variation 1, variable: \(myVar0)")
-        }
-        else if variationName == "variation2" {
-            println("variation2, variable: \(myVar0)")
-        }
-    }
- )
- 
- @param experimentName Name of the experiment to run
- @param baselineBlock Baseline block called if experiment is in baseline variation. Returns on incoming thread if synchronous, returns on main thread if asynchronous.
- @param variationBlock Variation block called when the experiment is running a variation. Returns on incoming thread if synchronous, returns on main thread if asynchronous.
- */
-+ (void)runCodeExperiment:(nonnull NSString*)experimentName
-              forBaseline:(nullable TLExperimentBlock)baselineBlock
-             forVariation:(nullable TLVariationBlock)variationBlock
-                DEPRECATED_MSG_ATTRIBUTE("Use [Taplytics runCodeBlock:] instead, codeblocks now reusable between experiments");
 
 #pragma mark - Event Logging
 
