@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v2.11.3
+//  Taplytics v2.12.0
 //
 //  Copyright (c) 2015 Taplytics Inc. All rights reserved.
 //
@@ -178,10 +178,11 @@ typedef void(^TLPropertiesLoadedBlock)(BOOL loaded);
 + (void)resetUser:(nullable void(^)(void))callback;
 
 /**
- This method will return the current user attributes for the user.
- @param callback NSDictionary of user attributes returned when Taplytics has loaded properties from our servers.
+ This method will return the current session info for the user.
+ @param callback NSDictionary of user session info returned when Taplytics has loaded properties from our servers.
+ This NSDictionary contains two keys: appUser_id and session_id
  */
-+ (void)getUserAttributes:(nullable void(^)(NSDictionary* _Nullable userAttributes))callback;
++ (void)getSessionInfo:(nullable void(^)(NSDictionary* _Nullable sessionInfo))callback;
 
 #pragma mark - Push Notifications
 
