@@ -75,10 +75,10 @@ The Taplytics SDK can also be installed via Segment. You can find install instru
 
 Secondly, (though, optionally) you can implement Advanced Pairing, which will allow you to pair your device to Taplytics via a link sent by email or text. Advanced Pairing is an easy way for your team to pair any build of your app to Taplytics. 
 
-1. First ensure that `application:openURL:` method is implemented in your `UIApplicationDelegate`
+1. First ensure that `application:openURL:options:` method is implemented in your `UIApplicationDelegate`
 
     ```objc
-    - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url sourceApplication:(NSString *)sourceApp annotation:(id)ann {
+    - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
         return NO;
     }
     ```
