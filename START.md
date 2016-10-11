@@ -306,7 +306,7 @@ Existing behaviour example:
 self.var = [TaplyticsVar taplyticsSyncVarWithName:@"syncVar" defaultValue:@1];
 NSLog(@"Variable Value: %@", _var.value);
 ```
-å
+
 Async Loading example:
 
 ```objc
