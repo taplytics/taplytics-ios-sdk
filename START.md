@@ -270,13 +270,14 @@ If you choose to, the Taplytics SDK can also send the running Experiment/Variati
 
 Start options allow you to control how certain SDK features function, and enable or disable features.
 
-|Start Option |Description |
-|---        |---          |
-|TaplyticsOptionDelayLoad | Controls the maximum time the SDK will show your launch image for. [More details](https://github.com/taplytics/taplytics-ios-sdk/blob/master/EXPERIMENTS.md#delay-load). |
-|TaplyticsOptionLaunchImageType | If you are using a xib as a launch image set the value as `@"xib"`. This will stop the caught exception that occurs for xib based launch images. |
-|TaplyticsOptionShowShakeMenu | To disable the shake menu from showing up in development mode, set to `@NO` |
-|TaplyticsOptionTestExperiments | To test specific experiments, pass in the experiment name/variation name as the key/values of a NSDictionary. [More details](https://github.com/taplytics/taplytics-ios-sdk/blob/master/EXPERIMENTS.md#testing-specific-experiments). |
-|TaplyticsOptionDisableBorders | To disable all Taplytics borders in development mode, set to `@YES` |
+|Start Option |Type |Description |
+|---        |---	        |---          |
+|TaplyticsOptionDelayLoad|NSNumber|Controls the maximum time the SDK will show your launch image for. [More details](https://github.com/taplytics/taplytics-ios-sdk/blob/master/EXPERIMENTS.md#delay-load). |
+|TaplyticsOptionLaunchImageType|NSString|If you are using a xib as a launch image set the value as `@"xib"`. This will stop the caught exception that occurs for xib based launch images. |
+|TaplyticsOptionShowShakeMenu|NSNumber(Boolean)|To disable the shake menu from showing up in development mode, set to `@NO` |
+|TaplyticsOptionTestExperiments|NSNumber(Boolean)|To test specific experiments, pass in the experiment name/variation name as the key/values of a NSDictionary. [More details](https://github.com/taplytics/taplytics-ios-sdk/blob/master/EXPERIMENTS.md#testing-specific-experiments). |
+|TaplyticsOptionDisableBorders|NSNumber(Boolean)|To disable all Taplytics borders in development mode, set to `@YES` |
+|TaplyticsOptionAsyncLoading|NSNumber(Boolean)|Forces loading of taplytics properties from disk as async task, breaks some synchronous variable behaviour, see section below for details. |
 
 Example: 
 
@@ -290,5 +291,38 @@ Example:
 		@"Experiment 1": @"Variation 1",
    		@"Experiment 2": @"baseline"
 	}
+}];
+```
+
+#### Async Loading
+Enabling the start option `TaplyticsOptionAsyncLoading ` will make the initial loading of taplytics properties from disk run on an async thread. However, this will break the behaviour of synchronous variables where they used the value loaded from disk, with `TaplyticsOptionAsyncLoading` enabled and synchronous variables are initialized before properties are loaded from disk they will use the default value. To ensure properties are loaded when initializing synchronous variables use `[Taplytics propertiesLoadedCallback:]`.
+
+Existing behaviour example:
+
+```objc
+[Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here"];
+
+// Existing behaviour would have loaded value from disk and the variable's value would be loaded from disk.
+self.var = [TaplyticsVar taplyticsSyncVarWithName:@"syncVar" defaultValue:@1];
+NSLog(@"Variable Value: %@", _var.value);
+```
+å
+Async Loading example:
+
+```objc
+[Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{
+	TaplyticsOptionAsyncLoading: @YES
+}];
+
+// Here var.value would not be loaded from disk and would have the default value of @1
+self.var = [TaplyticsVar taplyticsSyncVarWithName:@"syncVar" defaultValue:@1];
+NSLog(@"Variable Value: %@", _var.value);
+
+// Using the propertiesLoadedCallback:
+__weak AppDelegate* weakSelf = self;
+[Taplytics propertiesLoadedCallback:^(BOOL loaded) {
+	// Now the variable will have the correct value loaded from disk/server
+	weakSelf.var = [TaplyticsVar taplyticsSyncVarWithName:@"syncVar" defaultValue:@1];
+	NSLog(@"Variable Value: %@", weakSelf.var.value);
 }];
 ```
