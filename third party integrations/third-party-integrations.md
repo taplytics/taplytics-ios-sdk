@@ -11,7 +11,7 @@ The Taplytics SDK can automatically push experiments to the following Analytics 
 
 To enable any of these, navigate to your project settings and select the analytics sources you want to use with Taplytics. If you don't see your analytics source listed here, feel free to let us know what other integrations you need.
 
-Additionally, Taplytics will automatically track this data
+Additionally, Taplytics will automatically track events from these sources directly into Taplytics.
 
 ![image](https://github.com/taplytics/Taplytics-iOS-SDK/blob/master/third%20party%20integrations/settings.png?raw=true)
 
