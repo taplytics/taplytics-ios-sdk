@@ -13,7 +13,7 @@ To enable any of these, navigate to your project settings and select the analyti
 
 Additionally, Taplytics will automatically track this data
 
-!!!!IMAMAAAAAGGGEEEE
+![image](https://github.com/taplytics/Taplytics-iOS-SDK/blob/master/third%20party%20integrations/settings.png?raw=true)
 
 
 ##iOS
