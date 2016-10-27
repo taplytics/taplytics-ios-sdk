@@ -5,7 +5,7 @@
 The Taplytics SDK can automatically push experiments to the following Analytics Sources:
 
 | [iOS SDK](#ios) | [Android SDK](#android)           
-| ------------- |:-------------:    
+| ------------- |-------------    
 | <ul><li>[Google Analytics](#google-analytics-ios)</li><li>[Flurry](#flurry-ios)</li><li>[MixPanel](#mixpanel-ios)</li><li>[Amplitude](#amplitude-ios)</li><li>[Intercom](#intercom-ios)</li><li>[Apsalar](#apsalar-ios)</li><li>[Parse](#parse-ios)</li><li>[Adobe](#adobe-ios)</li><li>[Localytics](#localytics-ios)</li><li>[Heap](#heap-ios)</li><li>[Optimizely](#optimizely-ios)</li><li>[Segment](#segment-ios)</li><li>[KISSMetrics](#kissmetrics-ios)</li></ul>| <ul><li>[Google Analytics](#Google-Analytics-Android)</li><li>[Flurry](#flurry-android)</li><li>[MixPanel](#mixpanel-android)</li><li>[Amplitude](#amplitude-android)</li><li>[Adobe](#adobe-android)</li><li>[Localytics](#localytics-android)</li><li>[Segment](#segment-android)</li></ul>
 
 
