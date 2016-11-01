@@ -154,6 +154,16 @@ User Attributes set before `startTaplyticsAPIKey:` is called, will be used for e
 }];
 ```
 
+### Retrieving Session Info
+
+Taplytics also offers a method to retrieve select information of what you know about a session at a given time. This method returns the user's Taplytics identifier (appUser_id) and current session id (session_id)
+
+```objc
+    [Taplytics getSessionInfo:^(NSDictionary * _Nullable sessionInfo) {
+        //Use your NSDictionary of sessionInfo
+    }];
+```
+
 ### Resetting Users
 
 Once a user logs out of your app, their User Attributes are no longer valid. You can reset their data by calling `resetUser:`, make sure you do not set any new user attributes until you receive the callback.
