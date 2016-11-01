@@ -159,9 +159,9 @@ User Attributes set before `startTaplyticsAPIKey:` is called, will be used for e
 Taplytics also offers a method to retrieve select information of what you know about a session at a given time. This method returns the user's Taplytics identifier (appUser_id) and current session id (session_id)
 
 ```objc
-    [Taplytics getSessionInfo:^(NSDictionary * _Nullable sessionInfo) {
-        //Use your NSDictionary of sessionInfo
-    }];
+[Taplytics getSessionInfo:^(NSDictionary * _Nullable sessionInfo) {
+    //Use your NSDictionary of sessionInfo
+}];
 ```
 
 ### Resetting Users
