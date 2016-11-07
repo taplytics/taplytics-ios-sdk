@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v2.14.0
+//  Taplytics v2.15.0
 //
 //  Copyright (c) 2015 Taplytics Inc. All rights reserved.
 //
@@ -257,6 +257,14 @@ typedef void(^TLPropertiesLoadedBlock)(BOOL loaded);
  @param completionBlock Completion block called when fetch is complete, returns on main thread.
  */
 + (void)performBackgroundFetch:(nonnull void(^)(UIBackgroundFetchResult result))completionBlock;
+
+
+/**
+ Shows the launch image while Taplytics updates its configuration in the background.
+ This should ONLY be used in the case where the starting of Taplytics is delayed behind some network call.
+ Taplytics will not automatically show the launch image in cases where Taplytics isn't immediately initialzed in 'application:didFinishLaunchingWithOptions:'
+ */
++ (void)showAsyncLaunchImageForMaxTime:(nonnull NSNumber*) maxTime;
 
 @end
 
