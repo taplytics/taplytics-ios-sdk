@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v2.15.2
+//  Taplytics v2.15.3
 //
 //  Copyright (c) 2015 Taplytics Inc. All rights reserved.
 //
@@ -63,8 +63,8 @@ typedef void(^TLPropertiesLoadedBlock)(BOOL loaded);
  Console Logging: Taplytics will only log to the console in development builds.
  @param apiKey Your API key
  @param options Taplytics options dictionary, used for testing. Options include:
-            - @{@"delayLoad":@2} allows Taplytics to show your app's launch image and load its configuration for a maximum number of seconds
-                on app launch, the default for first launch is 2 seconds. This is useful when running a code experiments on the first screen 
+            - @{@"delayLoad":@4} allows Taplytics to show your app's launch image and load its configuration for a maximum number of seconds
+                on app launch, the default for first launch is 4 seconds. This is useful when running a code experiments on the first screen
                 of your app, this will ensure that your users will get shown a variation on the first launch of your app. Set to @0 for no
                 delay.
             - @{@"liveUpdate":@NO} Taplytics will auto-detect an app store build or a development build. But to force production mode use @NO,
