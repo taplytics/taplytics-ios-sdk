@@ -30,6 +30,8 @@ Due to the synchronous nature of the variable, if it is used before the experime
 }];
 ```
 
+Note that this must be done only _after_ startTaplytics. 
+
 Synchronous variables take two parameters in its constructor:
 
 1. Variable name (String)
