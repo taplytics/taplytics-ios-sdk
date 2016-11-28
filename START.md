@@ -305,7 +305,7 @@ Example:
 ```
 
 #### Async Loading
-Enabling the start option `TaplyticsOptionAsyncLoading ` will make the initial loading of taplytics properties from disk run on an async thread. However, this will break the behaviour of synchronous variables where they used the value loaded from disk, with `TaplyticsOptionAsyncLoading` enabled and synchronous variables are initialized before properties are loaded from disk they will use the default value. To ensure properties are loaded when initializing synchronous variables use `[Taplytics propertiesLoadedCallback:]`.
+Enabling the start option `TaplyticsOptionAsyncLoading ` will make the initial loading of taplytics properties from disk run on an async thread. However, this will break the behaviour of synchronous variables where they used the value loaded from disk, with `TaplyticsOptionAsyncLoading` enabled and synchronous variables are initialized before properties are loaded from disk they will use the default value. To ensure properties are loaded when initializing synchronous variables use `[Taplytics propertiesLoadedCallback:]`. **propertiesLoadedCallback must be placed _after_ startTaplytics**
 
 Existing behaviour example:
 
