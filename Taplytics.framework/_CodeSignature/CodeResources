@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/Taplytics.h</key>
 		<data>
-		EPt23EcRKsBuDwgVbZFT5QDeF5c=
+		l8SqPuzgDRIGYGiEiZJofLNXksM=
 		</data>
 		<key>Headers/TaplyticsOptions.h</key>
 		<data>
@@ -18,7 +18,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		TT7hgngOD9p1nUp4i1vG8FrF2BE=
+		hPKfaeevh7o7gPPfqVgGuNM35kU=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -31,11 +31,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			EPt23EcRKsBuDwgVbZFT5QDeF5c=
+			l8SqPuzgDRIGYGiEiZJofLNXksM=
 			</data>
 			<key>hash2</key>
 			<data>
-			USgUxqPCGLq0C+tQWtoUy6weO6I+rZ8sPuvX75QqYsA=
+			mWZz/ufpcEz9VeITWn/VFkQmWadAt/j4wUtMPN1SBCs=
 			</data>
 		</dict>
 		<key>Headers/TaplyticsOptions.h</key>
@@ -90,6 +90,11 @@
 			<key>weight</key>
 			<real>1100</real>
 		</dict>
+		<key>^Base\.lproj/</key>
+		<dict>
+			<key>weight</key>
+			<real>1010</real>
+		</dict>
 		<key>^version.plist$</key>
 		<true/>
 	</dict>
@@ -134,6 +139,11 @@
 			<true/>
 			<key>weight</key>
 			<real>1100</real>
+		</dict>
+		<key>^Base\.lproj/</key>
+		<dict>
+			<key>weight</key>
+			<real>1010</real>
 		</dict>
 		<key>^Info\.plist$</key>
 		<dict>
