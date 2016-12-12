@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v2.15.8
+//  Taplytics v2.16.0
 //
 //  Copyright (c) 2015 Taplytics Inc. All rights reserved.
 //
