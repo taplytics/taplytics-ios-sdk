@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v2.16.2
+//  Taplytics v2.17.0
 //
 //  Copyright (c) 2015 Taplytics Inc. All rights reserved.
 //
@@ -184,6 +184,13 @@ typedef void(^TLPropertiesLoadedBlock)(BOOL loaded);
  */
 + (void)getSessionInfo:(nullable void(^)(NSDictionary* _Nullable sessionInfo))callback;
 
+/**
+ End the current user session and create a new session. Calls taplytics to retrieve new experiment data if any.
+ 
+ @param callback called when the new session has begun.
+ */
++ (void)startNewSession:(nullable void(^)(BOOL success))callback;
+
 #pragma mark - Push Notifications
 
 /**
@@ -265,6 +272,7 @@ typedef void(^TLPropertiesLoadedBlock)(BOOL loaded);
  Taplytics will not automatically show the launch image in cases where Taplytics isn't immediately initialzed in 'application:didFinishLaunchingWithOptions:'
  */
 + (void)showAsyncLaunchImageForMaxTime:(nonnull NSNumber*) maxTime;
+
 
 @end
 
