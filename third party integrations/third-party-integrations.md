@@ -243,6 +243,7 @@ experimentsAndVariations.put("Experiment 2", "Variation 3");
 
 Amplitude.getInstance().logEvent("TL_Experiments", experimentsAndVariations)
 ```
+
 ### Localytics Android
 
 Taplytics logs experiment/variation events to the Amplitude Android SDK as follows:
