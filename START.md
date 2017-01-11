@@ -235,6 +235,7 @@ You can disable automatic tracking for any of the below constants by adding them
 |TaplyticsDisableUIPageViewSW | UIPageView tracking |
 |TaplyticsDisableUIActionSheetSW | UIActionSheet tracking |
 |TaplyticsDisableUIAlertViewSW | UIAlertView tracking |
+|TaplyticsDisableUITextFieldViewSW | UITextField tracking |
 
 For example:
 

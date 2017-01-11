@@ -6,11 +6,11 @@
 	<dict>
 		<key>Headers/Taplytics.h</key>
 		<data>
-		hmKzzit+fMHE43qaiZhgtefrBgA=
+		hG1MdsIZ/k9Nl30vT+7d522Jr8s=
 		</data>
 		<key>Headers/TaplyticsOptions.h</key>
 		<data>
-		bH6Cm7zXYhQD/MKwDqQl+ol9xXU=
+		fvORvAhdd0WymSHgRReyHoHnsAM=
 		</data>
 		<key>Headers/TaplyticsVar.h</key>
 		<data>
@@ -18,7 +18,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		bgGFj1ILR9ZwKboqiZKSxYj5FwA=
+		UmLCDotwc44txDWxoCxuYSWb34U=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -31,22 +31,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			hmKzzit+fMHE43qaiZhgtefrBgA=
+			hG1MdsIZ/k9Nl30vT+7d522Jr8s=
 			</data>
 			<key>hash2</key>
 			<data>
-			6orZO7g+OJs3Gt8x0vu4Ns5tbAxsUGzMrAfuIovCXww=
+			pTvFb0XtxZVAJQXI8eusbqxr8Bl9gtiV77hBy3gKIME=
 			</data>
 		</dict>
 		<key>Headers/TaplyticsOptions.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			bH6Cm7zXYhQD/MKwDqQl+ol9xXU=
+			fvORvAhdd0WymSHgRReyHoHnsAM=
 			</data>
 			<key>hash2</key>
 			<data>
-			SKDYB+/j+/acit1hZ0VrzcKnfLR5owfhIIoX1TsAeTs=
+			mSuHazOzm8a1n+m5K8pySWkGRzKfzbctV2mOfgX4ADU=
 			</data>
 		</dict>
 		<key>Headers/TaplyticsVar.h</key>

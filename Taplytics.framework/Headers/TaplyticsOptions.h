@@ -24,6 +24,7 @@ extern NSString *const TaplyticsDisableUICollectionViewSW;
 extern NSString *const TaplyticsDisableUIPageViewSW;
 extern NSString *const TaplyticsDisableUIActionSheetSW;
 extern NSString *const TaplyticsDisableUIAlertViewSW;
+extern NSString *const TaplyticsDisableUITextFieldViewSW;
 
 extern NSString *const TaplyticsDisableTrackLocation;
 extern NSString *const TaplyticsDisableTrackSocialSignIn;
