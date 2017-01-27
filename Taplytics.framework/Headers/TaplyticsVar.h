@@ -18,7 +18,7 @@ typedef void(^TLVarBlock)(NSObject* _Nullable value);
  the value of the variable can be change asynchronously once experiment properties are loaded from Taplytics Servers, 
  but will always be called before your app's launch image is hidden.
  
- Variables accept NSString, NSNumber, and Booleans casted into NSNumbers as values.
+ Variables accept a JSON serializable NSDictionary, NSString, NSNumber, and Booleans casted into NSNumbers as values.
  
  For example using a NSNumber:
  

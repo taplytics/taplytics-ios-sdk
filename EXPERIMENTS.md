@@ -37,7 +37,7 @@ Synchronous variables take two parameters in its constructor:
 1. Variable name (String)
 2. Default Value
 
-The type of the variable is defined by the type of the Default Value, and can be a `NSString`, `NSNumber` or a `Boolean` casted to a `NSNumber`. 
+The type of the variable is defined by the type of the Default Value and can be a JSON serializable `NSDictionary`, `NSString`, `NSNumber` or a `Boolean` casted to a `NSNumber`. 
 
 For example, using a variable of type `String`, using its value to get the value of the variable:
 ```objc
