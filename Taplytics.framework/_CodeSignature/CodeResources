@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/Taplytics.h</key>
 		<data>
-		ANBeFwzfsyyv8af7mDh3TQ1Y5ug=
+		OYt0p43M7GxPehMwyQVv8ilvUu8=
 		</data>
 		<key>Headers/TaplyticsOptions.h</key>
 		<data>
@@ -18,7 +18,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		/OLGy6owhLG/hhLe8aFYX+OZtFI=
+		85TXkyOgNyZSnO9T9FGfnjFVN10=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -31,11 +31,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ANBeFwzfsyyv8af7mDh3TQ1Y5ug=
+			OYt0p43M7GxPehMwyQVv8ilvUu8=
 			</data>
 			<key>hash2</key>
 			<data>
-			ghdORfSA90IbkB9WEOt+LQBnosGcxRW8riexCpM6YUw=
+			uJ4a4frAt2XT+oyJ3Rvejbg/okr4z0Jq9h7JGL7aUMY=
 			</data>
 		</dict>
 		<key>Headers/TaplyticsOptions.h</key>
