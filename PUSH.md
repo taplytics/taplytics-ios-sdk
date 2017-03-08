@@ -36,6 +36,8 @@ completionHandler(UIBackgroundFetchResultNoData);
 
 You'll also need to register for push notifications with iOS. When you do so, iOS will ask your users for permission and enable the ability to receive notifications to that device.
 
+You'll need to enable push notifications on your app. Go into your project settings and find your project under Targets. Select the Capabilities tab and turn on Push Notifications.
+
 If you are not already registering for push notifications all you have to do is call registerPushNotifications: on Taplytics, and we take care of all the rest!
 
 Please Note that calling this function will show the permission dialog to the user.
