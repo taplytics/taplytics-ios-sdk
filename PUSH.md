@@ -8,7 +8,7 @@ Setting up Push Notifications using Taplytics is simple. Follow the steps below 
 
 ## 1. Setup
 
-### Implement functions
+### Required Code for iOS 9 and Below
 For iOS and Taplytics to know that your app accepts Push Notifications, you must implement the following methods on your  `UIApplicationDelegate`.
 
 ```objc
@@ -23,14 +23,57 @@ didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSe
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
 }
  
+// Method will be called if the app is open when it recieves the push notification
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+	// "userInfo" will give you the notification information
 }
- 
+
+// Method will be called when the app recieves a push notification
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-completionHandler(UIBackgroundFetchResultNoData);
+	// "userInfo" will give you the notification information
 }
 ```
+
+### Required Code for iOS 10
+For iOS 10, you'll need to implement the new `UserNotification` class to allow Taplytics and iOS to accept Push Notifications.  You will need to change your `UIApplicationDelegate` header file to look something like the following
+
+```objc
+#import <UIKit/UIKit.h>
+#import <UserNotifications/UserNotifications.h>
+
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UNUserNotificationCenterDelegate>
+
+@end
+```
+
+You will also need to add the following methods to your 'UIApplicationDelegate'
+
+```objc
+// Implement these methods for Taplytics Push Notifications
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+}
+
+// Method will be called when the app recieves the push notification
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+   // "userInfo" will give you the notification information
+}
+
+// Method will be called if the app is open when it recieves the push notification
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler{
+   // "notification.request.content.userInfo" will give you the notification information
+}
+
+// Method will be called if the user opens the push notification
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
+	// "response.notification.request.content.userInfo" will give you the notification information
+}
+```
+If you want your app to also support lower versions of iOS, you just need to add the missing methods described in the above section.
 
 ### Register for Push Notifications
 
