@@ -8,7 +8,7 @@ Setting up Push Notifications using Taplytics is simple. Follow the steps below 
 
 ## 1. Setup
 
-### Implement functions
+### Required Code for iOS 9 and Below
 For iOS and Taplytics to know that your app accepts Push Notifications, you must implement the following methods on your  `UIApplicationDelegate`.
 
 ```objc
@@ -23,20 +23,67 @@ didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSe
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
 }
  
+// Method will be called if the app is open when it recieves the push notification
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+	// "userInfo" will give you the notification information
 }
- 
+
+// Method will be called when the app recieves a push notification
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-completionHandler(UIBackgroundFetchResultNoData);
+	// "userInfo" will give you the notification information
+	completionHandler(UIBackgroundFetchResultNoData);
 }
 ```
+
+### Required Code for iOS 10
+For iOS 10, you'll need to implement the new `UserNotification` class to allow Taplytics and iOS to accept Push Notifications.  You will need to change your `UIApplicationDelegate` header file to look something like the following
+
+```objc
+#import <UIKit/UIKit.h>
+#import <UserNotifications/UserNotifications.h>
+
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UNUserNotificationCenterDelegate>
+
+@end
+```
+
+You will also need to add the following methods to your 'UIApplicationDelegate'
+
+```objc
+// Implement these methods for Taplytics Push Notifications
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+}
+
+// Method will be called when the app recieves the push notification
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+   // "userInfo" will give you the notification information
+   completionHandler(UIBackgroundFetchResultNoData);
+}
+
+// Method will be called if the app is open when it recieves the push notification
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler{
+   // "notification.request.content.userInfo" will give you the notification information
+   completionHandler(UNNotificationPresentationOptionBadge);
+}
+
+// Method will be called if the user opens the push notification
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
+	// "response.notification.request.content.userInfo" will give you the notification information
+	completionHandler();
+}
+```
+If you want your app to also support lower versions of iOS, you just need to add the missing methods described in the above section.
 
 ### Register for Push Notifications
 
 You'll also need to register for push notifications with iOS. When you do so, iOS will ask your users for permission and enable the ability to receive notifications to that device.
 
-You'll need to enable push notifications on your app. Go into your project settings and find your project under Targets. Select the Capabilities tab and turn on Push Notifications.
+You'll need to enable a few capabilities on your app. Go into your project settings and find your project under Targets. Select the Capabilities tab and turn on Push Notifications and Background Modes.  Under Background Modes, enable Remote Notifications.
 
 If you are not already registering for push notifications all you have to do is call registerPushNotifications: on Taplytics, and we take care of all the rest!
 
