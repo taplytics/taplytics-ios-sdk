@@ -32,6 +32,7 @@ didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSe
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
 	// "userInfo" will give you the notification information
+	completionHandler(UIBackgroundFetchResultNoData);
 }
 ```
 
@@ -61,16 +62,19 @@ You will also need to add the following methods to your 'UIApplicationDelegate'
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
    // "userInfo" will give you the notification information
+   completionHandler(UIBackgroundFetchResultNoData);
 }
 
 // Method will be called if the app is open when it recieves the push notification
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler{
    // "notification.request.content.userInfo" will give you the notification information
+   completionHandler(UNNotificationPresentationOptionBadge);
 }
 
 // Method will be called if the user opens the push notification
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
 	// "response.notification.request.content.userInfo" will give you the notification information
+	completionHandler();
 }
 ```
 If you want your app to also support lower versions of iOS, you just need to add the missing methods described in the above section.
