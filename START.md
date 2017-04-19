@@ -284,6 +284,7 @@ Start options allow you to control how certain SDK features function, and enable
 |Start Option |Type |Description |
 |---        |---	        |---          |
 |TaplyticsOptionDelayLoad|NSNumber|Controls the maximum time the SDK will show your launch image for. [More details](https://github.com/taplytics/taplytics-ios-sdk/blob/master/EXPERIMENTS.md#delay-load). |
+|TaplyticsOptionShowLaunchImage|NSNumber(Boolean)|Controls whether or not the SDK will hold the launch image during DelayLoad.|
 |TaplyticsOptionLaunchImageType|NSString|If you are using a xib as a launch image set the value as `@"xib"`. This will stop the caught exception that occurs for xib based launch images. |
 |TaplyticsOptionShowShakeMenu|NSNumber(Boolean)|To disable the shake menu from showing up in development mode, set to `@NO` |
 |TaplyticsOptionTestExperiments|NSNumber(Boolean)|To test specific experiments, pass in the experiment name/variation name as the key/values of a NSDictionary. [More details](https://github.com/taplytics/taplytics-ios-sdk/blob/master/EXPERIMENTS.md#testing-specific-experiments). |
