@@ -80,6 +80,8 @@ self.tlVar = [TaplyticsVar taplyticsVarWithName:@"numVar" defaultValue:@(1) upda
 
 When the variable's value has been updated, the updated block will be called with that updated value. Note that we only store a weak reference to your variables, for the updated block to work correctly you will need to store a strong reference to the variable object.
 
+**Note: Default values for dynamic variables cannot be NULL. NULL values may cause default to trigger in all scenarios**
+
 #### Testing Dynamic Variables
 
 When testing dynamic variables in live update mode you can change the values on the fly via the taplytics interface and you can switch variations with the shake menu on the device.
