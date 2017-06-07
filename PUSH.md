@@ -170,7 +170,7 @@ Implementing rich push notification support can help improve improve the engagme
 
 #### Create a Notification Service Extension
 
-You'll need to add a Notification Service Extension to your app which is a small extension to your app that downloads the image attached to the notification and displays it as part of the notification. To create the extension open *File > New > Target* in Xcode and select **Notification Service Extension**. 
+You'll need to add a Notification Service Extension to your app which is a small extension to your app that downloads the image attached to the notification and displays it as part of the notification. To create the extension open *File > New > Target* in Xcode, select **Notification Service Extension**, then name your service extension and create it with language **Swift**. 
 
 ![image](https://github.com/taplytics/Taplytics-iOS-SDK/blob/feature/rich-push/third%20party%20integrations/notification-service-extension.png?raw=true)
 
