@@ -172,7 +172,7 @@ Implementing rich push notification support can help improve improve the engagme
 
 You'll need to add a Notification Service Extension to your app which is a small extension to your app that downloads the image attached to the notification and displays it as part of the notification. To create the extension open *File > New > Target* in Xcode and select **Notification Service Extension**. 
 
-![image](https://github.com/taplytics/Taplytics-iOS-SDK/blob/master/third%20party%20integrations/notification-service-extension.png?raw=true)
+![image](https://github.com/taplytics/Taplytics-iOS-SDK/blob/feature/rich-push/third%20party%20integrations/notification-service-extension.png?raw=true)
 
 Once you've created the Notification Service Extension you should have a file called *NotificationService.swift*, open that up and edit it's *didReceiveRequestWithContentHandler* method with the following code:
 
