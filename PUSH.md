@@ -168,11 +168,14 @@ ___
 
 Implementing rich push notification support can help improve improve the engagment with your push notifications with image content attached. Rich push notifications make use of **Notification Service Extension** on iOS 10+ to display images attached to the push notifications. We currently support JPEG and PNG images sent through our website or API.
 
+![image](https://github.com/taplytics/Taplytics-iOS-SDK/blob/master/third%20party%20integrations/rich-push-example.jpg?raw=true)
+
+
 #### Create a Notification Service Extension
 
 You'll need to add a Notification Service Extension to your app which is a small extension to your app that downloads the image attached to the notification and displays it as part of the notification. To create the extension open *File > New > Target* in Xcode, select **Notification Service Extension**, then name your service extension and create it with language **Swift**. 
 
-![image](https://github.com/taplytics/Taplytics-iOS-SDK/blob/feature/rich-push/third%20party%20integrations/notification-service-extension.png?raw=true)
+![image](https://github.com/taplytics/Taplytics-iOS-SDK/blob/master/third%20party%20integrations/notification-service-extension.png?raw=true)
 
 Once you've created the Notification Service Extension you should have a file called *NotificationService.swift*, open that up and edit it's *didReceiveRequestWithContentHandler* method with the following code:
 
