@@ -168,7 +168,7 @@ ___
 
 Implementing rich push notification support can help improve user engagement with your push notifications with image content attached. Rich push notifications make use of **Notification Service Extension** on iOS 10+ to display images attached to the push notifications. We currently support JPEG and PNG images sent through the Taplytics dashboard or API.
 
-The max image size that can be uploaded is 10mb. Note that images are not downscaled and if an image is sent, the full file size of the crop will be used. 
+The max image size that can be uploaded is 10mb. Note that images are not downscaled and if an image is sent, the full file size of the crop will be used.
 
 ![image](https://github.com/taplytics/Taplytics-iOS-SDK/blob/master/third%20party%20integrations/rich-push-example.jpg?raw=true)
 
@@ -226,6 +226,3 @@ override func didReceive(_ request: UNNotificationRequest, withContentHandler co
 What this code is doing is looking for any data attached to the push payload under a `taplytics` object, and specifically looking for a `taplytics.image_url` url to download an image from, which will then start a `downloadTask` for that url. Once the image is downloaded it will move the image to the Extension's temp directory and add the image as a notification attachment to the push, and finally render the notification to display it. 
 
 Any push notifications sent without the image url attached to its data will display as normal by iOS.
-
-Here is an example of a push notification with an image:
-
