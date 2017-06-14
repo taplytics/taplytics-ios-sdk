@@ -202,7 +202,7 @@ If you already have Analytics events instrumented with another Analytics source 
 - [Mixpanel](https://mixpanel.com/)
 - [Intercom](https://www.intercom.io/)
 - [Adobe](http://www.adobe.com/marketing-cloud.html)
-- [Localytics](https://www.localytics.com/) (Version 2 and under only)
+- [Localytics](https://www.localytics.com/) (Only below Version 4)
 - [Parse](https://www.parse.com/)
 - [Apsalar](https://apsalar.com/)
 - [Crashlytics Answers](http://try.crashlytics.com/answers/)
