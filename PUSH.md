@@ -5,6 +5,7 @@ Setting up Push Notifications using Taplytics is simple. Follow the steps below 
 | 1 | [Setup](#1-setup) |
 | 2 | [Receiving Push Notifications](#2-receiving-push-notifications) |
 | 3 | [Resetting Users](#3-resetting-users) |
+| 4 | [Rich Push Notifications](#4-rich-push-notifications-ios-10) |
 
 ## 1. Setup
 
