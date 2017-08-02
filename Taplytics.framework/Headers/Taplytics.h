@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v2.19.1
+//  Taplytics v2.19.2
 //
 //  Copyright (c) 2015 Taplytics Inc. All rights reserved.
 //
@@ -18,6 +18,9 @@ typedef void(^TLVariationBlock)(NSString* _Nullable variationName, NSDictionary*
 typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary* _Nullable experimentsAndVariations);
 
 typedef void(^TLPropertiesLoadedBlock)(BOOL loaded);
+
+typedef void(^TLNewSessionBlock)(void);
+
 
 
 @protocol TaplyticsDelegate <NSObject>
@@ -272,6 +275,8 @@ typedef void(^TLPropertiesLoadedBlock)(BOOL loaded);
  Taplytics will not automatically show the launch image in cases where Taplytics isn't immediately initialzed in 'application:didFinishLaunchingWithOptions:'
  */
 + (void)showAsyncLaunchImageForMaxTime:(nonnull NSNumber*) maxTime;
+
++ (void)setTaplyticsNewSessionListener:(nonnull TLNewSessionBlock)block;
 
 
 @end
