@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v2.19.2
+//  Taplytics v2.20.0
 //
 //  Copyright (c) 2015 Taplytics Inc. All rights reserved.
 //
@@ -203,12 +203,6 @@ typedef void(^TLNewSessionBlock)(void);
 + (void)registerPushNotifications;
 
 /**
- Register for push notification access, this method will show the iOS permissions alert asking for access to send push notifications.
- @param types accepts both UIUserNotificationType (iOS 8) or UIRemoteNotificationType
- */
-+ (void)registerPushNotificationsWithTypes:(NSInteger)types;
-
-/**
  Registers for location access, this method will show the iOS permissions alert asking for location access. 
  Location permissions are required for location based push notifications. We request kCLAuthorizationStatusAuthorizedAlways access
  so that we can monitor regions for your location based push notifications.
@@ -217,7 +211,7 @@ typedef void(^TLNewSessionBlock)(void);
 
 /**
  Register for push notification access, this method will show the iOS alert asking for access to send push notifications.
- @param types accepts both UIUserNotificationType (iOS 8) or UIRemoteNotificationType
+ @param types accepts UIUserNotificationType
  @param categories accepts a NSSet of UIUserNotificationCategory settings
  */
 + (void)registerPushNotificationsWithTypes:(NSInteger)types categories:(nullable NSSet*)categories;
@@ -275,9 +269,6 @@ typedef void(^TLNewSessionBlock)(void);
  Taplytics will not automatically show the launch image in cases where Taplytics isn't immediately initialzed in 'application:didFinishLaunchingWithOptions:'
  */
 + (void)showAsyncLaunchImageForMaxTime:(nonnull NSNumber*) maxTime;
-
-+ (void)setTaplyticsNewSessionListener:(nonnull TLNewSessionBlock)block;
-
 
 @end
 
