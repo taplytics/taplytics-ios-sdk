@@ -69,7 +69,7 @@ First, you'll want to install our SDK inside your XCode project.
         ...
         // make sure you call startTaplytics before any makeKeyWindow calls:
         // [self.window makeKeyAndVisible];
-		// [self.window makeKeyWindow];
+        // [self.window makeKeyWindow];
         ...
         return YES;
     }
