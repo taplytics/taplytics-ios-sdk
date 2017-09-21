@@ -28,7 +28,7 @@ First, you'll want to install our SDK inside your XCode project.
     
     - Open your project's .xcworkspace file
     
-2. Initialize the SDK by adding an import and the following line of code with your API key to your `UIApplicationDelegate`. Make sure to call startTaplytics before making `self.window` the key window, such as: `[self.window makeKeyAndVisible]` or `[self.window makeKeyWindow]`.
+2. Initialize the SDK by adding an import and the following line of code with your API key to your `UIApplicationDelegate`. Make sure to call `startTaplyticsAPIKey:` before making `self.window` the key window, such as: `[self.window makeKeyAndVisible]` or `[self.window makeKeyWindow]`.
 
 ```objc
 #import <Taplytics/Taplytics.h>
@@ -58,7 +58,7 @@ First, you'll want to install our SDK inside your XCode project.
     ```
     
 4. Add the `-ObjC` Linker flag to your project settings.
-5. Initialize the SDK by adding a line of code with your API key in your `UIApplicationDelegate`. Make sure to call startTaplytics before making `self.window` the key window, such as: `[self.window makeKeyAndVisible]` or `[self.window makeKeyWindow]`.
+5. Initialize the SDK by adding a line of code with your API key in your `UIApplicationDelegate`. Make sure to call `startTaplyticsAPIKey:` before making `self.window` the key window, such as: `[self.window makeKeyAndVisible]` or `[self.window makeKeyWindow]`.
 
     ```objc
     #import <Taplytics/Taplytics.h>
