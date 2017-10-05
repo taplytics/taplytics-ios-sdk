@@ -170,9 +170,9 @@ If you would like to see which variations and experiments are running on a given
 [Taplytics getRunningExperimentsAndVariations:^(NSDictionary *experimentsAndVariations) {
     // For example: 
     // NSDictionary* experimentsAndVariations = @{
-    //  @"Experiment 1": @"baseline",
-    //  @"Experiment 2": @"Variation 1"
-    //};
+    //     @"Experiment 1": @"baseline",
+    //     @"Experiment 2": @"Variation 1"
+    // };
 }];
 ```
 NOTE: The block can return asynchronously once Taplytics properties have loaded. The block will return a `NSDictionary` with experiment names as the key value, and variation names as the value.
@@ -189,8 +189,9 @@ If there is an internet connection, a new session will be created, and new exper
 
 It can be used as follows:
 
-```java
-    [Taplytics startNewSession:^(BOOL success) {
-        //New session here! Success will be false if this failed.
-    }]```
+```objc
+[Taplytics startNewSession:^(BOOL success) {
+    // New session here! Success will be false if this failed.
+}];
+```
 
