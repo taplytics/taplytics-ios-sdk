@@ -87,6 +87,16 @@ First, you'll want to install our SDK inside your XCode project.
     }
     ```
 
+    ```swift
+    import Taplytics
+    ...
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        // Override point for customization after application launch.
+
+        Taplytics.startAPIKey("88739c4cdf38b0975b7a152214d6ab025d138cc1")
+    }
+    ```
+
 #### Install Using Segment
 The Taplytics SDK can also be installed via Segment. You can find install instructions [here](https://taplytics.com/docs/segment-integration)
 
@@ -104,6 +114,12 @@ You can implement Advanced Pairing, which will allow you to pair your device to 
     ```objc
     - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
         return NO;
+    }
+    ```
+
+    ```swift
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        return false
     }
     ```
 
@@ -154,6 +170,22 @@ For example:
 }];
 ```
 
+```swift
+Taplytics.setUserAttributes([
+    "user_id": "testUser",
+    "name": "Test User",
+    "email": "test@taplytics.com",
+    "gender": "female",
+    "age": 25,
+    "avatarUrl": "https://pbs.twimg.com/profile_images/497895869270618112/1zbNvWlD.png",
+    "customData": [
+        "paidSubscriber": true,
+        "purchases": 3,
+        "totalRevenue": 42.42
+    ]
+])
+```
+
 _NOTE: The `customData` field is limited to 50kb of JSON string data._
 
 ### User Attributes on First Launch
@@ -162,20 +194,20 @@ User Attributes set before `startTaplyticsAPIKey:` is called, will be used for e
 
 ```objc
 // These custom data values will be used for segmentation on the first session of the app.
-[Taplytics setUserAttributes:@{
-    @"customData": @{
-        @"paid_user": @YES
-    }
-}];
+[Taplytics setUserAttributes:@{@"customData": @{@"paid_user": @YES}}];
 
 [Taplytics startTaplyticsAPIKey:@"API_KEY"];
 
 // These custom data values will only take effect on the second session of the app.
-[Taplytics setUserAttributes:@{
-    @"customData": @{
-        @"demo_account": @NO
-    }
-}];
+[Taplytics setUserAttributes:@{@"customData": @{@"demo_account": @NO}}];
+```
+
+```swift
+Taplytics.setUserAttributes(["customData": ["paid_user": true]])
+
+Taplytics.startAPIKey("API_KEY")
+
+Taplytics.setUserAttributes(["customData": ["demo_account": false]])
 ```
 
 ### Retrieving Session Info
@@ -184,8 +216,14 @@ Taplytics also offers a method to retrieve select information of what you know a
 
 ```objc
 [Taplytics getSessionInfo:^(NSDictionary * _Nullable sessionInfo) {
-    // Use your NSDictionary of sessionInfo
+    // Use the NSDictionary of sessionInfo
 }];
+```
+
+```swift
+Taplytics.getSessionInfo { (sessionInfo) in
+    // Use the NSDictionary of sessionInfo
+}
 ```
 
 ### Resetting Users
@@ -197,6 +235,12 @@ Once a user logs out of your app, their User Attributes are no longer valid. You
 [Taplytics resetUser:^{
   // Finished User Reset
 }];
+```
+
+```swift
+Taplytics.resetUser {
+  // Finished User Reset
+}
 ```
 
 ---
@@ -264,7 +308,15 @@ You can disable automatic tracking for any of the below constants by adding them
 For example:
 
 ```objc
-[Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{TaplyticsOptionDisable: @[TaplyticsOptionTrackLocation]}];
+[Taplytics startTaplyticsAPIKey:@"API_KEY" options:@{
+    TaplyticsOptionDisable: @[TaplyticsOptionTrackLocation]
+}];
+```
+
+```swift
+Taplytics.startAPIKey("API_KEY", options: [
+    TaplyticsOptionDisable: [TaplyticsOptionTrackLocation]
+])
 ```
 
 #### Background Session Time
@@ -272,7 +324,11 @@ For example:
 Taplytics automatically tracks sessions for you. The Taplytics SDK keeps track of the last activity timestamp in your app (app activity is considered a view change, button click, or Taplytics event logged), and when your app returns from background if the time since last activity is greater then 10 minutes we create a new session for you. If you would like the session background time something other then 10 minutes you can se it as a start option:
 
 ```objc
-[Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{TaplyticsOptionSessionBackgroundTime: @10}];
+[Taplytics startTaplyticsAPIKey:@"API_KEY" options:@{TaplyticsOptionSessionBackgroundTime: @10}];
+```
+
+```swift
+Taplytics.startAPIKey("API_KEY", options: [TaplyticsOptionSessionBackgroundTime: 10])
 ```
 
 ---
@@ -289,6 +345,16 @@ You can also track your own custom Analytics events to Taplytics using the `logE
 
 // Log Revenue
 [Taplytics logRevenue:@"Purchase" value:@10.25 metaData:@{@"Item":@"blueSweater"}];
+```
+
+```swift
+Taplytics.logEvent("CustomEvent")
+
+// With Number value and metaData
+Taplytics.logEvent("CustomEvent", value: 42, metaData: ["userSubscribed": true])
+
+// Log Revenue
+Taplytics.logRevenue("Purchase", revenue: 10.15, metaData: ["Item": "blueSweater"])
 ```
 
 _NOTE: event metaData is limited to 50kb of JSON string data._
@@ -318,16 +384,29 @@ Start options allow you to control how certain SDK features function, and enable
 Example:
 
 ```objc
-[Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{
+[Taplytics startTaplyticsAPIKey:@"API_KEY" options:@{
 	TaplyticsOptionDelayLoad: @6,
 	TaplyticsOptionLaunchImageType: @"xib",
 	TaplyticsOptionShowShakeMenu: @NO,
 	TaplyticsOptionDisableBorders: @YES,
 	TaplyticsOptionTestExperiments: @{
-		@"Experiment 1": @"Variation 1",
+		  @"Experiment 1": @"Variation 1",
    		@"Experiment 2": @"baseline"
 	}
 }];
+```
+
+```swift
+Taplytics.startAPIKey("API_KEY", options: [
+    TaplyticsOptionDelayLoad: 6,
+    TaplyticsOptionLaunchImageType: "xib",
+    TaplyticsOptionShowShakeMenu: false,
+    TaplyticsOptionDisableBorders: true,
+    TaplyticsOptionTestExperiments: [
+        "Experiment 1": "Variation 1",
+        "Experiment 2": "baseline"
+    ]
+])
 ```
 
 #### Async Loading
@@ -336,19 +415,25 @@ Enabling the start option `TaplyticsOptionAsyncLoading ` will make the initial l
 Existing behaviour example:
 
 ```objc
-[Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here"];
+[Taplytics startTaplyticsAPIKey:@"API_KEY"];
 
 // Existing behaviour would have loaded value from disk and the variable's value would be loaded from disk.
 self.var = [TaplyticsVar taplyticsSyncVarWithName:@"syncVar" defaultValue:@1];
 NSLog(@"Variable Value: %@", _var.value);
 ```
 
+```swift
+Taplytics.startAPIKey("API_KEY")
+
+// Existing behaviour would have loaded value from disk and the variable's value would be loaded from disk.
+self.tlVar = TaplyticsVar.sync(name: "syncVar", defaultValue: 1 as NSNumber)
+print("Variable Value: \(tlVar.value)")
+```
+
 Async Loading example:
 
 ```objc
-[Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{
-	TaplyticsOptionAsyncLoading: @YES
-}];
+[Taplytics startTaplyticsAPIKey:@"API_KEY" options:@{TaplyticsOptionAsyncLoading: @YES}];
 
 // Here var.value would not be loaded from disk and would have the default value of @1
 self.var = [TaplyticsVar taplyticsSyncVarWithName:@"syncVar" defaultValue:@1];
@@ -361,4 +446,24 @@ __weak AppDelegate* weakSelf = self;
 	weakSelf.var = [TaplyticsVar taplyticsSyncVarWithName:@"syncVar" defaultValue:@1];
 	NSLog(@"Variable Value: %@", weakSelf.var.value);
 }];
+```
+
+```swift
+Taplytics.startAPIKey("API_KEY", options: [TaplyticsOptionAsyncLoading: true])
+
+// Here var.value would not be loaded from disk and would have the default value of @1
+self.tlVar = TaplyticsVar.sync(name: "syncVar", defaultValue: 1 as NSNumber)
+print("Variable Value: \(tlVar.value)")
+
+// Using the propertiesLoadedCallback:
+Taplytics.propertiesLoadedCallback { (loaded) in
+    guard loaded, let label = self.label else {
+        return
+    }
+
+    self.tlVar = TaplyticsVar.sync(name: "syncVar", defaultValue: 1 as NSNumber)
+    if let tlVariable = self.tlVar, let stringValue = tlVariable.value as? String {
+        print("Variable Value: \(stringValue)")
+    }
+}
 ```

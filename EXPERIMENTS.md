@@ -32,6 +32,12 @@ Due to the synchronous nature of the variable, if it is used before the experime
 }];
 ```
 
+```swift
+Taplytics.propertiesLoadedCallback { (loaded) in
+    loadTLVariables()
+}
+```
+
 Note that this must be done only _after_ startTaplytics.
 
 Synchronous variables take two parameters in its constructor:
@@ -42,9 +48,15 @@ Synchronous variables take two parameters in its constructor:
 The type of the variable is defined by the type of the Default Value and can be a JSON serializable `NSDictionary`, `NSString`, `NSNumber` or a `Boolean` casted to a `NSNumber`.
 
 For example, using a variable of type `String`, using its value to get the value of the variable:
+
 ```objc
 TaplyticsVar* stringVar = [TaplyticsVar taplyticsSyncVarWithName:@"stringVar" defaultValue:@"string"];
 NSString* string = (NSString*)stringVar.value;
+```
+
+```swift
+let stringVar = TaplyticsVar.sync(name: "stringVar", defaultValue: "string" as NSString)
+let string = stringVar.value as? String
 ```
 
 Using a casted `Boolean` to a `NSNumber`:
@@ -52,6 +64,11 @@ Using a casted `Boolean` to a `NSNumber`:
 ```objc
 TaplyticsVar* boolVar = [TaplyticsVar taplyticsSyncVarWithName:@"boolVar" defaultValue:@(YES)];
 BOOL boolean = [(NSNumber*)boolVar.value boolValue];
+```
+
+```swift
+let boolVar = TaplyticsVar.sync(name: "boolVar", defaultValue: true as NSNumber)
+let boolean = boolVar.value as? Bool
 ```
 
 #### Asynchronous
@@ -80,6 +97,15 @@ self.tlVar = [TaplyticsVar taplyticsVarWithName:@"numVar" defaultValue:@(1) upda
 }];
 ```
 
+```swift
+self.tlVar = TaplyticsVar.async(name: "numVar", defaultValue: 1 as NSNumber) { (updatedValue) in
+    guard let value = updatedValue as? NSNumber else {
+        return
+    }
+    // use value
+}
+```
+
 When the variable's value has been updated, the updated block will be called with that updated value. Note that we only store a weak reference to your variables, for the updated block to work correctly you will need to store a strong reference to the variable object.
 
 **Note: Default values for dynamic variables cannot be NULL. NULL values may cause default to trigger in all scenarios**
@@ -102,6 +128,19 @@ __weak id weakSelf = self;
 }];
 ```
 
+```swift
+Taplytics.propertiesLoadedCallback { (loaded) in
+    guard loaded, let label = self.label else {
+        return
+    }
+
+    let stringVar = TaplyticsVar.sync(name: "stringVar", defaultValue: "string" as NSString)
+    if let stringValue = stringVar.value as? String {
+        label.text = stringValue
+    }
+}
+```
+
 ### Code Blocks
 
 Similar to Dynamic Variables, Taplytics has an option for **Code Blocks**. Code Blocks are linked to Experiments through the Taplytics website very much the same way that Dynamic Variables are, and will be executed based on the configuration of the experiment through the Taplytics website.
@@ -121,9 +160,9 @@ Example Using Objective-C:
 Example Using Swift:
 
 ```swift
-Taplytics.runCodeBlock("enableFeature", forBlock: {
+Taplytics.runCodeBlock("enableFeature") {
     // enable your feature here
-})
+}
 ```
 
 ## Testing Specific Experiments
@@ -137,6 +176,15 @@ To test/QA specific experiment and variation combinations use the `TaplyticsOpti
         @"Experiment 2": @"baseline"
     }
 }];
+```
+
+```swift
+Taplytics.startAPIKey("API_KEY", options: [
+    TaplyticsOptionTestExperiments: [
+        "Experiment 1": "Variation 1",
+        "Experiment 2": "baseline"
+    ]
+])
 ```
 
 ---
@@ -155,13 +203,20 @@ On the first launch of your app, the Taplytics SDK will show your iOS launch ima
 If you would like to disable showing the launch image:
 
 ```objc
-[Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{TaplyticsOptionDelayLoad:@0}];
+[Taplytics startTaplyticsAPIKey:@"API_KEY" options:@{TaplyticsOptionDelayLoad:@0}];
+```
+```swift
+Taplytics.startAPIKey("API_KEY", options: [TaplyticsOptionDelayLoad: 0])
 ```
 
 Or increase the maximum wait time to 10 seconds:
 
 ```objc
-[Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{TaplyticsOptionDelayLoad:@10}];
+[Taplytics startTaplyticsAPIKey:@"API_KEY" options:@{TaplyticsOptionDelayLoad:@10}];
+```
+
+```swift
+Taplytics.startAPIKey("API_KEY", options: [TaplyticsOptionDelayLoad: 10])
 ```
 
 ---
@@ -172,13 +227,25 @@ If you would like to see which variations and experiments are running on a given
 
 ```objc
 [Taplytics getRunningExperimentsAndVariations:^(NSDictionary *experimentsAndVariations) {
-    // For example:
-    // NSDictionary* experimentsAndVariations = @{
+    // For example experimentsAndVariations will contain:
+    // @{
     //     @"Experiment 1": @"baseline",
     //     @"Experiment 2": @"Variation 1"
     // };
 }];
 ```
+
+```swift
+Taplytics.getRunningExperimentsAndVariations { (experimentsAndVariations) in
+    // For example experimentsAndVariations will contain:
+    // [
+    //    "Experiment 1": "baseline",
+    //    "Experiment 2": "Variation 1",
+    // ]
+}
+
+```
+
 NOTE: The block can return asynchronously once Taplytics properties have loaded. The block will return a `NSDictionary` with experiment names as the key value, and variation names as the value.
 
 ## Sessions
@@ -197,4 +264,10 @@ It can be used as follows:
 [Taplytics startNewSession:^(BOOL success) {
     // New session here! Success will be false if this failed.
 }];
+```
+
+```swift
+Taplytics.startNewSession { (success) in
+    // New session here! Success will be false if this failed.
+}
 ```

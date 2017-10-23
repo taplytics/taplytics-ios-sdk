@@ -39,6 +39,26 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
 }
 ```
 
+```swift
+func application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings) {
+}
+
+func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+}
+
+func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+}
+
+func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+	// "userInfo" will give you the notification information
+}
+
+func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+	// "userInfo" will give you the notification information
+	completionHandler(UIBackgroundFetchResult.noData)
+}
+```
+
 ### Required Code for iOS 10
 For iOS 10, you'll need to implement the new `UserNotification` class to allow Taplytics and iOS to accept Push Notifications.  You will need to change your `UIApplicationDelegate` header file to look something like the following
 
@@ -49,6 +69,16 @@ For iOS 10, you'll need to implement the new `UserNotification` class to allow T
 @interface AppDelegate : UIResponder <UIApplicationDelegate, UNUserNotificationCenterDelegate>
 
 @end
+```
+
+```swift
+import UIKit
+import UserNotifications
+
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+	...
+}
 ```
 
 You will also need to add the following methods to your 'UIApplicationDelegate'
@@ -80,6 +110,30 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
 	completionHandler();
 }
 ```
+
+```swift
+func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+}
+
+func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+}
+
+func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+	// "userInfo" will give you the notification information
+	completionHandler(UIBackgroundFetchResult.noData)
+}
+
+func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+	// "notification.request.content.userInfo" will give you the notification information
+	completionHandler(UNNotificationPresentationOptions.badge)
+}
+
+func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+	// "response.notification.request.content.userInfo" will give you the notification information
+	completionHandler()
+}
+```
+
 If you want your app to also support lower versions of iOS, you just need to add the missing methods described in the above section.
 
 ### Register for Push Notifications
@@ -97,6 +151,10 @@ Please Note that calling this function will show the permission dialog to the us
 [Taplytics registerPushNotifications];
 ```
 
+```swift
+Taplytics.registerPushNotifications()
+```
+
 #### Register for Location Permissions (Optional)
 
 For automated push campaigns using location based regions you will need to add the `CoreLocation` framework to your app, and request location permissions from your users. Taplytics will automatically update and manage the monitored regions on your device for your automated push campaigns.
@@ -106,6 +164,10 @@ You can handle asking for location permissions yourself, or you can use our prov
 ```objc
 // We will request AuthorizedAlways access to be able to set monitored regions
 [Taplytics registerLocationAccess];
+```
+
+```swift
+Taplytics.registerLocationAccess()
 ```
 
 In order to allow the iOS location manager to successfully display a location request dialog to the user, the following properties must be added to the application's Plist settings:
@@ -147,10 +209,14 @@ Here's how you can achieve setting the Push environment:
 ```objc
 
 // To bucket everything into Production:
-[Taplytics startTaplyticsAPIKey:@"SDK_TOKEN_HERE" options:@{@"pushSandbox":@0}];
+[Taplytics startTaplyticsAPIKey:@"API_KEY" options:@{@"pushSandbox":@0}];
 
 // To bucket everything into Development:
-[Taplytics startTaplyticsAPIKey:@"SDK_TOKEN_HERE" options:@{@"pushSandbox":@1}];
+[Taplytics startTaplyticsAPIKey:@"API_KEY" options:@{@"pushSandbox":@1}];
+```
+
+```swift
+Taplytics.startAPIKey("API_KEY", options: ["pushSandbox": 1])
 ```
 
 ---
@@ -161,8 +227,14 @@ If you're using our User Attributes feature, you can easily disconnect a user fr
 
 ```objc
 [Taplytics resetUser:^{
-  // Finished User Reset
+	// Finished User Reset
 }];
+```
+
+```swift
+Taplytics.resetUser {
+  // Finished user reset
+}
 ```
 
 ___
