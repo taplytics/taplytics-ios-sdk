@@ -1,5 +1,7 @@
 Creating experiments is easy using Taplytics. You can either use our visual editor or create code-based experiments. You can find documentation on how to do this below.
 
+#### *Note: The visual editor is only available in our iOS framework, not available on tvOS.*
+
 | Table of Contents |
 | ----------------- |
 | [Dynamic Variables & Code Blocks](#dynamic-variables--code-blocks) |
@@ -20,9 +22,9 @@ Taplytics variables are values in your app that are controlled by experiments. C
 
 #### Synchronous
 
-Synchronous variables are guaranteed to have the same value for the entire session and will have that value immediately after construction. 
+Synchronous variables are guaranteed to have the same value for the entire session and will have that value immediately after construction.
 
-Due to the synchronous nature of the variable, if it is used before the experiments have been loaded from Taplytics servers (for example on the first launch of your app), it's value will be the default value rather than the value set for that experiment. This could taint the results of the experiment. In order to prevent this you can ensure that the experiments are loaded before using the variable. This can be done using the `propertiesLoadedCallback:` method, as an example: 
+Due to the synchronous nature of the variable, if it is used before the experiments have been loaded from Taplytics servers (for example on the first launch of your app), it's value will be the default value rather than the value set for that experiment. This could taint the results of the experiment. In order to prevent this you can ensure that the experiments are loaded before using the variable. This can be done using the `propertiesLoadedCallback:` method, as an example:
 
 ```objc
 [Taplytics propertiesLoadedCallback:^(BOOL loaded) {
@@ -30,21 +32,21 @@ Due to the synchronous nature of the variable, if it is used before the experime
 }];
 ```
 
-Note that this must be done only _after_ startTaplytics. 
+Note that this must be done only _after_ startTaplytics.
 
 Synchronous variables take two parameters in its constructor:
 
 1. Variable name (String)
 2. Default Value
 
-The type of the variable is defined by the type of the Default Value and can be a JSON serializable `NSDictionary`, `NSString`, `NSNumber` or a `Boolean` casted to a `NSNumber`. 
+The type of the variable is defined by the type of the Default Value and can be a JSON serializable `NSDictionary`, `NSString`, `NSNumber` or a `Boolean` casted to a `NSNumber`.
 
 For example, using a variable of type `String`, using its value to get the value of the variable:
 ```objc
 TaplyticsVar* stringVar = [TaplyticsVar taplyticsSyncVarWithName:@"stringVar" defaultValue:@"string"];
 NSString* string = (NSString*)stringVar.value;
 ```
- 
+
 Using a casted `Boolean` to a `NSNumber`:
 
 ```objc
@@ -62,7 +64,7 @@ Asynchronous variables take three parameters in its constructor:
 2. Default Value
 3. TLVarBlock
 
-Just as for synchronous variables the type of the variable is defined by the type of the default value, and can be a `NSString`, `NSNumber` or a `Boolean` casted to a `NSNumber`. 
+Just as for synchronous variables the type of the variable is defined by the type of the default value, and can be a `NSString`, `NSNumber` or a `Boolean` casted to a `NSNumber`.
 
 For example, using a variable of type `NSNumber`:
 
@@ -102,7 +104,7 @@ __weak id weakSelf = self;
 
 ### Code Blocks
 
-Similar to Dynamic Variables, Taplytics has an option for **Code Blocks**. Code Blocks are linked to Experiments through the Taplytics website very much the same way that Dynamic Variables are, and will be executed based on the configuration of the experiment through the Taplytics website. 
+Similar to Dynamic Variables, Taplytics has an option for **Code Blocks**. Code Blocks are linked to Experiments through the Taplytics website very much the same way that Dynamic Variables are, and will be executed based on the configuration of the experiment through the Taplytics website.
 
 A Code Block is a callback that can be enabled or disabled depending on the variation. If the Code Block is enabled for the current variation, the code within the callback will be executed asynchronously when Taplytics properties are loaded. If the Code Block is disabled for the current variation, the callback will not be executed.
 
@@ -116,14 +118,14 @@ Example Using Objective-C:
 }];
 ```
 
-Example Using Swift: 
+Example Using Swift:
 
 ```swift
 Taplytics.runCodeBlock("enableFeature", forBlock: {
     // enable your feature here
 })
 ```
-    
+
 ## Testing Specific Experiments
 
 To test/QA specific experiment and variation combinations use the `TaplyticsOptionTestExperiments` start option with a  `NSDictionary` containing keys of the experiment names, and values of variation names (or `baseline`).
@@ -141,6 +143,8 @@ To test/QA specific experiment and variation combinations use the `TaplyticsOpti
 
 ## Visual Editing
 You don't have to do anything else! You can use the Taplytics dashboard to make all your visual changes. See the docs on visual editing [here](https://taplytics.com/docs/guides/visual-experiments).
+
+*Note: Only available using our iOS framework, not available on tvOS.*
 
 ---
 
@@ -168,7 +172,7 @@ If you would like to see which variations and experiments are running on a given
 
 ```objc
 [Taplytics getRunningExperimentsAndVariations:^(NSDictionary *experimentsAndVariations) {
-    // For example: 
+    // For example:
     // NSDictionary* experimentsAndVariations = @{
     //     @"Experiment 1": @"baseline",
     //     @"Experiment 2": @"Variation 1"
@@ -185,7 +189,7 @@ By default, Taplytics defines a session as when a user is using the app with les
 
 To manually force a new user session (ex: A user has logged in / out), there exists a ```startNewSession``` method.
 
-If there is an internet connection, a new session will be created, and new experiments/variations will be fetched from Taplytics if they exist. 
+If there is an internet connection, a new session will be created, and new experiments/variations will be fetched from Taplytics if they exist.
 
 It can be used as follows:
 
@@ -194,4 +198,3 @@ It can be used as follows:
     // New session here! Success will be false if this failed.
 }];
 ```
-
