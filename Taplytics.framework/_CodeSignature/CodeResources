@@ -6,19 +6,19 @@
 	<dict>
 		<key>Headers/Taplytics.h</key>
 		<data>
-		xktHsHAnyTz2LOjyWOy93PgRG24=
+		kHcA5C/pPxLQImAU/tRFIVA+Dsk=
 		</data>
 		<key>Headers/TaplyticsOptions.h</key>
 		<data>
-		fvORvAhdd0WymSHgRReyHoHnsAM=
+		6c5/Jhb83BGRAYdNJfJuAYODPwU=
 		</data>
 		<key>Headers/TaplyticsVar.h</key>
 		<data>
-		AsCRn+ZqFNi/weGwBjli7JrTvQA=
+		BakajzaSrYmep8e8SAUXAABY9uU=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		TpirlQmiBtRdE6iakIiPMuP9k3s=
+		on3b7daGaxkfGMGDetHaE2DVsyQ=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -31,33 +31,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			xktHsHAnyTz2LOjyWOy93PgRG24=
+			kHcA5C/pPxLQImAU/tRFIVA+Dsk=
 			</data>
 			<key>hash2</key>
 			<data>
-			JkwMLN8TJm3ulyiNAFkckp5OPgSIvvhhCyWxXwb6evw=
+			+t0NyR/lfD8lA2HwqJQ57c2uJzUjMmJBHGI6N32EmtI=
 			</data>
 		</dict>
 		<key>Headers/TaplyticsOptions.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			fvORvAhdd0WymSHgRReyHoHnsAM=
+			6c5/Jhb83BGRAYdNJfJuAYODPwU=
 			</data>
 			<key>hash2</key>
 			<data>
-			mSuHazOzm8a1n+m5K8pySWkGRzKfzbctV2mOfgX4ADU=
+			1Oc3VfN/+xJz9HR9W+ZaRtILnyrDvRf2OKi5qaupzqE=
 			</data>
 		</dict>
 		<key>Headers/TaplyticsVar.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			AsCRn+ZqFNi/weGwBjli7JrTvQA=
+			BakajzaSrYmep8e8SAUXAABY9uU=
 			</data>
 			<key>hash2</key>
 			<data>
-			UfT66ASRed/ZN5Gsft+W+rV1x513Yt0TwIzAMXltrV4=
+			p27W1p0J+t1ZcJFlro4xiujGBHTYMGJUDCZlMJFF/8Q=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

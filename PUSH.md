@@ -1,5 +1,7 @@
 Setting up Push Notifications using Taplytics is simple. Follow the steps below to get started.
 
+#### *Note: Push notification is not available for our tvOS framework!*
+
 | # | Step |
 | --- | --- |
 | 1 | [Setup](#1-setup) |
@@ -17,19 +19,19 @@ For iOS and Taplytics to know that your app accepts Push Notifications, you must
 - (void)application:(UIApplication *)application
 didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
 }
- 
+
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 }
- 
+
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
 }
- 
+
 // Method will be called if the app is open when it recieves the push notification
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
 	// "userInfo" will give you the notification information
 }
 
-// Method will be called when the app recieves a push notification
+// Method will be called when the app receives a push notification
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
 	// "userInfo" will give you the notification information
@@ -101,7 +103,7 @@ For automated push campaigns using location based regions you will need to add t
 
 You can handle asking for location permissions yourself, or you can use our provided method as seen below. But make sure that you request `AuthorizedAlways` permissions so that we can set regions.
 
-```objc 
+```objc
 // We will request AuthorizedAlways access to be able to set monitored regions
 [Taplytics registerLocationAccess];
 ```
@@ -176,7 +178,7 @@ The max image size that can be uploaded is 10mb. Note that images are not downsc
 
 #### Create a Notification Service Extension
 
-You'll need to add a Notification Service Extension to your app which is a small extension to your app that downloads the image attached to the notification and displays it as part of the notification. To create the extension open *File > New > Target* in Xcode, select **Notification Service Extension**, then name your service extension and create it with language **Swift**. 
+You'll need to add a Notification Service Extension to your app which is a small extension to your app that downloads the image attached to the notification and displays it as part of the notification. To create the extension open *File > New > Target* in Xcode, select **Notification Service Extension**, then name your service extension and create it with language **Swift**.
 
 ![image](https://github.com/taplytics/Taplytics-iOS-SDK/blob/master/third%20party%20integrations/notification-service-extension.png?raw=true)
 
@@ -186,14 +188,14 @@ Once you've created the Notification Service Extension you should have a file ca
 override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
     self.contentHandler = contentHandler
     self.bestAttemptContent = request.content.mutableCopy() as? UNMutableNotificationContent
-    
+
     // look for existance of taplytics data with image_url
     if let tlData = request.content.userInfo["taplytics"] as? [String: Any], let imageUrl = tlData["image_url"] as? String, let url = URL(string: imageUrl) {
         URLSession.shared.downloadTask(with: url) { (location, response, error) in
             if let location = location {
                 // get path in temp directory for file
                 let tempFileURL = URL(string: "file://".appending(NSTemporaryDirectory()).appending(url.lastPathComponent))!
-                
+
                 var attachment: UNNotificationAttachment?
                 do {
                     // move file into temp directory to be displayed by Notification Service Extension
@@ -201,19 +203,19 @@ override func didReceive(_ request: UNNotificationRequest, withContentHandler co
                         try FileManager.default.removeItem(at: tempFileURL)
                     }
                     try FileManager.default.moveItem(at: location, to: tempFileURL)
-                    
+
                     // generate image attachment
                     attachment = try UNNotificationAttachment(identifier: "tl_image", url: tempFileURL)
                 } catch let error {
                     print("Error: \(error)")
                 }
-                
+
                 // Add the attachment to the notification content
                 if let attachment = attachment {
                     self.bestAttemptContent?.attachments = [attachment]
                 }
             }
-            
+
             // render notification
             self.contentHandler!(self.bestAttemptContent!)
         }.resume()
@@ -224,6 +226,6 @@ override func didReceive(_ request: UNNotificationRequest, withContentHandler co
 }
 ```
 
-What this code is doing is looking for any data attached to the push payload under a `taplytics` object, and specifically looking for a `taplytics.image_url` url to download an image from, which will then start a `downloadTask` for that url. Once the image is downloaded it will move the image to the Extension's temp directory and add the image as a notification attachment to the push, and finally render the notification to display it. 
+What this code is doing is looking for any data attached to the push payload under a `taplytics` object, and specifically looking for a `taplytics.image_url` url to download an image from, which will then start a `downloadTask` for that url. Once the image is downloaded it will move the image to the Extension's temp directory and add the image as a notification attachment to the push, and finally render the notification to display it.
 
 Any push notifications sent without the image url attached to its data will display as normal by iOS.

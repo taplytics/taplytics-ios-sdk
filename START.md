@@ -1,4 +1,4 @@
-You can get started with using Taplytics on iOS in minutes. Just follow the steps below:
+You can get started with using Taplytics on iOS or tvOS in minutes. Just follow the steps below:
 
 | # | Step |
 | --- | --- |
@@ -14,49 +14,61 @@ First, you'll want to install our SDK inside your XCode project.
 
 #### CocoaPods Installation
 1. Install using CocoaPods
-    - Add a `Podfile` to the root of your project directory with the following:
+    - Create a `Podfile` using `pod init` and add Taplytics to your podfile:
 
         ```ruby
+        # For iOS:
         pod 'Taplytics'
+        # For tvOS:
+        pod 'Taplytics_tvOS'
         ```
 
     - Run pod install:
-    
-        ```
+
+        ```ruby
         pod install
         ```
-    
-    - Open your project's .xcworkspace file
-    
+
+    - Open your project's `.xcworkspace` file
+
 2. Initialize the SDK by adding an import and the following line of code with your API key to your `UIApplicationDelegate`. Make sure to call `startTaplyticsAPIKey:` before making `self.window` the key window, such as: `[self.window makeKeyAndVisible]` or `[self.window makeKeyWindow]`.
 
-```objc
-#import <Taplytics/Taplytics.h>
-...
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-	...
-	[Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here"];
-	...
-	// make sure you call startTaplytics before any makeKeyWindow calls:
-	// [self.window makeKeyAndVisible];
-	// [self.window makeKeyWindow];
-	...
-	return YES;
-}
-```
+  ```objc
+  #import <Taplytics/Taplytics.h>
+  ...
+  - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+  	...
+  	[Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here"];
+  	...
+  	// make sure you call startTaplytics before any makeKeyWindow calls:
+  	// [self.window makeKeyAndVisible];
+  	// [self.window makeKeyWindow];
+  	...
+  	return YES;
+  }
+  ```
 
 #### Manual Installation
 
 1. [Download the SDK / clone into your app.](https://github.com/taplytics/taplytics-ios-sdk)
 2. Load the Taplytics framework into your app.
-3. Add the required frameworks:
-    
+3. Add the required frameworks
+  - For iOS:
+
     ```
     CoreTelephony.framework
     SystemConfiguration.framework
     JavaScriptCore.framework
     ```
-    
+
+  - For tvOS:
+
+    ```
+    SystemConfiguration.framework
+    JavaScriptCore.framework
+    ```
+
+
 4. Add the `-ObjC` Linker flag to your project settings.
 5. Initialize the SDK by adding a line of code with your API key in your `UIApplicationDelegate`. Make sure to call `startTaplyticsAPIKey:` before making `self.window` the key window, such as: `[self.window makeKeyAndVisible]` or `[self.window makeKeyWindow]`.
 
@@ -74,16 +86,18 @@ First, you'll want to install our SDK inside your XCode project.
         return YES;
     }
     ```
-    
+
 #### Install Using Segment
 The Taplytics SDK can also be installed via Segment. You can find install instructions [here](https://taplytics.com/docs/segment-integration)
 
 
 ---
 
-### Advanced Pairing
+### Advanced Pairing (Optional)
 
-Secondly, (though, optionally) you can implement Advanced Pairing, which will allow you to pair your device to Taplytics via a link sent by email or text. Advanced Pairing is an easy way for your team to pair any build of your app to Taplytics. 
+##### Note: Advanced pairing is only supported by iOS, tvOS does not support advanced pairing!
+
+You can implement Advanced Pairing, which will allow you to pair your device to Taplytics via a link sent by email or text. Advanced Pairing is an easy way for your team to pair any build of your app to Taplytics.
 
 1. First ensure that `application:openURL:options:` method is implemented in your `UIApplicationDelegate`
 
@@ -92,12 +106,12 @@ Secondly, (though, optionally) you can implement Advanced Pairing, which will al
         return NO;
     }
     ```
-    
+
 2. [Get your Taplytics URL Scheme from Taplytics' Settings](https://taplytics.com/dashboard)
 
     ![Image of URL Scheme](http://taplytics.com/assets/docs/install-sdk/url-scheme.png)
-    
-    
+
+
 3. Add Taplytics URL Type in XCode's Build Info panel, with Identifier: com.taplytics, add your Taplytics URL Scheme from above.
 
     ![Image Of XCode build info](http://taplytics.com/assets/docs/install-sdk/app-link.png)
@@ -153,7 +167,7 @@ User Attributes set before `startTaplyticsAPIKey:` is called, will be used for e
         @"paid_user": @YES
     }
 }];
-    
+
 [Taplytics startTaplyticsAPIKey:@"API_KEY"];
 
 // These custom data values will only take effect on the second session of the app.
@@ -170,7 +184,7 @@ Taplytics also offers a method to retrieve select information of what you know a
 
 ```objc
 [Taplytics getSessionInfo:^(NSDictionary * _Nullable sessionInfo) {
-    //Use your NSDictionary of sessionInfo
+    // Use your NSDictionary of sessionInfo
 }];
 ```
 
@@ -200,8 +214,8 @@ The following events and general information are automatically tracked by Taplyt
 - Social Sign-in Authorized/Denied
 - Social Share Authorized/Denied
 - Photo Library Authorized/Denied
-- Push Notification Authorized/Denied
-- Push Notification Seen/Opened
+- Push Notification Authorized/Denied (iOS only)
+- Push Notification Seen/Opened (iOS only)
 
 #### External Analytics Sources
 
@@ -250,15 +264,15 @@ You can disable automatic tracking for any of the below constants by adding them
 For example:
 
 ```objc
-[Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{TaplyticsOptionDisable:@[TaplyticsOptionTrackLocation]}];
+[Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{TaplyticsOptionDisable: @[TaplyticsOptionTrackLocation]}];
 ```
 
 #### Background Session Time
 
-Taplytics automatically tracks sessions for you. The Taplytics SDK keeps track of the last activity timestamp in your app (app activity is considered a view change, button click, or Taplytics event logged), and when your app returns from background if the time since last activity is greater then 10 minutes we create a new session for you. If you would like the session background time something other then 10 minutes you can se it as a start option: 
+Taplytics automatically tracks sessions for you. The Taplytics SDK keeps track of the last activity timestamp in your app (app activity is considered a view change, button click, or Taplytics event logged), and when your app returns from background if the time since last activity is greater then 10 minutes we create a new session for you. If you would like the session background time something other then 10 minutes you can se it as a start option:
 
 ```objc
-[Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{TaplyticsOptionSessionBackgroundTime:@10}];
+[Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{TaplyticsOptionSessionBackgroundTime: @10}];
 ```
 
 ---
@@ -301,7 +315,7 @@ Start options allow you to control how certain SDK features function, and enable
 |TaplyticsOptionDisableBorders|NSNumber(Boolean)|To disable all Taplytics borders in development mode, set to `@YES` |
 |TaplyticsOptionAsyncLoading|NSNumber(Boolean)|Forces loading of taplytics properties from disk as async task, breaks some synchronous variable behaviour, see section below for details. |
 
-Example: 
+Example:
 
 ```objc
 [Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{
@@ -317,7 +331,7 @@ Example:
 ```
 
 #### Async Loading
-Enabling the start option `TaplyticsOptionAsyncLoading ` will make the initial loading of taplytics properties from disk run on an async thread. However, this will break the behaviour of synchronous variables where they used the value loaded from disk, with `TaplyticsOptionAsyncLoading` enabled and synchronous variables are initialized before properties are loaded from disk they will use the default value. To ensure properties are loaded when initializing synchronous variables use `[Taplytics propertiesLoadedCallback:]`. **propertiesLoadedCallback must be placed _after_ startTaplytics**
+Enabling the start option `TaplyticsOptionAsyncLoading ` will make the initial loading of taplytics properties from disk run on an async thread. However, this will break the behaviour of synchronous variables where they used the value loaded from disk, with `TaplyticsOptionAsyncLoading` enabled and synchronous variables are initialized before properties are loaded from disk they will use the default value. To ensure properties are loaded when initializing synchronous variables use `[Taplytics propertiesLoadedCallback:]`. **Note: propertiesLoadedCallback must be placed _after_ startTaplytics**.
 
 Existing behaviour example:
 

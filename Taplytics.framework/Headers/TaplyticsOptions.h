@@ -2,7 +2,7 @@
 //  TaplyticsOptions.h
 //  Taplytics
 //
-//  Copyright (c) 2014 Taplytics All rights reserved.
+//  Copyright © 2017 Taplytics. All rights reserved.
 //
 
 extern NSString *const TaplyticsOptionDelayLoad;
@@ -23,7 +23,6 @@ extern NSString *const TaplyticsDisableUITableViewSW;
 extern NSString *const TaplyticsDisableUICollectionViewSW;
 extern NSString *const TaplyticsDisableUIPageViewSW;
 extern NSString *const TaplyticsDisableUIActionSheetSW;
-extern NSString *const TaplyticsDisableUIAlertViewSW;
 extern NSString *const TaplyticsDisableUITextFieldViewSW;
 
 extern NSString *const TaplyticsDisableTrackLocation;

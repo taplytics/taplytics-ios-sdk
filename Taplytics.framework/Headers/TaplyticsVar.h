@@ -2,7 +2,7 @@
 //  TaplyticsVar.h
 //  Taplytics
 //
-//  Copyright (c) 2015 Taplytics Inc. All rights reserved.
+//  Copyright © 2017 Taplytics. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
