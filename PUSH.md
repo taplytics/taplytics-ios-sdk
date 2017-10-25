@@ -14,6 +14,7 @@ Setting up Push Notifications using Taplytics is simple. Follow the steps below 
 ### Required Code for iOS 9 and Below
 For iOS and Taplytics to know that your app accepts Push Notifications, you must implement the following methods on your  `UIApplicationDelegate`.
 
+<sub>**Objective-C**</sub>
 ```objc
 // Implement these methods for Taplytics Push Notifications
 - (void)application:(UIApplication *)application
@@ -39,6 +40,7 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
 }
 ```
 
+<sub>**Swift**</sub>
 ```swift
 func application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings) {
 }
@@ -62,6 +64,7 @@ func application(_ application: UIApplication, didReceiveRemoteNotification user
 ### Required Code for iOS 10
 For iOS 10, you'll need to implement the new `UserNotification` class to allow Taplytics and iOS to accept Push Notifications.  You will need to change your `UIApplicationDelegate` header file to look something like the following
 
+<sub>**Objective-C**</sub>
 ```objc
 #import <UIKit/UIKit.h>
 #import <UserNotifications/UserNotifications.h>
@@ -71,6 +74,7 @@ For iOS 10, you'll need to implement the new `UserNotification` class to allow T
 @end
 ```
 
+<sub>**Swift**</sub>
 ```swift
 import UIKit
 import UserNotifications
@@ -83,6 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
 You will also need to add the following methods to your 'UIApplicationDelegate'
 
+<sub>**Objective-C**</sub>
 ```objc
 // Implement these methods for Taplytics Push Notifications
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
@@ -111,6 +116,7 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
 }
 ```
 
+<sub>**Swift**</sub>
 ```swift
 func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
 }
@@ -146,11 +152,12 @@ If you are not already registering for push notifications all you have to do is 
 
 Please Note that calling this function will show the permission dialog to the user.
 
+<sub>**Objective-C**</sub>
 ```objc
-/* Example usage */
 [Taplytics registerPushNotifications];
 ```
 
+<sub>**Swift**</sub>
 ```swift
 Taplytics.registerPushNotifications()
 ```
@@ -161,16 +168,19 @@ For automated push campaigns using location based regions you will need to add t
 
 You can handle asking for location permissions yourself, or you can use our provided method as seen below. But make sure that you request `AuthorizedAlways` permissions so that we can set regions.
 
+<sub>**Objective-C**</sub>
 ```objc
 // We will request AuthorizedAlways access to be able to set monitored regions
 [Taplytics registerLocationAccess];
 ```
 
+<sub>**Swift**</sub>
 ```swift
 Taplytics.registerLocationAccess()
 ```
 
 In order to allow the iOS location manager to successfully display a location request dialog to the user, the following properties must be added to the application's Plist settings:
+
 ```objc
 NSLocationAlwaysUsageDescription
 NSLocationWhenInUseUsageDescription
@@ -206,16 +216,21 @@ You can use the `options` attribute when you start Taplytics in order to force t
 
 Here's how you can achieve setting the Push environment:
 
+<sub>**Objective-C**</sub>
 ```objc
-
-// To bucket everything into Production:
+// To bucket everyone into Production:
 [Taplytics startTaplyticsAPIKey:@"API_KEY" options:@{@"pushSandbox":@0}];
 
 // To bucket everything into Development:
 [Taplytics startTaplyticsAPIKey:@"API_KEY" options:@{@"pushSandbox":@1}];
 ```
 
+<sub>**Swift**</sub>
 ```swift
+// To bucket everyone into Production:
+Taplytics.startAPIKey("API_KEY", options: ["pushSandbox": 0])
+
+// To bucket everything into Development:
 Taplytics.startAPIKey("API_KEY", options: ["pushSandbox": 1])
 ```
 
@@ -225,12 +240,14 @@ Taplytics.startAPIKey("API_KEY", options: ["pushSandbox": 1])
 
 If you're using our User Attributes feature, you can easily disconnect a user from a device when they log out. This will prevent our system from sending push notifications to that device. It is especially important to reset the user when your push campaigns are targeted to a specific user. You can do this by calling our `resetUser:` function:
 
+<sub>**Objective-C**</sub>
 ```objc
 [Taplytics resetUser:^{
 	// Finished User Reset
 }];
 ```
 
+<sub>**Swift**</sub>
 ```swift
 Taplytics.resetUser {
   // Finished user reset

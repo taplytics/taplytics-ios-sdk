@@ -33,20 +33,43 @@ First, you'll want to install our SDK inside your XCode project.
 
 2. Initialize the SDK by adding an import and the following line of code with your API key to your `UIApplicationDelegate`. Make sure to call `startTaplyticsAPIKey:` before making `self.window` the key window, such as: `[self.window makeKeyAndVisible]` or `[self.window makeKeyWindow]`.
 
-  ```objc
-  #import <Taplytics/Taplytics.h>
-  ...
-  - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  	...
-  	[Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here"];
-  	...
-  	// make sure you call startTaplytics before any makeKeyWindow calls:
-  	// [self.window makeKeyAndVisible];
-  	// [self.window makeKeyWindow];
-  	...
-  	return YES;
-  }
-  ```
+    <sub>**Objective-C**</sub>
+    ```objc
+    // iOS
+    #import <Taplytics/Taplytics.h>
+    // tvOS
+    #import <Taplytics_tvOS/Taplytics.h>
+    ...
+    - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+        ...
+        [Taplytics startTaplyticsAPIKey:@"API_KEY"];
+        ...
+        // make sure you call startTaplytics before any makeKeyWindow calls:
+        // [self.window makeKeyAndVisible];
+        // [self.window makeKeyWindow];
+        ...
+        return YES;
+    }
+    ```
+
+    <sub>**Swift**</sub>
+    ```swift
+    // iOS
+    import Taplytics
+    // tvOS
+    import Taplytics_tvOS
+    ...
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+      ...
+      Taplytics.startAPIKey("API_KEY")
+      ...
+      // make sure you call startTaplytics before any makeKeyWindow calls:
+      // self.window.makeKeyAndVisible()
+      // self.window.makeKeyWindow()
+      ...
+      return true
+    }
+    ```
 
 #### Manual Installation
 
@@ -72,12 +95,16 @@ First, you'll want to install our SDK inside your XCode project.
 4. Add the `-ObjC` Linker flag to your project settings.
 5. Initialize the SDK by adding a line of code with your API key in your `UIApplicationDelegate`. Make sure to call `startTaplyticsAPIKey:` before making `self.window` the key window, such as: `[self.window makeKeyAndVisible]` or `[self.window makeKeyWindow]`.
 
+    <sub>**Objective-C**</sub>
     ```objc
+    // iOS
     #import <Taplytics/Taplytics.h>
+    // tvOS
+    #import <Taplytics_tvOS/Taplytics.h>
     ...
     - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
         ...
-        [Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here"];
+        [Taplytics startTaplyticsAPIKey:@"API_KEY"];
         ...
         // make sure you call startTaplytics before any makeKeyWindow calls:
         // [self.window makeKeyAndVisible];
@@ -87,19 +114,27 @@ First, you'll want to install our SDK inside your XCode project.
     }
     ```
 
+    <sub>**Swift**</sub>
     ```swift
+    // iOS
     import Taplytics
+    // tvOS
+    import Taplytics_tvOS
     ...
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-
-        Taplytics.startAPIKey("88739c4cdf38b0975b7a152214d6ab025d138cc1")
+        ...
+        Taplytics.startAPIKey("API_KEY")
+        ...
+        // make sure you call startTaplytics before any makeKeyWindow calls:
+        // self.window.makeKeyAndVisible()
+        // self.window.makeKeyWindow()
+        ...
+        return true
     }
     ```
 
 #### Install Using Segment
 The Taplytics SDK can also be installed via Segment. You can find install instructions [here](https://taplytics.com/docs/segment-integration)
-
 
 ---
 
@@ -111,12 +146,14 @@ You can implement Advanced Pairing, which will allow you to pair your device to 
 
 1. First ensure that `application:openURL:options:` method is implemented in your `UIApplicationDelegate`
 
+    <sub>**Objective-C**</sub>
     ```objc
     - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
         return NO;
     }
     ```
 
+    <sub>**Swift**</sub>
     ```swift
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         return false
@@ -154,6 +191,7 @@ The possible fields are:
 
 For example:
 
+<sub>**Objective-C**</sub>
 ```objc
 [Taplytics setUserAttributes: @{
     @"user_id": @"testUser",
@@ -170,6 +208,7 @@ For example:
 }];
 ```
 
+<sub>**Swift**</sub>
 ```swift
 Taplytics.setUserAttributes([
     "user_id": "testUser",
@@ -192,6 +231,7 @@ _NOTE: The `customData` field is limited to 50kb of JSON string data._
 
 User Attributes set before `startTaplyticsAPIKey:` is called, will be used for experiment segmentation on the first session of your app. Any attributes that are set after `startTaplyticsAPIKey:` is called will not be used for experiment segmentation until the next session of your app.
 
+<sub>**Objective-C**</sub>
 ```objc
 // These custom data values will be used for segmentation on the first session of the app.
 [Taplytics setUserAttributes:@{@"customData": @{@"paid_user": @YES}}];
@@ -202,6 +242,7 @@ User Attributes set before `startTaplyticsAPIKey:` is called, will be used for e
 [Taplytics setUserAttributes:@{@"customData": @{@"demo_account": @NO}}];
 ```
 
+<sub>**Swift**</sub>
 ```swift
 Taplytics.setUserAttributes(["customData": ["paid_user": true]])
 
@@ -214,12 +255,14 @@ Taplytics.setUserAttributes(["customData": ["demo_account": false]])
 
 Taplytics also offers a method to retrieve select information of what you know about a session at a given time. This method returns the user's Taplytics identifier (appUser_id) and current session id (session_id)
 
+<sub>**Objective-C**</sub>
 ```objc
 [Taplytics getSessionInfo:^(NSDictionary * _Nullable sessionInfo) {
     // Use the NSDictionary of sessionInfo
 }];
 ```
 
+<sub>**Swift**</sub>
 ```swift
 Taplytics.getSessionInfo { (sessionInfo) in
     // Use the NSDictionary of sessionInfo
@@ -230,13 +273,14 @@ Taplytics.getSessionInfo { (sessionInfo) in
 
 Once a user logs out of your app, their User Attributes are no longer valid. You can reset their data by calling `resetUser:`, make sure you do not set any new user attributes until you receive the callback.
 
-
+<sub>**Objective-C**</sub>
 ```objc
 [Taplytics resetUser:^{
   // Finished User Reset
 }];
 ```
 
+<sub>**Swift**</sub>
 ```swift
 Taplytics.resetUser {
   // Finished User Reset
@@ -307,12 +351,14 @@ You can disable automatic tracking for any of the below constants by adding them
 
 For example:
 
+<sub>**Objective-C**</sub>
 ```objc
 [Taplytics startTaplyticsAPIKey:@"API_KEY" options:@{
     TaplyticsOptionDisable: @[TaplyticsOptionTrackLocation]
 }];
 ```
 
+<sub>**Swift**</sub>
 ```swift
 Taplytics.startAPIKey("API_KEY", options: [
     TaplyticsOptionDisable: [TaplyticsOptionTrackLocation]
@@ -323,10 +369,12 @@ Taplytics.startAPIKey("API_KEY", options: [
 
 Taplytics automatically tracks sessions for you. The Taplytics SDK keeps track of the last activity timestamp in your app (app activity is considered a view change, button click, or Taplytics event logged), and when your app returns from background if the time since last activity is greater then 10 minutes we create a new session for you. If you would like the session background time something other then 10 minutes you can se it as a start option:
 
+<sub>**Objective-C**</sub>
 ```objc
 [Taplytics startTaplyticsAPIKey:@"API_KEY" options:@{TaplyticsOptionSessionBackgroundTime: @10}];
 ```
 
+<sub>**Swift**</sub>
 ```swift
 Taplytics.startAPIKey("API_KEY", options: [TaplyticsOptionSessionBackgroundTime: 10])
 ```
@@ -337,6 +385,7 @@ Taplytics.startAPIKey("API_KEY", options: [TaplyticsOptionSessionBackgroundTime:
 
 You can also track your own custom Analytics events to Taplytics using the `logEvent:` methods:
 
+<sub>**Objective-C**</sub>
 ```objc
 [Taplytics logEvent:@"CustomEvent"];
 
@@ -347,6 +396,7 @@ You can also track your own custom Analytics events to Taplytics using the `logE
 [Taplytics logRevenue:@"Purchase" value:@10.25 metaData:@{@"Item":@"blueSweater"}];
 ```
 
+<sub>**Swift**</sub>
 ```swift
 Taplytics.logEvent("CustomEvent")
 
@@ -383,6 +433,7 @@ Start options allow you to control how certain SDK features function, and enable
 
 Example:
 
+<sub>**Objective-C**</sub>
 ```objc
 [Taplytics startTaplyticsAPIKey:@"API_KEY" options:@{
 	TaplyticsOptionDelayLoad: @6,
@@ -396,6 +447,7 @@ Example:
 }];
 ```
 
+<sub>**Swift**</sub>
 ```swift
 Taplytics.startAPIKey("API_KEY", options: [
     TaplyticsOptionDelayLoad: 6,
@@ -414,6 +466,7 @@ Enabling the start option `TaplyticsOptionAsyncLoading ` will make the initial l
 
 Existing behaviour example:
 
+<sub>**Objective-C**</sub>
 ```objc
 [Taplytics startTaplyticsAPIKey:@"API_KEY"];
 
@@ -422,6 +475,7 @@ self.var = [TaplyticsVar taplyticsSyncVarWithName:@"syncVar" defaultValue:@1];
 NSLog(@"Variable Value: %@", _var.value);
 ```
 
+<sub>**Swift**</sub>
 ```swift
 Taplytics.startAPIKey("API_KEY")
 
@@ -432,6 +486,7 @@ print("Variable Value: \(tlVar.value)")
 
 Async Loading example:
 
+<sub>**Objective-C**</sub>
 ```objc
 [Taplytics startTaplyticsAPIKey:@"API_KEY" options:@{TaplyticsOptionAsyncLoading: @YES}];
 
@@ -448,6 +503,7 @@ __weak AppDelegate* weakSelf = self;
 }];
 ```
 
+<sub>**Swift**</sub>
 ```swift
 Taplytics.startAPIKey("API_KEY", options: [TaplyticsOptionAsyncLoading: true])
 
