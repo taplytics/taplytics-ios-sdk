@@ -26,10 +26,18 @@ Synchronous variables are guaranteed to have the same value for the entire sessi
 
 Due to the synchronous nature of the variable, if it is used before the experiments have been loaded from Taplytics servers (for example on the first launch of your app), it's value will be the default value rather than the value set for that experiment. This could taint the results of the experiment. In order to prevent this you can ensure that the experiments are loaded before using the variable. This can be done using the `propertiesLoadedCallback:` method, as an example:
 
+<sub>**Objective-C**</sub>
 ```objc
 [Taplytics propertiesLoadedCallback:^(BOOL loaded) {
     [self loadTLVariables];
 }];
+```
+
+<sub>**Swift**</sub>
+```swift
+Taplytics.propertiesLoadedCallback { (loaded) in
+    loadTLVariables()
+}
 ```
 
 Note that this must be done only _after_ startTaplytics.
@@ -42,16 +50,31 @@ Synchronous variables take two parameters in its constructor:
 The type of the variable is defined by the type of the Default Value and can be a JSON serializable `NSDictionary`, `NSString`, `NSNumber` or a `Boolean` casted to a `NSNumber`.
 
 For example, using a variable of type `String`, using its value to get the value of the variable:
+
+<sub>**Objective-C**</sub>
 ```objc
 TaplyticsVar* stringVar = [TaplyticsVar taplyticsSyncVarWithName:@"stringVar" defaultValue:@"string"];
 NSString* string = (NSString*)stringVar.value;
 ```
 
+<sub>**Swift**</sub>
+```swift
+let stringVar = TaplyticsVar.sync(name: "stringVar", defaultValue: "string" as NSString)
+let string = stringVar.value as? String
+```
+
 Using a casted `Boolean` to a `NSNumber`:
 
+<sub>**Objective-C**</sub>
 ```objc
 TaplyticsVar* boolVar = [TaplyticsVar taplyticsSyncVarWithName:@"boolVar" defaultValue:@(YES)];
 BOOL boolean = [(NSNumber*)boolVar.value boolValue];
+```
+
+<sub>**Swift**</sub>
+```swift
+let boolVar = TaplyticsVar.sync(name: "boolVar", defaultValue: true as NSNumber)
+let boolean = boolVar.value as? Bool
 ```
 
 #### Asynchronous
@@ -68,6 +91,7 @@ Just as for synchronous variables the type of the variable is defined by the typ
 
 For example, using a variable of type `NSNumber`:
 
+<sub>**Objective-C**</sub>
 ```objc
 // In your Interface create a strong reference to the variable
 @property (nonatomic, strong) TaplyticsVar* tlVar;
@@ -78,6 +102,16 @@ self.tlVar = [TaplyticsVar taplyticsVarWithName:@"numVar" defaultValue:@(1) upda
         NSNumber* num = (NSNumber*)value;
     }
 }];
+```
+
+<sub>**Swift**</sub>
+```swift
+self.tlVar = TaplyticsVar.async(name: "numVar", defaultValue: 1 as NSNumber) { (updatedValue) in
+    guard let value = updatedValue as? NSNumber else {
+        return
+    }
+    // use value
+}
 ```
 
 When the variable's value has been updated, the updated block will be called with that updated value. Note that we only store a weak reference to your variables, for the updated block to work correctly you will need to store a strong reference to the variable object.
@@ -92,6 +126,7 @@ When testing dynamic variables in live update mode you can change the values on 
 
 This can be achieved by using a properties loaded callback. Here is an example for updating a label:
 
+<sub>**Objective-C**</sub>
 ```objc
 __weak id weakSelf = self;
 [Taplytics propertiesLoadedCallback:^(BOOL loaded) {
@@ -100,6 +135,20 @@ __weak id weakSelf = self;
         weakSelf.label.text = var.value;
     }
 }];
+```
+
+<sub>**Swift**</sub>
+```swift
+Taplytics.propertiesLoadedCallback { (loaded) in
+    guard loaded, let label = self.label else {
+        return
+    }
+
+    let stringVar = TaplyticsVar.sync(name: "stringVar", defaultValue: "string" as NSString)
+    if let stringValue = stringVar.value as? String {
+        label.text = stringValue
+    }
+}
 ```
 
 ### Code Blocks
@@ -112,6 +161,7 @@ A Code Block can be used alongside as many other Code Blocks as you would like t
 
 Example Using Objective-C:
 
+<sub>**Objective-C**</sub>
 ```objc
 [Taplytics runCodeBlock:@"enableFeature" forBlock:^{
     // enable your feature here
@@ -120,16 +170,18 @@ Example Using Objective-C:
 
 Example Using Swift:
 
+<sub>**Swift**</sub>
 ```swift
-Taplytics.runCodeBlock("enableFeature", forBlock: {
+Taplytics.runCodeBlock("enableFeature") {
     // enable your feature here
-})
+}
 ```
 
 ## Testing Specific Experiments
 
 To test/QA specific experiment and variation combinations use the `TaplyticsOptionTestExperiments` start option with a  `NSDictionary` containing keys of the experiment names, and values of variation names (or `baseline`).
 
+<sub>**Objective-C**</sub>
 ```objc
 [Taplytics startTaplyticsAPIKey:@"API_KEY" options:@{
     TaplyticsOptionTestExperiments: @{
@@ -137,6 +189,16 @@ To test/QA specific experiment and variation combinations use the `TaplyticsOpti
         @"Experiment 2": @"baseline"
     }
 }];
+```
+
+<sub>**Swift**</sub>
+```swift
+Taplytics.startAPIKey("API_KEY", options: [
+    TaplyticsOptionTestExperiments: [
+        "Experiment 1": "Variation 1",
+        "Experiment 2": "baseline"
+    ]
+])
 ```
 
 ---
@@ -154,14 +216,26 @@ On the first launch of your app, the Taplytics SDK will show your iOS launch ima
 
 If you would like to disable showing the launch image:
 
+<sub>**Objective-C**</sub>
 ```objc
-[Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{TaplyticsOptionDelayLoad:@0}];
+[Taplytics startTaplyticsAPIKey:@"API_KEY" options:@{TaplyticsOptionDelayLoad:@0}];
+```
+
+<sub>**Swift**</sub>
+```swift
+Taplytics.startAPIKey("API_KEY", options: [TaplyticsOptionDelayLoad: 0])
 ```
 
 Or increase the maximum wait time to 10 seconds:
 
+<sub>**Objective-C**</sub>
 ```objc
-[Taplytics startTaplyticsAPIKey:@"Your_App_Token_Here" options:@{TaplyticsOptionDelayLoad:@10}];
+[Taplytics startTaplyticsAPIKey:@"API_KEY" options:@{TaplyticsOptionDelayLoad:@10}];
+```
+
+<sub>**Swift**</sub>
+```swift
+Taplytics.startAPIKey("API_KEY", options: [TaplyticsOptionDelayLoad: 10])
 ```
 
 ---
@@ -170,15 +244,28 @@ Or increase the maximum wait time to 10 seconds:
 
 If you would like to see which variations and experiments are running on a given device, there exists a `getRunningExperimentsAndVariations()` function which provides a callback with the current experiments and their running variation. An example:
 
+<sub>**Objective-C**</sub>
 ```objc
 [Taplytics getRunningExperimentsAndVariations:^(NSDictionary *experimentsAndVariations) {
-    // For example:
-    // NSDictionary* experimentsAndVariations = @{
+    // For example experimentsAndVariations will contain:
+    // @{
     //     @"Experiment 1": @"baseline",
     //     @"Experiment 2": @"Variation 1"
     // };
 }];
 ```
+
+<sub>**Swift**</sub>
+```swift
+Taplytics.getRunningExperimentsAndVariations { (experimentsAndVariations) in
+    // For example experimentsAndVariations will contain:
+    // [
+    //    "Experiment 1": "baseline",
+    //    "Experiment 2": "Variation 1",
+    // ]
+}
+```
+
 NOTE: The block can return asynchronously once Taplytics properties have loaded. The block will return a `NSDictionary` with experiment names as the key value, and variation names as the value.
 
 ## Sessions
@@ -193,8 +280,16 @@ If there is an internet connection, a new session will be created, and new exper
 
 It can be used as follows:
 
+<sub>**Objective-C**</sub>
 ```objc
 [Taplytics startNewSession:^(BOOL success) {
     // New session here! Success will be false if this failed.
 }];
+```
+
+<sub>**Swift**</sub>
+```swift
+Taplytics.startNewSession { (success) in
+    // New session here! Success will be false if this failed.
+}
 ```
