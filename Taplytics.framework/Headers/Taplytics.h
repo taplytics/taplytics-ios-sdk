@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v2.22.0
+//  Taplytics v2.23.0
 //
 //  Copyright © 2017 Taplytics. All rights reserved.
 //
@@ -39,6 +39,8 @@ typedef void(^TLNewSessionBlock)(void);
 
 
 @interface Taplytics : NSObject
+
+- (instancetype _Nonnull )init NS_SWIFT_UNAVAILABLE("Remove exposure of init");
 
 #pragma mark - Starting Taplytics
 

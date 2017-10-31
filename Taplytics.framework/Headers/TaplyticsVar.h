@@ -64,13 +64,17 @@ typedef void(^TLVarBlock)(NSObject* _Nullable value);
  */
 @property (nonatomic, readonly) BOOL isSynchronous;
 
+- (instancetype _Nonnull)init NS_SWIFT_UNAVAILABLE("Remove exposure of init");
+
 /**
- Get instance of Taplytics Variable with name and defualt value synchronously. 
+ Get instance of Taplytics Variable with name and default value synchronously.
  
  @param name the name of the Taplytics Variable
  @param defaultValue the defualt value to be used and when not modified by a Taplytics Experiment or when experiments are not loaded before use
  */
- + (nonnull instancetype)taplyticsSyncVarWithName:(nonnull NSString *)name defaultValue:(nonnull NSObject*)defaultValue;
+ + (nonnull instancetype)taplyticsSyncVarWithName:(nonnull NSString *)name
+                                     defaultValue:(nonnull NSObject*)defaultValue
+                                     NS_SWIFT_NAME(sync(name:defaultValue:));
 
 /**
  Get instance of Taplytics Variable with name and default value. Updates to its value are notified using the updatedBlock.
@@ -81,7 +85,24 @@ typedef void(^TLVarBlock)(NSObject* _Nullable value);
  @param updatedBlock the update code block called when the Taplytics Variable's value is updated.
  */
 
-+ (nonnull instancetype)taplyticsVarWithName:(nonnull NSString *)name defaultValue:(nonnull NSObject*)defaultValue updatedBlock:(nullable TLVarBlock)updatedBlock;
++ (nonnull instancetype)taplyticsVarWithName:(nonnull NSString *)name
+                                defaultValue:(nonnull NSObject*)defaultValue
+                                updatedBlock:(nullable TLVarBlock)updatedBlock
+                                NS_SWIFT_NAME(async(name:defaultValue:updatedBlock:));
+
+/**
+ Created sync method to support deprecated Swift 3 variable formatting, calls [self taplyticsSyncVarWithName:defaultValue:] internally.
+ */
++ (nonnull instancetype)syncVarWithName:(nonnull NSString *)name
+                           defaultValue:(nonnull NSObject *) defaultValue
+                            NS_SWIFT_NAME(taplyticsSyncVar(withName:defaultValue:)) __deprecated;
+/**
+ Created async method to support deprecated Swift 3 variable formatting, calls [self taplyticsVarWithName:defaultValue:updatedBlock:] internally.
+ */
++ (nonnull instancetype)asyncVarWithName:(nonnull NSString *)name
+                            defaultValue:(nonnull NSObject *)defaultValue
+                            updatedBlock:(nullable TLVarBlock)updatedBlock
+                            NS_SWIFT_NAME(init(name:defaultValue:updatedBlock:)) __deprecated;
 
 @end
 
