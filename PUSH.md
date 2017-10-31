@@ -318,3 +318,26 @@ override func didReceive(_ request: UNNotificationRequest, withContentHandler co
 What this code is doing is looking for any data attached to the push payload under a `taplytics` object, and specifically looking for a `taplytics.image_url` url to download an image from, which will then start a `downloadTask` for that url. Once the image is downloaded it will move the image to the Extension's temp directory and add the image as a notification attachment to the push, and finally render the notification to display it.
 
 Any push notifications sent without the image url attached to its data will display as normal by iOS.
+
+___
+
+## 5. Push Notification Payload
+
+If you are handling push notifications with custom payloads, the custom data key/values will be added to the base object as seen below:
+
+```json
+{
+	"custom_data_key": "custom_data_value", // Custom Data key/value
+	"aps": {
+		"alert": "Test Push",
+		"badge": 1,
+		"sound": "default",
+		"tl_id": "59f880ea6f6d6b7b3bee7e9c", // Taplytics push id
+		"content-available": "1",
+		"mutable-content": "1"
+	},
+	"taplytics": { // Taplytics rich push data
+		"image_url": "https://media.taplytics.com/pushImages/59f880ea6f6d6b7b3bee7e9c.png"
+	}
+}
+```
