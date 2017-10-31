@@ -327,17 +327,17 @@ If you are handling push notifications with custom payloads, the custom data key
 
 ```json
 {
-	"custom_data_key": "custom_data_value", // Custom Data key/value
+	"custom_data_key": "custom_data_value",
 	"aps": {
 		"alert": "Test Push",
 		"badge": 1,
 		"sound": "default",
-		"tl_id": "59f880ea6f6d6b7b3bee7e9c", // Taplytics push id
+		"tl_id": "",
 		"content-available": "1",
 		"mutable-content": "1"
 	},
-	"taplytics": { // Taplytics rich push data
-		"image_url": "https://media.taplytics.com/pushImages/59f880ea6f6d6b7b3bee7e9c.png"
+	"taplytics": {
+		"image_url": ""
 	}
 }
 ```
