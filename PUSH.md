@@ -1,6 +1,6 @@
 Setting up Push Notifications using Taplytics is simple. Follow the steps below to get started.
 
-#### *Note: Push notification is not available for our tvOS framework!*
+#### *Note: Push notifications are not available for our tvOS framework!*
 
 | # | Step |
 | --- | --- |
