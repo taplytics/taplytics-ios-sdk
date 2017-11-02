@@ -53,6 +53,7 @@ First, you'll want to install our SDK inside your XCode project.
     ```
     <sub>**Swift**</sub>
     ```swift
+    // For iOS only, don't add this import for tvOS
     import Taplytics
     ...
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
