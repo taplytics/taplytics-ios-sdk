@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v2.23.1
+//  Taplytics v2.23.2
 //
 //  Copyright © 2017 Taplytics. All rights reserved.
 //
@@ -20,7 +20,6 @@ typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary* _Nullable ex
 typedef void(^TLPropertiesLoadedBlock)(BOOL loaded);
 
 typedef void(^TLNewSessionBlock)(void);
-
 
 
 @protocol TaplyticsDelegate <NSObject>

@@ -53,8 +53,10 @@ First, you'll want to install our SDK inside your XCode project.
     ```
     <sub>**Swift**</sub>
     ```swift
-    // For iOS only, don't add this import for tvOS
+    // iOS
     import Taplytics
+    // tvOS
+    import Taplytics_tvOS
     ...
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
       ...
@@ -68,11 +70,6 @@ First, you'll want to install our SDK inside your XCode project.
     }
     ```
 
-    For tvOS Swift projects, you will need a Objective-C-Swift bridging header. You can create this by creating an Objective-C file in a Swift project, Xcode will prompt you to make a bridging header and will setup it up for you. Then your bridging header should look like this:
-
-    ```objc
-    #import <Taplytics_tvOS/Taplytics.h>
-    ```
     That's it! You can then call Taplytics in your `didFinishLaunchingWithOptions` method in your AppDelegate.
 
 
@@ -121,7 +118,10 @@ First, you'll want to install our SDK inside your XCode project.
 
     <sub>**Swift**</sub>
     ```swift
+    // For iOS
     import Taplytics
+    // For tvOS
+    import Taplytics_tvOS
     ...
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         ...
