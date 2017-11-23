@@ -140,7 +140,7 @@ The Taplytics SDK can also be installed via Segment. You can find install instru
 
 ---
 
-### Advanced Pairing (Optional)
+### Advanced Pairing
 
 ##### Note: Advanced pairing is only supported by iOS, tvOS does not support advanced pairing!
 
