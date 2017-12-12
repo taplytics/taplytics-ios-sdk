@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>17B48</string>
+	<string>17B1003</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>FMWK</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.23.3</string>
+	<string>2.23.4</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleSupportedPlatforms</key>
@@ -29,19 +29,19 @@
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
-	<string>15J580</string>
+	<string>15K104</string>
 	<key>DTPlatformName</key>
 	<string>appletvos</string>
 	<key>DTPlatformVersion</key>
-	<string>11.1</string>
+	<string>11.2</string>
 	<key>DTSDKBuild</key>
-	<string>15J580</string>
+	<string>15K104</string>
 	<key>DTSDKName</key>
-	<string>appletvos11.1</string>
+	<string>appletvos11.2</string>
 	<key>DTXcode</key>
-	<string>0910</string>
+	<string>0920</string>
 	<key>DTXcodeBuild</key>
-	<string>9B55</string>
+	<string>9C40b</string>
 	<key>MinimumOSVersion</key>
 	<string>9.0</string>
 	<key>UIDeviceFamily</key>
