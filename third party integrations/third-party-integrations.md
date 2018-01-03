@@ -22,13 +22,17 @@ Additionally, Taplytics will automatically track events from these sources direc
 Taplytics pushes experiment/variation info to the Google Analytics SDK in the following format:
 
 ```objectivec
+id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
 NSDictionary* experimentsAndVariations = @{
-	 @"Experiment 1": @"Variation 1",
-	 @"Experiment 2": @"baseline"
+    @"Experiment 1": @"Variation 1",
+    @"Experiment 2": @"baseline"
 };
 for (NSString* experimentName in experimentsAndVariations.allKeys) {
-NSString* variationName = experimentsAndVariations[experimentName];
-[[[GAI sharedInstance] defaultTracker] set:experimentName value:variationName];
+    NSString* variationName = experimentsAndVariations[experimentName];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"TL_experiments"
+                                           action:experimentName
+                                            label:variationName
+                                            value:nil] build]];
 }
 ```
 
