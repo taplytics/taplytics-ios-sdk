@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'Taplytics_tvOS'
-  s.version      = '2.24.3'
+  s.version      = '2.24.4'
   s.author       = { 'Taplytics' => 'help@taplytics.com' }
   s.license      = { :type => 'Commercial', :text => 'See https://taplytics.com/terms' }
   s.homepage     = 'https://taplytics.com'
