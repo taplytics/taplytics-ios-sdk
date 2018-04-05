@@ -5,7 +5,7 @@ Creating experiments is easy using Taplytics. You can either use our visual edit
 | Table of Contents |
 | ----------------- |
 | [Dynamic Variables & Code Blocks](#dynamic-variables--code-blocks) |
-| [Code Experiments](#code-experiments-deprecated) |
+| [Feature Flags](#feature-flags) |
 | [Visual Editing](#visual-editing) |
 | [First-view Experiments](#delay-load) |
 | [List Running Experiments](#running-experiments) |
@@ -15,34 +15,6 @@ Creating experiments is easy using Taplytics. You can either use our visual edit
 **To see and modify these variables or blocks on the dashboard, the app must be launched and this code containing the variable or block must be navigated to a least once.**
 
 The code below is used to send the information of the variable or block to Taplytics, so it will appear on the dashboard.
-
-### Feature Flags
-
-Taplytics feature flags operate in synchronous mode.
-
-#### Synchronous
-
-Synchronous feature flags are guaranteed to have the same value for the entire session and will have that value immediately after construction.
-
-Due to the synchronous nature of feature flags, if it is used before the feature flags have been loaded from Taplytics servers (for example on the first launch of your app), it will default to as if the feature flag is not present. In order to prevent this you can ensure that the feature flags are loaded before using the feature flag. This can be done using the `propertiesLoadedCallback:` method, as an example:
-
-<sub>**Objective-C**</sub>
-```objc
-[Taplytics propertiesLoadedCallback:^(BOOL loaded) {
-    if ([Taplytics featureFlagEnabled:@"featureFlagKey"]) {
-        //Put feature code here, or launch feature from here
-    }
-}];
-```
-
-<sub>**Swift**</sub>
-```swift
-Taplytics.propertiesLoadedCallback { (loaded) in
-    if (Taplytics.featureFlagEnabled(key: "featureFlagKey")) {
-        //Put feature code here, or launch feature from here
-    }
-}
-```
 
 ### Dynamic Variables
 
@@ -181,33 +153,7 @@ Taplytics.propertiesLoadedCallback { (loaded) in
 }
 ```
 
-### Code Blocks
-
-Similar to Dynamic Variables, Taplytics has an option for **Code Blocks**. Code Blocks are linked to Experiments through the Taplytics website very much the same way that Dynamic Variables are, and will be executed based on the configuration of the experiment through the Taplytics website.
-
-A Code Block is a callback that can be enabled or disabled depending on the variation. If the Code Block is enabled for the current variation, the code within the callback will be executed asynchronously when Taplytics properties are loaded. If the Code Block is disabled for the current variation, the callback will not be executed.
-
-A Code Block can be used alongside as many other Code Blocks as you would like to determine a combination that yields the best results. Perhaps there are three different Code Blocks on one view. This means there could be 8 different combinations of Code Blocks being enabled / disabled on that view if you'd like.
-
-Example Using Objective-C:
-
-<sub>**Objective-C**</sub>
-```objc
-[Taplytics runCodeBlock:@"enableFeature" forBlock:^{
-    // enable your feature here
-}];
-```
-
-Example Using Swift:
-
-<sub>**Swift**</sub>
-```swift
-Taplytics.runCodeBlock("enableFeature") {
-    // enable your feature here
-}
-```
-
-## Testing Specific Experiments
+### Testing Specific Experiments
 
 To test/QA specific experiment and variation combinations use the `TaplyticsOptionTestExperiments` start option with a  `NSDictionary` containing keys of the experiment names, and values of variation names (or `baseline`).
 
@@ -229,6 +175,50 @@ Taplytics.startAPIKey("API_KEY", options: [
         "Experiment 2": "baseline"
     ]
 ])
+```
+
+---
+
+## Feature Flags
+
+Taplytics feature flags operate in synchronous mode.
+
+### Synchronous
+
+Synchronous feature flags are guaranteed to have the same value for the entire session and will have that value immediately after construction.
+
+<sub>**Objective-C**</sub>
+```
+if ([Taplytics featureFlagEnabled:@"featureFlagKey"]) {
+    // Put feature code here, or launch feature from here
+}
+```
+
+<sub>**Swift**</sub>
+```swift
+if (Taplytics.featureFlagEnabled(key: "featureFlagKey")) {
+    // Put feature code here, or launch feature from here
+}
+```
+
+Due to the synchronous nature of feature flags, if it is used before the feature flags have been loaded from Taplytics servers (for example on the first launch of your app), it will default to as if the feature flag is not present. In order to prevent this you can ensure that the feature flags are loaded before using the feature flag. This can be done using the `propertiesLoadedCallback:` method, as an example:
+
+<sub>**Objective-C**</sub>
+```objc
+[Taplytics propertiesLoadedCallback:^(BOOL loaded) {
+    if ([Taplytics featureFlagEnabled:@"featureFlagKey"]) {
+        // Put feature code here, or launch feature from here
+    }
+}];
+```
+
+<sub>**Swift**</sub>
+```swift
+Taplytics.propertiesLoadedCallback { (loaded) in
+    if (Taplytics.featureFlagEnabled(key: "featureFlagKey")) {
+        // Put feature code here, or launch feature from here
+    }
+}
 ```
 
 ---
