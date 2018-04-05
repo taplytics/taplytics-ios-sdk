@@ -16,6 +16,34 @@ Creating experiments is easy using Taplytics. You can either use our visual edit
 
 The code below is used to send the information of the variable or block to Taplytics, so it will appear on the dashboard.
 
+### Feature Flags
+
+Taplytics feature flags operate in synchronous mode.
+
+#### Synchronous
+
+Synchronous feature flags are guaranteed to have the same value for the entire session and will have that value immediately after construction.
+
+Due to the synchronous nature of feature flags, if it is used before the feature flags have been loaded from Taplytics servers (for example on the first launch of your app), it will default to as if the feature flag is not present. In order to prevent this you can ensure that the feature flags are loaded before using the feature flag. This can be done using the `propertiesLoadedCallback:` method, as an example:
+
+<sub>**Objective-C**</sub>
+```objc
+[Taplytics propertiesLoadedCallback:^(BOOL loaded) {
+    if ([Taplytics featureFlagEnabled:@"featureFlagKey"]) {
+        //Put feature code here, or launch feature from here
+    }
+}];
+```
+
+<sub>**Swift**</sub>
+```swift
+Taplytics.propertiesLoadedCallback { (loaded) in
+    if (Taplytics.featureFlagEnabled(key: "featureFlagKey")) {
+        //Put feature code here, or launch feature from here
+    }
+}
+```
+
 ### Dynamic Variables
 
 Taplytics variables are values in your app that are controlled by experiments. Changing the values can update the content or functionality of your app. Variables are reusable between experiments and operate in one of two modes: synchronous or asynchronous.
@@ -77,7 +105,7 @@ BOOL boolean = [(NSNumber*)boolVar.value boolValue];
 ```swift
 let boolVar = TaplyticsVar.sync(name: "boolVar", defaultValue: true as NSNumber)
 let boolean = boolVar.value as? Bool
-```
+```9
 
 #### Asynchronous
 
