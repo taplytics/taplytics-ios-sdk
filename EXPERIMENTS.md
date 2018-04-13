@@ -223,6 +223,36 @@ Taplytics.propertiesLoadedCallback { (loaded) in
 
 ---
 
+## Running Feature Flags
+
+If you would like to see which feature flags are running on a given device, there exists a `getRunningFeatureFlags()` function which provides a callback with the current experiments and their running variation. An example:
+
+<sub>**Objective-C**</sub>
+```objc
+[Taplytics getRunningFeatureFlags:^(NSDictionary *featureFlags) {
+    // For example featureFlags will contain:
+    // @{
+    //     @"Feature Flag 1's Name": @"Feature Flag 1's Key",
+    //     @"Feature Flag 2's Name": @"Feature Flag 2's Key"
+    // };
+}];
+```
+
+<sub>**Swift**</sub>
+```swift
+Taplytics.getRunningFeatureFlags { (featureFlags) in
+    // For example featureFlags will contain:
+    // [
+    //     @"Feature Flag 1's Name": @"Feature Flag 1's Key",
+    //     @"Feature Flag 2's Name": @"Feature Flag 2's Key"
+    // ]
+}
+```
+
+NOTE: The block can return asynchronously once Taplytics properties have loaded. The block will return a `NSDictionary` with feature flag names as the key value, and feature flag keys as the value.
+
+---
+
 ## Visual Editing
 You don't have to do anything else! You can use the Taplytics dashboard to make all your visual changes. See the docs on visual editing [here](https://taplytics.com/docs/guides/visual-experiments).
 
