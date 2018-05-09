@@ -77,7 +77,7 @@ BOOL boolean = [(NSNumber*)boolVar.value boolValue];
 ```swift
 let boolVar = TaplyticsVar.sync(name: "boolVar", defaultValue: true as NSNumber)
 let boolean = boolVar.value as? Bool
-```9
+```
 
 #### Asynchronous
 
