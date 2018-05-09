@@ -49,7 +49,7 @@ Synchronous variables take two parameters in its constructor:
 
 The type of the variable is defined by the type of the Default Value and can be a JSON serializable `NSDictionary`, `NSString`, `NSNumber` or a `Boolean` casted to a `NSNumber`.
 
-We do support arrays within JSON code variables, however, it has to be a top level array where it would resemble something like this ``{"a" : [1,2,3]}`.
+We do support arrays within JSON code variables, however, it has to be a top level array where it would resemble something like this `{"a" : [1,2,3]}`.
 
 Here's an example, using a variable of type `String`, using its value to get the value of the variable:
 
