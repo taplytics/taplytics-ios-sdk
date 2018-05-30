@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v2.25.1
+//  Taplytics v2.27.0
 //
 //  Copyright © 2017 Taplytics. All rights reserved.
 //
@@ -196,6 +196,23 @@ typedef void(^TLNewSessionBlock)(void);
  @param callback called when the new session has begun.
  */
 + (void)startNewSession:(nullable void(^)(BOOL success))callback;
+
+#pragma mark - User Tracking
+
+/**
+ Calling this method will disable all user tracking.
+ */
++ (void)optOutUserTracking;
+
+/**
+ Calling this method will re-enable user tracking.
+ */
++ (void)optInUserTracking;
+
+/**
+ @return if the user has opted out of user tracking.
+ */
++ (BOOL)hasUserOptedOutTracking;
 
 #pragma mark - Push Notifications
 
