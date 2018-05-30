@@ -289,6 +289,28 @@ Taplytics.resetUser {
 }
 ```
 
+### User Opt-In / Opt-Out
+
+Using the User Opt-In / Opt-Out APIs allows you to simplify the process to get user consent for analytics tracking and experimentation. Calling `optOutUserTracking` will disable all Taplytics analytics tracking and experiments, and calling `optInUserTracking` will re-enable all Taplytics analytics tracking and experiments. You can retrieve the current status using: `hasUserOptedOutTracking`.
+
+<sub>**Objective-C**</sub>
+```objc
+[Taplytics optOutUserTracking];
+
+[Taplytics optInUserTracking];
+
+BOOL hasOptedOut = [Taplytics hasUserOptedOutTracking];
+```
+
+<sub>**Swift**</sub>
+```swift
+Taplytics.optOutUserTracking()
+        
+Taplytics.optInUserTracking()
+
+let hasOptedOut = Taplytics.hasUserOptedOutTracking()
+```
+
 ---
 
 ## 3. Track Events
