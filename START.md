@@ -253,6 +253,22 @@ Taplytics.startAPIKey("API_KEY")
 Taplytics.setUserAttributes(["customData": ["demo_account": false]])
 ```
 
+You can also use `setUserAttributes` with a block that can notify you when the call to the server has completed.
+
+<sub>**Objective-C**</sub>
+```objc
+[Taplytics setUserAttributes:@{@"customData": @{@"demo_account": @NO}} withCallback:^(void) {
+    // Finished setting user attributes!
+}];
+```
+
+<sub>**Swift**</sub>
+```swift
+Taplytics.setUserAttributes(["customData": ["paid_user": true]]) {
+    // Finished setting user attributes!        
+}
+```
+
 ### Retrieving Session Info
 
 Taplytics also offers a method to retrieve select information of what you know about a session at a given time. This method returns the user's Taplytics identifier (appUser_id) and current session id (session_id)
