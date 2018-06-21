@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v2.27.0
+//  Taplytics v2.28.0
 //
 //  Copyright © 2017 Taplytics. All rights reserved.
 //
@@ -18,6 +18,8 @@ typedef void(^TLVariationBlock)(NSString* _Nullable variationName, NSDictionary*
 typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary* _Nullable experimentsAndVariations);
 
 typedef void(^TLRunningFeatureFlagsBlock)(NSDictionary* _Nullable featureFlags);
+
+typedef void(^TLSetUserAttributesBlock)(void);
 
 typedef void(^TLPropertiesLoadedBlock)(BOOL loaded);
 
@@ -174,6 +176,14 @@ typedef void(^TLNewSessionBlock)(void);
  @warning Attributes can only be values allowed by NSJSONSerialization.
 */
 + (void)setUserAttributes:(nullable NSDictionary*)attributes;
+
+/**
+ Similar to setUserAttributes but with an added callback parameter.
+ @param attributes is a dictionary of user attributes that can be used to segment your users against.
+ @param callback called when setUserAttributes is completely done.
+ @warning Attributes can only be values allowed by NSJSONSerialization.
+ */
++ (void)setUserAttributes:(nullable NSDictionary*)attributes withCallback:(nullable void(^)(void))callback;
 
 /**
  This method will reset the User to a new empty user, this method is intended to be used when your user logs out of an account. 
