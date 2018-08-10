@@ -1,8 +1,8 @@
 //
 //  Taplytics.h
-//  Taplytics v2.30.0
+//  Taplytics v2.31.0
 //
-//  Copyright © 2017 Taplytics. All rights reserved.
+//  Copyright © 2018 Taplytics. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -252,6 +252,12 @@ typedef void(^TLNewSessionBlock)(void);
 + (BOOL)isUserRegisteredForPushNotifications;
 
 #pragma mark - Utility Functions
+
+/**
+ Show the experiment / variation menu. Useful for QA testing when shaking the device is not possible.
+ */
+
++ (void)showMenu;
 
 /**
  @return if Taplytics is currently loading properties from our servers
