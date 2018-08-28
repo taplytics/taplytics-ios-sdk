@@ -343,3 +343,19 @@ Taplytics.startNewSession { (success) in
     // New session here! Success will be false if this failed.
 }
 ```
+
+## Debugging
+
+The shake menu allows you to switch variations on your device on the fly. You can use the shake functionality to open it, or you can call it in code like so:
+
+<sub>**Objective-C**</sub>
+
+```objc
+[Taplytics showMenu];
+```
+
+<sub>**Swift**</sub>
+
+```swift
+Taplytics.showMenu()
+```
