@@ -273,44 +273,76 @@ Once you've created the Notification Service Extension you should have a file ca
 
 ```swift
 override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
-    self.contentHandler = contentHandler
-    self.bestAttemptContent = request.content.mutableCopy() as? UNMutableNotificationContent
+        self.contentHandler = contentHandler
+        self.bestAttemptContent = request.content.mutableCopy() as? UNMutableNotificationContent
+        
+        // look for existance of taplytics data with image_url
+        let tlData = request.content.userInfo["taplytics"] as? [String: Any]
+        if let data = tlData, let imageUrl = data["image_url"] as? String, let url = URL(string: imageUrl) {
+            URLSession.shared.downloadTask(with: url) { (location, response, error) in
+                if let location = location {
+                    // get path in temp directory for file
 
-    // look for existance of taplytics data with image_url
-    if let tlData = request.content.userInfo["taplytics"] as? [String: Any], let imageUrl = tlData["image_url"] as? String, let url = URL(string: imageUrl) {
-        URLSession.shared.downloadTask(with: url) { (location, response, error) in
-            if let location = location {
-                // get path in temp directory for file
-                let tempFileURL = URL(string: "file://".appending(NSTemporaryDirectory()).appending(url.lastPathComponent))!
+                    var attachment: UNNotificationAttachment?
+                    do {
+                        let tempFileURL = URL(string: "file://".appending(NSTemporaryDirectory()).appending(url.lastPathComponent))!
+                        // move file into temp directory to be displayed by Notification Service Extension
+                        if (FileManager.default.fileExists(atPath: tempFileURL.relativePath)) {
+                            try FileManager.default.removeItem(at: tempFileURL)
+                        }
+                        try FileManager.default.moveItem(at: location, to: tempFileURL)
 
-                var attachment: UNNotificationAttachment?
-                do {
-                    // move file into temp directory to be displayed by Notification Service Extension
-                    if (FileManager.default.fileExists(atPath: tempFileURL.relativePath)) {
-                        try FileManager.default.removeItem(at: tempFileURL)
+                        // generate image attachment
+                        attachment = try UNNotificationAttachment(identifier: "tl_image", url: tempFileURL)
+                    } catch let error {
+                        print("Error: \(error)")
                     }
-                    try FileManager.default.moveItem(at: location, to: tempFileURL)
 
-                    // generate image attachment
-                    attachment = try UNNotificationAttachment(identifier: "tl_image", url: tempFileURL)
-                } catch let error {
-                    print("Error: \(error)")
+                    // Add the attachment to the notification content
+                    if let attachment = attachment {
+                        self.bestAttemptContent?.attachments = [attachment]
+                    }
                 }
 
-                // Add the attachment to the notification content
-                if let attachment = attachment {
-                    self.bestAttemptContent?.attachments = [attachment]
+                // render notification
+                self.contentHandler!(self.bestAttemptContent!)
+                }.resume()
+        }
+        // look for existance of taplytics data with video_url
+        else if let data = tlData, let videoUrl = data["video_url"] as? String, let url = URL(string: videoUrl) {
+            URLSession.shared.downloadTask(with: url) { (location, response, error) in
+                if let location = location {
+                    // get path in temp directory for file
+                    let tempFileURL = URL(string: "file://".appending(NSTemporaryDirectory()).appending(url.lastPathComponent))!
+                    
+                    var attachment: UNNotificationAttachment?
+                    do {
+                        // move file into temp directory to be displayed by Notification Service Extension
+                        if (FileManager.default.fileExists(atPath: tempFileURL.relativePath)) {
+                            try FileManager.default.removeItem(at: tempFileURL)
+                        }
+                        try FileManager.default.moveItem(at: location, to: tempFileURL)
+                        
+                        // generate image attachment
+                        attachment = try UNNotificationAttachment(identifier: "tl_video", url: tempFileURL)
+                    } catch let error {
+                        print("Error: \(error)")
+                    }
+                    
+                    // Add the attachment to the notification content
+                    if let attachment = attachment {
+                        self.bestAttemptContent?.attachments = [attachment]
+                    }
                 }
-            }
-
-            // render notification
+                
+                // render notification
+                self.contentHandler!(self.bestAttemptContent!)
+                }.resume()
+        } else {
+            // If there is no image payload render the notification as a normal notification.
             self.contentHandler!(self.bestAttemptContent!)
-        }.resume()
-    } else {
-        // If there is no image payload render the notification as a normal notification.
-        self.contentHandler!(self.bestAttemptContent!)
+        }
     }
-}
 ```
 
 What this code is doing is looking for any data attached to the push payload under a `taplytics` object, and specifically looking for a `taplytics.image_url` url to download an image from, which will then start a `downloadTask` for that url. Once the image is downloaded it will move the image to the Extension's temp directory and add the image as a notification attachment to the push, and finally render the notification to display it.
