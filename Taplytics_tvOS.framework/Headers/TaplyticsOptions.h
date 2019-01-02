@@ -12,6 +12,7 @@ extern NSString *const TaplyticsOptionShowShakeMenu;
 extern NSString *const TaplyticsOptionUserBucketing;
 extern NSString *const TaplyticsOptionSessionBackgroundTime;
 extern NSString *const TaplyticsOptionPushSandbox;
+extern NSString *const TaplyticsOptionMatchByAccessibilityIdentifier;
 extern NSString *const TaplyticsOptionTestExperiments;
 extern NSString *const TaplyticsOptionDisable;
 extern NSString *const TaplyticsOptionDisableBorders;
