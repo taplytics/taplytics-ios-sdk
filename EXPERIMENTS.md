@@ -260,7 +260,7 @@ You don't have to do anything else! You can use the Taplytics dashboard to make 
 
 Visual editing works best on static elements so that the visual editor can identify the elements easier. If your element's attributes morphs, it can get missed when applying edits. 
 
-You can set an `accessibilityIdentifier` on your element through the interface builder so that the visual editor has an easier time to identify the element needed to apply the correct change. To enable this functionality, set `TaplyticsOptionMatchByAccessibilityIdentifier` to `@YES` in your starting options.
+You can set an `accessibilityIdentifier` on your element through the interface builder so that the visual editor can identify the element needed to apply the correct change. To enable this functionality, set `TaplyticsOptionMatchByAccessibilityIdentifier` to `@YES` in your starting options.
 
 *Note: Only available using our iOS framework, not available on tvOS.*
 
