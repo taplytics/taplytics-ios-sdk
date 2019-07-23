@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/Taplytics.h</key>
 		<data>
-		aqt8hKAKU4tAygXq3vypPCw6RyI=
+		q5aqSLYsdgjvzGTjMoM8HFnI/+c=
 		</data>
 		<key>Headers/TaplyticsOptions.h</key>
 		<data>
@@ -22,7 +22,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		ZvFMUCkAFBmMEFVDo2H+CABRJn0=
+		2lUWEzOMFD1nboFdiJa5oip/Lmo=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -35,11 +35,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			aqt8hKAKU4tAygXq3vypPCw6RyI=
+			q5aqSLYsdgjvzGTjMoM8HFnI/+c=
 			</data>
 			<key>hash2</key>
 			<data>
-			josuhtq3QS2GqRSFoFJQz5fHADTpnXbO8zkOFgOhuIk=
+			ap2HzzqbJf3xqLNR9BHitnbmgq5tMA7TDgi1ViDVCiU=
 			</data>
 		</dict>
 		<key>Headers/TaplyticsOptions.h</key>
@@ -89,7 +89,7 @@
 	</dict>
 	<key>rules</key>
 	<dict>
-		<key>^</key>
+		<key>^.*</key>
 		<true/>
 		<key>^.*\.lproj/</key>
 		<dict>
@@ -120,24 +120,12 @@
 			<key>weight</key>
 			<real>11</real>
 		</dict>
-		<key>^</key>
-		<dict>
-			<key>weight</key>
-			<real>20</real>
-		</dict>
 		<key>^(.*/)?\.DS_Store$</key>
 		<dict>
 			<key>omit</key>
 			<true/>
 			<key>weight</key>
 			<real>2000</real>
-		</dict>
-		<key>^(Frameworks|SharedFrameworks|PlugIns|Plug-ins|XPCServices|Helpers|MacOS|Library/(Automator|Spotlight|LoginItems))/</key>
-		<dict>
-			<key>nested</key>
-			<true/>
-			<key>weight</key>
-			<real>10</real>
 		</dict>
 		<key>^.*</key>
 		<true/>
@@ -173,13 +161,6 @@
 			<true/>
 			<key>weight</key>
 			<real>20</real>
-		</dict>
-		<key>^[^/]+$</key>
-		<dict>
-			<key>nested</key>
-			<true/>
-			<key>weight</key>
-			<real>10</real>
 		</dict>
 		<key>^embedded\.provisionprofile$</key>
 		<dict>
