@@ -176,7 +176,7 @@ You can implement Advanced Pairing, which will allow you to pair your device to 
 
 ## 2. User Attributes
 
-It's possible to segment your users based on custom user attributes. To set this up, you need to make either the `user_id` or `email` unique to identify the user across multiple devices. Below is a list of standard custom fields you can send to Taplytics. There is also a `customData` field that allows you to send any custom data you have as a flat `NSDictionary` with `NSJSONSerialization` accepted values.
+It's possible to segment your users based on custom user attributes. To set this up, you need to make either the `user_id` or `email` unique to identify the user across multiple devices. Below is a list of standard custom fields you can send to Taplytics. There is also a `customData` field that allows you to send any custom data you have as a flat `NSDictionary` with `NSJSONSerialization` accepted values. If logging is enabled, logs will show the user attributes every time they are set or updated.
 
 The possible fields are:
 
@@ -289,7 +289,7 @@ Taplytics.getSessionInfo { (sessionInfo) in
 
 ### Resetting Users
 
-Once a user logs out of your app, their User Attributes are no longer valid. You can reset their data by calling `resetUser:`, make sure you do not set any new user attributes until you receive the callback.
+Once a user logs out of your app, their User Attributes are no longer valid. You can reset their data by calling `resetUser:`, make sure you do not set any new user attributes until you receive the callback. If logging is enabled, logs will show if the user has been reset or if there was an error.
 
 <sub>**Objective-C**</sub>
 ```objc
@@ -470,6 +470,7 @@ Start options allow you to control how certain SDK features function, and enable
 |TaplyticsOptionTestExperiments|NSNumber(Boolean)|To test specific experiments, pass in the experiment name/variation name as the key/values of a NSDictionary. [More details](https://github.com/taplytics/taplytics-ios-sdk/blob/master/EXPERIMENTS.md#testing-specific-experiments). |
 |TaplyticsOptionDisableBorders|NSNumber(Boolean)|To disable all Taplytics borders in development mode, set to `@YES` |
 |TaplyticsOptionAsyncLoading|NSNumber(Boolean)|Forces loading of taplytics properties from disk as async task, breaks some synchronous variable behaviour, see section below for details. |
+|TaplyticsOptionLogging|NSNumber(Boolean)|Provides more verbose logging from Taplytics to help with debugging. |
 
 Example:
 
