@@ -18,7 +18,7 @@ The code below is used to send the information of the variable or block to Taply
 
 ### Dynamic Variables
 
-Taplytics variables are values in your app that are controlled by experiments. Changing the values can update the content or functionality of your app. Variables are reusable between experiments and operate in one of two modes: synchronous or asynchronous.
+Taplytics variables are values in your app that are controlled by experiments. Changing the values can update the content or functionality of your app. Variables are reusable between experiments and operate in one of two modes: synchronous or asynchronous. If logging is enabled, logs will show the value when a variable has been set or updated.
 
 #### Synchronous
 
@@ -298,7 +298,9 @@ Taplytics.startAPIKey("API_KEY", options: [TaplyticsOptionDelayLoad: 10])
 
 ## Running Experiments
 
-If you would like to see which variations and experiments are running on a given device, there exists a `getRunningExperimentsAndVariations()` function which provides a callback with the current experiments and their running variation. An example:
+If you would like to see which variations and experiments are running on a given device, there exists a `getRunningExperimentsAndVariations()` function which provides a callback with the current experiments and their running variation. If logging is enabled, logs will also show them.
+
+An example:
 
 <sub>**Objective-C**</sub>
 ```objc
@@ -332,7 +334,7 @@ By default, Taplytics defines a session as when a user is using the app with les
 
 To manually force a new user session (ex: A user has logged in / out), there exists a ```startNewSession``` method.
 
-If there is an internet connection, a new session will be created, and new experiments/variations will be fetched from Taplytics if they exist.
+If there is an internet connection, a new session will be created, and new experiments/variations will be fetched from Taplytics if they exist. If logging is enabled, logs will show when a new session has been started or if an error has occurred.
 
 It can be used as follows:
 
