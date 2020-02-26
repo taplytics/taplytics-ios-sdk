@@ -360,6 +360,7 @@ If you already have Analytics events instrumented with another Analytics source 
 - [Crashlytics Answers](http://try.crashlytics.com/answers/)
 - [KISSMetrics](https://www.kissmetrics.com/products)
 - [Heap](https://heapanalytics.com/)
+- [Firebase](https://firebase.google.com/docs/analytics)
 
 #### Disabling Automatic Tracking
 
@@ -382,6 +383,7 @@ You can disable automatic tracking for any of the below constants by adding them
 |TaplyticsDisableSourceCrashlytics | Crashlytics Answers Analytics event tracking |
 |TaplyticsDisableSourceKISSMetrics | KISSMetrics Analytics event tracking |
 |TaplyticsDisableSourceHeap | Heap Analytics event tracking |
+|TaplyticsDisableSourceFirebase | Firebase Analytics event tracking |
 |TaplyticsDisableUITableViewSW | UITableView tracking |
 |TaplyticsDisableUICollectionViewSW | UICollectionView tracking |
 |TaplyticsDisableUIPageViewSW | UIPageView tracking |
@@ -451,6 +453,39 @@ _NOTE: event metaData is limited to 50kb of JSON string data._
 
 ---
 
+### Firebase Events
+
+Firebase has a limit of 500 distinct event names per project. As a way around this, you can pass in the start option `TaplyticsOptionCustomFirebaseFormat` and send the event names in the parameters instead with any additional metadata.
+
+Note: If passing the event name in the parameters, you *must* track the event name using the key `eventName`.
+
+<sub>**Objective-C**</sub>
+```objc
+// Normal way of logging events
+[FIRAnalytics logEventWithName:@"CustomEvent" parameters:@{@"userSubscribed":@YES}];
+[FIRAnalytics logEventWithName:@"AnotherCustomEvent" parameters:@{@"userSubscribed":@YES}];
+
+// With start option enabled
+[FIRAnalytics logEventWithName:@"tlEvents" parameters:@{@"eventName":@"CustomEvent", @"userSubscribed":@YES}];
+[FIRAnalytics logEventWithName:@"tlEvents" parameters:@{@"eventName":@"AnotherCustomEvent", @"userSubscribed":@YES}];
+
+```
+
+<sub>**Swift**</sub>
+```swift
+// Normal way of logging events
+Analytics.logEvent("CustomEvent", parameters: ["userSubscribed": true])
+Analytics.logEvent("AnotherCustomEvent", parameters: ["userSubscribed": true])
+
+// With start option enabled
+Analytics.logEvent("tlEvents", parameters: ["eventName": "CustomEvent", "userSubscribed": true])
+Analytics.logEvent("tlEvents", parameters: ["eventName": "AnotherCustomEvent", "userSubscribed": true])
+```
+
+_NOTE: event metaData is limited to 50kb of JSON string data._
+
+---
+
 ### Experiment Information Postbacks
 
 If you choose to, the Taplytics SDK can also send the running Experiment/Variation information to a supported Analytics source. [Check out our docs](https://taplytics.com/docs/guides/third-party-integration-setup) for details.
@@ -471,6 +506,7 @@ Start options allow you to control how certain SDK features function, and enable
 |TaplyticsOptionDisableBorders|NSNumber(Boolean)|To disable all Taplytics borders in development mode, set to `@YES` |
 |TaplyticsOptionAsyncLoading|NSNumber(Boolean)|Forces loading of taplytics properties from disk as async task, breaks some synchronous variable behaviour, see section below for details. |
 |TaplyticsOptionLogging|NSNumber(Boolean)|Provides more verbose logging from Taplytics to help with debugging. |
+|TaplyticsOptionCustomFirebaseFormat|NSNumber(Boolean)|Allows you to pass Firebase event names in the parameters as a workaround Firebase's 500 event limit. [More details](#Firebase-Events). |
 
 Example:
 
