@@ -6,7 +6,7 @@ The Taplytics SDK can automatically push experiments to the following Analytics 
 
 | [iOS SDK](#ios) | [Android SDK](#android)           
 | ------------- |-------------    
-| <ul><li>[Google Analytics](#google-analytics-ios)</li><li>[Flurry](#flurry-ios)</li><li>[MixPanel](#mixpanel-ios)</li><li>[Amplitude](#amplitude-ios)</li><li>[Intercom](#intercom-ios)</li><li>[Apsalar](#apsalar-ios)</li><li>[Parse](#parse-ios)</li><li>[Adobe](#adobe-ios)</li><li>[Localytics](#localytics-ios)</li><li>[Heap](#heap-ios)</li><li>[Optimizely](#optimizely-ios)</li><li>[Segment](#segment-ios)</li><li>[KISSMetrics](#kissmetrics-ios)</li></ul>| <ul><li>[Google Analytics](#Google-Analytics-Android)</li><li>[Flurry](#flurry-android)</li><li>[MixPanel](#mixpanel-android)</li><li>[Amplitude](#amplitude-android)</li><li>[Adobe](#adobe-android)</li><li>[Localytics](#localytics-android)</li><li>[Segment](#segment-android)</li></ul>
+| <ul><li>[Google Analytics](#google-analytics-ios)</li><li>[Flurry](#flurry-ios)</li><li>[MixPanel](#mixpanel-ios)</li><li>[Amplitude](#amplitude-ios)</li><li>[Intercom](#intercom-ios)</li><li>[Apsalar](#apsalar-ios)</li><li>[Parse](#parse-ios)</li><li>[Adobe](#adobe-ios)</li><li>[Localytics](#localytics-ios)</li><li>[Heap](#heap-ios)</li><li>[Optimizely](#optimizely-ios)</li><li>[Segment](#segment-ios)</li><li>[KISSMetrics](#kissmetrics-ios)</li><li>[Firebase](#firebase-ios)</li></ul>| <ul><li>[Google Analytics](#Google-Analytics-Android)</li><li>[Flurry](#flurry-android)</li><li>[MixPanel](#mixpanel-android)</li><li>[Amplitude](#amplitude-android)</li><li>[Adobe](#adobe-android)</li><li>[Localytics](#localytics-android)</li><li>[Segment](#segment-android)</li></ul>
 
 
 To enable any of these, navigate to your project settings and select the analytics sources you want to use with Taplytics. If you don't see your analytics source listed here, feel free to let us know what other integrations you need.
@@ -182,6 +182,19 @@ NSDictionary* experimentsAndVariations = @{
 };
 
 [[Amplitude instance] logEvent:@"TL_Experiments" withEventProperties:experimentsAndVariations];
+```
+
+### Firebase iOS
+
+Taplytics logs experiment/variation events to the Firebase iOS SDK as follows:
+
+```objectivec
+NSDictionary* experimentsAndVariations = @{
+    @"Experiment 1": @"Variation 1",
+    @"Experiment 2": @"baseline"
+};
+
+[FIRAnalytics logEventWithName:@"TL_Experiments" parameters:experimentsAndVariations];
 ```
 
 ## Android
