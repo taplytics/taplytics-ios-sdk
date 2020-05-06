@@ -10,6 +10,7 @@ extern NSString *const TaplyticsOptionShowLaunchImage;
 extern NSString *const TaplyticsOptionLaunchImageType;
 extern NSString *const TaplyticsOptionShowShakeMenu;
 extern NSString *const TaplyticsOptionUserBucketing;
+extern NSString *const TaplyticsOptionFastMode;
 extern NSString *const TaplyticsOptionSessionBackgroundTime;
 extern NSString *const TaplyticsOptionNewAdobeFormat;
 extern NSString *const TaplyticsOptionCustomFirebaseFormat;
