@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v2.50.0
+//  Taplytics v2.51.0
 //
 //  Copyright © 2018 Taplytics. All rights reserved.
 //
@@ -272,6 +272,16 @@ typedef void(^TLNewSessionBlock)(void);
  @param key of feature flag to check
  */
 + (BOOL)featureFlagEnabled:(nullable NSString*)key;
+
+/**
+ Determine if a Feature Flag is enabled for this user's device, the method will return true if the Feature Flag is enabled. Feature Flags can be set up through the Taplytics dashboard, pass in the key for the Feature Flag as set up in the Taplytics Dashboard.
+ 
+ @return if feature flag for key is enabled
+ 
+ @param key of feature flag to check
+ @param defaultValue the default value of the feature flag. If there is no connection or the feature flag does not load then default value will be returned
+ */
++ (BOOL)featureFlagEnabled:(nullable NSString*)key defaultValue:(BOOL)defaultValue;
 
 /**
  This block will be called asynchronously when the SDK has loaded properties from the server, or return synchronously if properties have already been loaded.
