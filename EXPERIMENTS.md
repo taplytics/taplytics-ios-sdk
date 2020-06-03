@@ -181,7 +181,7 @@ Taplytics.startAPIKey("API_KEY", options: [
 
 ## Feature Flags
 
-Taplytics feature flags operate in synchronous mode.
+Taplytics feature flags operate in synchronous mode. They also support optional default values that can be set to `true` or `false` in the case where the user does not have the feature flag enabled.
 
 ### Synchronous
 
@@ -189,14 +189,14 @@ Synchronous feature flags are guaranteed to have the same value for the entire s
 
 <sub>**Objective-C**</sub>
 ```
-if ([Taplytics featureFlagEnabled:@"featureFlagKey"]) {
+if ([Taplytics featureFlagEnabled:@"featureFlagKey" defaultValue:NO]) {
     // Put feature code here, or launch feature from here
 }
 ```
 
 <sub>**Swift**</sub>
 ```swift
-if (Taplytics.featureFlagEnabled(key: "featureFlagKey")) {
+if (Taplytics.featureFlagEnabled(key: "featureFlagKey", defaultValue: false)) {
     // Put feature code here, or launch feature from here
 }
 ```
