@@ -13,6 +13,7 @@ extern NSString *const TaplyticsOptionUserBucketing;
 extern NSString *const TaplyticsOptionFastMode;
 extern NSString *const TaplyticsOptionSessionBackgroundTime;
 extern NSString *const TaplyticsOptionNewAdobeFormat;
+extern NSString *const TaplyticsOptionAmplitudeExpsAsEvents;
 extern NSString *const TaplyticsOptionCustomFirebaseFormat;
 extern NSString *const TaplyticsOptionPushSandbox;
 extern NSString *const TaplyticsOptionMatchByAccessibilityIdentifier;
