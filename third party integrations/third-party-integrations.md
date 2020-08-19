@@ -173,16 +173,16 @@ NSDictionary* experimentsAndVariations = @{
 ```
 ### Amplitude iOS
 
-Taplytics logs experiment/variation events to the Amplitude iOS SDK as follows:
+As of 2.52.0, Taplytics sets experiment/variation events to the Amplitude iOS SDK as user property `TL_Experiments`. The value is an array of strings with the format:
 
-```objectivec
-NSDictionary* experimentsAndVariations = @{
-    @"Experiment 1": @"Variation 1",
-    @"Experiment 2": @"baseline"
-};
-
-[[Amplitude instance] logEvent:@"TL_Experiments" withEventProperties:experimentsAndVariations];
 ```
+[
+	"exp1:var2",
+	...
+]
+```
+
+To log them as an event with event properties instead, use the new option: `TaplyticsOptionAmplitudeExpsAsEvents`
 
 ### Firebase iOS
 

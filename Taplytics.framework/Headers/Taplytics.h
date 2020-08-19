@@ -1,8 +1,8 @@
 //
 //  Taplytics.h
-//  Taplytics v2.51.2
+//  Taplytics v2.52.0
 //
-//  Copyright © 2018 Taplytics. All rights reserved.
+//  Copyright © 2020 Taplytics. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
