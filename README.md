@@ -12,7 +12,7 @@ _How do I, as a developer, start using Taplytics?_
 
 ## Resources
 - [Taplytics SDK CocoaDocs Class Reference](http://cocoadocs.org/docsets/Taplytics)
-- [Taplytics Docs](https://taplytics.com/docs?utm_source=github&utm_campaign=documentation&utm_medium=content)
+- [Taplytics Docs](https://docs.taplytics.com?utm_source=github&utm_campaign=documentation&utm_medium=content)
 
 ## Questions or Need Help
 
