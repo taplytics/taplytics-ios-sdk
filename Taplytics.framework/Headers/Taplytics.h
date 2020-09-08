@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v2.52.0
+//  Taplytics v3.0.0
 //
 //  Copyright © 2020 Taplytics. All rights reserved.
 //
@@ -11,19 +11,25 @@
 
 typedef void(^TLCodeBlock)(void);
 
-typedef void(^TLExperimentBlock)(NSDictionary* _Nullable variables);
+typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary* _Nonnull experimentsAndVariations);
 
-typedef void(^TLVariationBlock)(NSString* _Nullable variationName, NSDictionary* _Nullable variables);
-
-typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary* _Nullable experimentsAndVariations);
-
-typedef void(^TLRunningFeatureFlagsBlock)(NSDictionary* _Nullable featureFlags);
+typedef void(^TLRunningFeatureFlagsBlock)(NSDictionary* _Nonnull featureFlags);
 
 typedef void(^TLSetUserAttributesBlock)(void);
 
+typedef void(^TLStartPropertiesLoadedBlock)(BOOL loaded);
+
+typedef void(^TLNewSessionBlock)(BOOL loaded);
+
 typedef void(^TLPropertiesLoadedBlock)(BOOL loaded);
 
-typedef void(^TLNewSessionBlock)(void);
+typedef void(^TLBackgroundFetchBlock)(UIBackgroundFetchResult result);
+
+typedef void(^TLGetSessionInfoBlock)(NSDictionary* _Nonnull sessionInfo);
+
+typedef void(^TLStartNewSessionBlock)(BOOL success);
+
+typedef void(^TLResetUserBlock)(void);
 
 
 @protocol TaplyticsDelegate <NSObject>
@@ -38,12 +44,22 @@ typedef void(^TLNewSessionBlock)(void);
  */
 - (void)taplyticsExperimentChanged:(nullable NSString*)experimentName variationName:(nullable NSString*)variationName;
 
+/**
+ This delegate method will be called every time the SDK starts a new session including; on the first launch, when startNewSession: is called, or when a new userId is set.
+ Note that this method can callback multiple times.
+ 
+ Threading: This delegate method will be called from the main thread.
+ 
+ @param loaded will be true when properties have been loaded sucessfully or false when the "delayLoad" timeout has been reached.
+ */
+- (void)taplyticsNewSession:(BOOL)loaded;
+
 @end
 
 
 @interface Taplytics : NSObject
 
-- (instancetype _Nonnull )init NS_SWIFT_UNAVAILABLE("Remove exposure of init");
+- (instancetype _Nonnull)init NS_SWIFT_UNAVAILABLE("Remove exposure of init");
 
 #pragma mark - Starting Taplytics
 
@@ -56,23 +72,13 @@ typedef void(^TLNewSessionBlock)(void);
  [Taplytics startTaplyticsAPIKey:@"API_KEY" options:@{@"delayLoad":@0}];
  
  Console Logging: Taplytics will only log to the console in development builds.
- @param apiKey your api key
- */
-+ (void)startTaplyticsAPIKey:(nonnull NSString*)apiKey;
-
-/**
- Start the Taplytics SDK with your api key. the api key can be found in the 'project settings' page.
  
- On the first launch of your app Taplytics will show your launch image for a maximum of two seconds, this gives Taplytics time
- to download your experiment's configuration and display the experiment's changes to your users. In subsequent launches of your
- app Taplytics use the experiment's configuration from disk, and not show your launch image. If you do not want this behavior, use:
- [Taplytics startTaplyticsAPIKey:@"API_KEY" options:@{@"delayLoad":@0}];
+ Threading: This method should be called from the main thread, will dispatch_sync to the main thread if not.
  
- Console Logging: Taplytics will only log to the console in development builds.
  @param apiKey Your API key
  @param options Taplytics options dictionary, used for testing. Options include:
             - @{@"delayLoad":@4} allows Taplytics to show your app's launch image and load its configuration for a maximum number of seconds
-                on app launch, the default for first launch is 4 seconds. This is useful when running a code experiments on the first screen
+                on app launch, the default for first launch is 4 seconds. This is useful when running code experiments on the first screen
                 of your app, this will ensure that your users will get shown a variation on the first launch of your app. Set to @0 for no
                 delay.
             - @{@"liveUpdate":@NO} Taplytics will auto-detect an app store build or a development build. But to force production mode use @NO,
@@ -80,13 +86,23 @@ typedef void(^TLNewSessionBlock)(void);
             - @{@"shakeMenu":@NO} To disable the Taplytics development mode shake menu set @NO, only use if you have your own development shake menu.
             - @{@"disable":@[TaplyticsDisableTrackLocation]} To disable any tracking attributes set a @"disable" key with an array of values to disable from
                 TaplyticsOptions.h
+ @param callback This callback will be triggered once, with a "loaded" bool true when properties have been loaded successfully or false when the "delayLoad" timeout has been reached.
+ 
  */
++ (void)startTaplyticsAPIKey:(nonnull NSString*)apiKey options:(nullable NSDictionary*)options callback:(nullable TLStartPropertiesLoadedBlock)callback;
+
 + (void)startTaplyticsAPIKey:(nonnull NSString*)apiKey options:(nullable NSDictionary*)options;
 
++ (void)startTaplyticsAPIKey:(nonnull NSString*)apiKey callback:(nullable TLStartPropertiesLoadedBlock)callback;
+
++ (void)startTaplyticsAPIKey:(nonnull NSString*)apiKey;
 
 /**
  Optionally set the taplytics delegate when you need to know when a experiment has changed. For example if you are testing 
  a code experiment on your root view and want to visually see the different variations.
+ 
+ Threading: This method is thread-safe.
+ 
  @param delegate The delegate for the receiver. The delegate must implement the TaplyticsDelegate protocol.
  */
 + (void)setTaplyticsDelegate:(nullable id<TaplyticsDelegate>)delegate;
@@ -108,6 +124,8 @@ typedef void(^TLNewSessionBlock)(void);
     // enable your feature here
  }];
  
+ Threading: This method is thread-safe.
+
  @param name unique name of the codeblock
  @param codeBlock the code block will be called depending on the rules setup by the experiment it is attached to. returns on main thread.
  */
@@ -119,6 +137,8 @@ typedef void(^TLNewSessionBlock)(void);
 /**
  Log an event to Taplytics, these events can be used as goals in your experiments.
  
+ Threading: This method is thread-safe.
+
  @param eventName the name of the event
  */
 + (void)logEvent:(nonnull NSString*)eventName;
@@ -126,6 +146,8 @@ typedef void(^TLNewSessionBlock)(void);
 /**
  Log an event to Taplytics with an optional number value and optional metadata, these events can be used as goals in your experiments.
  
+ Threading: This method is thread-safe.
+
  @param eventName the name of the event
  @param value an optional number value to quantify your event
  @param metaData an optional dictionary of metaData to attach to your event. Keep the values of this dictionary flat.
@@ -136,6 +158,8 @@ typedef void(^TLNewSessionBlock)(void);
 /**
  Log revenue to Taplytics with a revenue value, these events can be used as goals in your experiments.
  
+ Threading: This method is thread-safe.
+
  @param eventName the name of the revenue event
  @param value an optional number value to quantify your event
  */
@@ -144,12 +168,39 @@ typedef void(^TLNewSessionBlock)(void);
 /**
  Log revenue to Taplytics with a revenue value and optional metadata, these events can be used as goals in your experiments.
  
+ Threading: This method is thread-safe.
+
  @param eventName the name of the revenue event
  @param value an optional number value to quantify your event
  @param metaData an optional dictionary of metaData to attach to your event. Keep the values of this dictionary flat.
  @warning the metaData can only be values allowed by NSJSONSerialization.
  */
 + (void)logRevenue:(nonnull NSString*)eventName revenue:(nonnull NSNumber*)value metaData:(nullable NSDictionary*)metaData;
+
+# pragma mark - Feature Flags
+
+/**
+ Determine if a Feature Flag is enabled for this user's device, the method will return true if the Feature Flag is enabled. Feature Flags can be set up through the Taplytics dashboard, pass in the key for the Feature Flag as set up in the Taplytics Dashboard.
+ 
+ Threading: This method is thread-safe.
+
+ @return if feature flag for key is enabled
+ 
+ @param key of feature flag to check
+ */
++ (BOOL)featureFlagEnabled:(nullable NSString*)key;
+
+/**
+ Determine if a Feature Flag is enabled for this user's device, the method will return true if the Feature Flag is enabled. Feature Flags can be set up through the Taplytics dashboard, pass in the key for the Feature Flag as set up in the Taplytics Dashboard.
+ 
+ Threading: This method is thread-safe.
+
+ @return if feature flag for key is enabled
+ 
+ @param key of feature flag to check
+ @param defaultValue the default value of the feature flag. If there is no connection or the feature flag does not load then default value will be returned
+ */
++ (BOOL)featureFlagEnabled:(nullable NSString*)key defaultValue:(BOOL)defaultValue;
 
 #pragma mark - User Attributes
 
@@ -172,6 +223,8 @@ typedef void(^TLNewSessionBlock)(void);
         }
     }];
  
+ Threading: This method should be called from the main thread, will dispatch_sync to main thread if not.
+
  @param attributes is a dictionary of user attributes that can be used to segment your users against.
  @warning Attributes can only be values allowed by NSJSONSerialization.
 */
@@ -179,48 +232,65 @@ typedef void(^TLNewSessionBlock)(void);
 
 /**
  Similar to setUserAttributes but with an added callback parameter.
+
+ Threading: This method should be called from the main thread, will dispatch_sync to main thread if not.
+
  @param attributes is a dictionary of user attributes that can be used to segment your users against.
  @param callback called when setUserAttributes is completely done.
  @warning Attributes can only be values allowed by NSJSONSerialization.
  */
-+ (void)setUserAttributes:(nullable NSDictionary*)attributes withCallback:(nullable void(^)(void))callback;
++ (void)setUserAttributes:(nullable NSDictionary*)attributes withCallback:(nullable TLSetUserAttributesBlock)callback;
 
 /**
  This method will reset the User to a new empty user, this method is intended to be used when your user logs out of an account. 
  This method will also disable sending push notifications to this device for the previous user. 
  Call registerPushNotifications again to register push notifications for the new user.
+ 
+ Threading: This method should be called from the main thread, will dispatch_sync to main thread if not.
+
  @param callback called when Taplytics has completed resetting your user.
  */
-+ (void)resetUser:(nullable void(^)(void))callback;
++ (void)resetUser:(nullable TLResetUserBlock)callback;
 
 /**
  This method will return the current session info for the user.
+ 
+ Threading: This method is thread-safe.
+
  @param callback NSDictionary of user session info returned when Taplytics has loaded properties from our servers.
  This NSDictionary contains two keys: appUser_id and session_id
  */
-+ (void)getSessionInfo:(nullable void(^)(NSDictionary* _Nullable sessionInfo))callback;
++ (void)getSessionInfo:(nonnull TLGetSessionInfoBlock)callback;
 
 /**
  End the current user session and create a new session. Calls taplytics to retrieve new experiment data if any.
  
+ Threading: This method is thread-safe, callback will return on main thread.
+
  @param callback called when the new session has begun.
  */
-+ (void)startNewSession:(nullable void(^)(BOOL success))callback;
++ (void)startNewSession:(nullable TLStartNewSessionBlock)callback;
 
 #pragma mark - User Tracking
 
 /**
  Calling this method will disable all user tracking.
+ 
+ Threading: This method should be called from the main thread, will dispatch_async to main thread if not.
  */
 + (void)optOutUserTracking;
 
 /**
  Calling this method will re-enable user tracking.
+ 
+ Threading: This method should be called from the main thread, will dispatch_async to main thread if not.
  */
 + (void)optInUserTracking;
 
 /**
  @return if the user has opted out of user tracking.
+ 
+ Threading: This method is thread-safe.
  */
 + (BOOL)hasUserOptedOutTracking;
 
@@ -229,25 +299,34 @@ typedef void(^TLNewSessionBlock)(void);
 /**
  Register for push notification access, this method will show the iOS permissions alert asking for access to send push notifications.
  This method will register for Badge, Sound, and Alert notification types
+ 
+ Threading: This method should be called from the main thread, will dispatch_sync to main thread if not.
  */
 + (void)registerPushNotifications;
 
 /**
- Registers for location access, this method will show the iOS permissions alert asking for location access. 
- Location permissions are required for location based push notifications. We request kCLAuthorizationStatusAuthorizedAlways access
- so that we can monitor regions for your location based push notifications.
- */
-+ (void)registerLocationAccess;
-
-/**
  Register for push notification access, this method will show the iOS alert asking for access to send push notifications.
+ 
+ Threading: This method should be called from the main thread, will dispatch_sync to main thread if not.
+
  @param types accepts UIUserNotificationType
  @param categories accepts a NSSet of UIUserNotificationCategory settings
  */
 + (void)registerPushNotificationsWithTypes:(NSInteger)types categories:(nullable NSSet*)categories;
 
 /**
+ Registers for location access, this method will show the iOS permissions alert asking for location access.
+ Location permissions are required for location based push notifications. We request kCLAuthorizationStatusAuthorizedAlways access
+ so that we can monitor regions for your location based push notifications.
+ 
+ Threading: This method should be called from the main thread, will dispatch_async to main thread if not.
+ */
++ (void)registerLocationAccess;
+
+/**
  @return if the the user is registered with Taplytics and iOS for push notifications.
+ 
+ Threading: This method is thread-safe.
  */
 + (BOOL)isUserRegisteredForPushNotifications;
 
@@ -255,41 +334,37 @@ typedef void(^TLNewSessionBlock)(void);
 
 /**
  Show the experiment / variation menu. Useful for QA testing when shaking the device is not possible.
+ 
+ Threading: This method should be called from the main thread, will dispatch_sync to main thread if not.
  */
 
 + (void)showMenu;
 
 /**
+ Threading: This method is thread-safe.
+
  @return if Taplytics is currently loading properties from our servers
  */
 + (BOOL)isLoadingPropertiesFromServer;
 
 /**
- Determine if a Feature Flag is enabled for this user's device, the method will return true if the Feature Flag is enabled. Feature Flags can be set up through the Taplytics dashboard, pass in the key for the Feature Flag as set up in the Taplytics Dashboard.
+ This callback will be called every time the SDK starts a new session, including on the first launch, when startNewSession: is called, or when a new userId is set.
+ Note that this method can callback multiple times.
  
- @return if feature flag for key is enabled
- 
- @param key of feature flag to check
- */
-+ (BOOL)featureFlagEnabled:(nullable NSString*)key;
+ Threading: This method is thread-safe. Callback will either be fired from current thread or main thread.
 
-/**
- Determine if a Feature Flag is enabled for this user's device, the method will return true if the Feature Flag is enabled. Feature Flags can be set up through the Taplytics dashboard, pass in the key for the Feature Flag as set up in the Taplytics Dashboard.
- 
- @return if feature flag for key is enabled
- 
- @param key of feature flag to check
- @param defaultValue the default value of the feature flag. If there is no connection or the feature flag does not load then default value will be returned
+ @param block loaded callback block
  */
-+ (BOOL)featureFlagEnabled:(nullable NSString*)key defaultValue:(BOOL)defaultValue;
++ (void)newSessionCallback:(nonnull TLNewSessionBlock)callback;
 
 /**
  This block will be called asynchronously when the SDK has loaded properties from the server, or return synchronously if properties have already been loaded.
  
+ Threading: This method is thread-safe. Callback will either be fired from current thread or main thread.
+
  @param block loaded callback block
  */
-+ (void)propertiesLoadedCallback:(nonnull TLPropertiesLoadedBlock)block;
-
++ (void)propertiesLoadedCallback:(nonnull TLPropertiesLoadedBlock)block __deprecated_msg("use newSessionCallback:");
 
 /**
  Get a NSDictionary of all running experiments and their current variation. This block will return async on the main thread once the experiment
@@ -300,10 +375,11 @@ typedef void(^TLNewSessionBlock)(void);
  @"Experiment 2": @"Variation 1"
  };
  
+ Threading: This method is thread-safe. Callback will either be fired from current thread or main thread.
+
  @param block This block will be called back with a NSDictionary with key value of experiment name and value of it's variation name. Returns on main thread.
  */
 + (void)getRunningExperimentsAndVariations:(nonnull TLRunningExperimentsAndVariationsBlock)block;
-
 
 /**
  Get a NSDictionary of all running feature flags and their associated key. This block will return async on the main thread once the feature flag
@@ -314,6 +390,8 @@ typedef void(^TLNewSessionBlock)(void);
  @"Feature Flag 2's Name": @"Feature Flag 2's Key"
  };
  
+ Threading: This method is thread-safe. Callback will either be fired from current thread or main thread.
+
  @param block This block will be called back with a NSDictionary with key value of feature flag name and feature flag key. Returns on main thread.
  */
 + (void)getRunningFeatureFlags:(nonnull TLRunningFeatureFlagsBlock)block;
@@ -327,15 +405,19 @@ typedef void(^TLNewSessionBlock)(void);
  [Taplytics performBackgroundFetch:completeBlock];
  }
  
+ Threading: This method should be called from the main thread, will dispatch_async to main thread if not.
+
  @param completionBlock Completion block called when fetch is complete, returns on main thread.
  */
-+ (void)performBackgroundFetch:(nonnull void(^)(UIBackgroundFetchResult result))completionBlock;
++ (void)performBackgroundFetch:(nonnull TLBackgroundFetchBlock)completionBlock;
 
 
 /**
  Shows the launch image while Taplytics updates its configuration in the background.
  This should ONLY be used in the case where the starting of Taplytics is delayed behind some network call.
  Taplytics will not automatically show the launch image in cases where Taplytics isn't immediately initialzed in 'application:didFinishLaunchingWithOptions:'
+ 
+ Threading: This method is thread-safe.
  */
 + (void)showAsyncLaunchImageForMaxTime:(nonnull NSNumber*) maxTime;
 

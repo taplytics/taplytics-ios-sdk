@@ -24,18 +24,18 @@ Taplytics variables are values in your app that are controlled by experiments. C
 
 Synchronous variables are guaranteed to have the same value for the entire session and will have that value immediately after construction.
 
-Due to the synchronous nature of the variable, if it is used before the experiments have been loaded from Taplytics servers (for example on the first launch of your app), it's value will be the default value rather than the value set for that experiment. This could taint the results of the experiment. In order to prevent this you can ensure that the experiments are loaded before using the variable. This can be done using the `propertiesLoadedCallback:` method, as an example:
+Due to the synchronous nature of the variable, if it is used before the experiments have been loaded from Taplytics servers (for example on the first launch of your app), it's value will be the default value rather than the value set for that experiment. This could taint the results of the experiment. In order to prevent this you can ensure that the experiments are loaded before using the variable. This can be done using the `newSessionCallback:` method, as an example:
 
 <sub>**Objective-C**</sub>
 ```objc
-[Taplytics propertiesLoadedCallback:^(BOOL loaded) {
+[Taplytics newSessionCallback:^(BOOL loaded) {
     [self loadTLVariables];
 }];
 ```
 
 <sub>**Swift**</sub>
 ```swift
-Taplytics.propertiesLoadedCallback { (loaded) in
+Taplytics.newSessionCallback { (loaded) in
     loadTLVariables()
 }
 ```
@@ -131,7 +131,7 @@ This can be achieved by using a properties loaded callback. Here is an example f
 <sub>**Objective-C**</sub>
 ```objc
 __weak id weakSelf = self;
-[Taplytics propertiesLoadedCallback:^(BOOL loaded) {
+[Taplytics newSessionCallback:^(BOOL loaded) {
     TaplyticsVar* var = [TaplyticsVar taplyticsSyncVarWithName:@"stringVar" defaultValue:@"defaultValue"];
     if (weakSelf && weakSelf.label) {
         weakSelf.label.text = var.value;
@@ -141,7 +141,7 @@ __weak id weakSelf = self;
 
 <sub>**Swift**</sub>
 ```swift
-Taplytics.propertiesLoadedCallback { (loaded) in
+Taplytics.newSessionCallback { (loaded) in
     guard loaded, let label = self.label else {
         return
     }
@@ -201,11 +201,11 @@ if (Taplytics.featureFlagEnabled(key: "featureFlagKey", defaultValue: false)) {
 }
 ```
 
-Due to the synchronous nature of feature flags, if it is used before the feature flags have been loaded from Taplytics servers (for example on the first launch of your app), it will default to as if the feature flag is not present. In order to prevent this you can ensure that the feature flags are loaded before using the feature flag. This can be done using the `propertiesLoadedCallback:` method, as an example:
+Due to the synchronous nature of feature flags, if it is used before the feature flags have been loaded from Taplytics servers (for example on the first launch of your app), it will default to as if the feature flag is not present. In order to prevent this you can ensure that the feature flags are loaded before using the feature flag. This can be done using the `newSessionCallback:` method, as an example:
 
 <sub>**Objective-C**</sub>
 ```objc
-[Taplytics propertiesLoadedCallback:^(BOOL loaded) {
+[Taplytics newSessionCallback:^(BOOL loaded) {
     if ([Taplytics featureFlagEnabled:@"featureFlagKey"]) {
         // Put feature code here, or launch feature from here
     }
@@ -214,7 +214,7 @@ Due to the synchronous nature of feature flags, if it is used before the feature
 
 <sub>**Swift**</sub>
 ```swift
-Taplytics.propertiesLoadedCallback { (loaded) in
+Taplytics.newSessionCallback { (loaded) in
     if (Taplytics.featureFlagEnabled(key: "featureFlagKey")) {
         // Put feature code here, or launch feature from here
     }
