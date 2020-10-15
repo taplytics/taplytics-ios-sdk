@@ -54,3 +54,6 @@ extern NSString *const TaplyticsDisableSourceMParticle;
 extern NSString *const TaplyticsDisableSourceHeap;
 extern NSString *const TaplyticsDisableSourceAmplitude;
 extern NSString *const TaplyticsDisableSourceFirebase;
+
+extern NSString *const TaplyticsAdobeEnumBASELINE;
+extern NSString *const TaplyticsAdobeEnumTLEXP;
