@@ -12,4 +12,5 @@ Pod::Spec.new do |s|
   s.preserve_paths = 'Taplytics.framework'
   s.source_files = s.public_header_files = "Taplytics.framework/**/*.h"
   s.vendored_frameworks = "Taplytics.framework"
+  s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
 end
