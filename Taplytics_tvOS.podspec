@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'Taplytics_tvOS'
-  s.version      = '3.2.0'
+  s.version      = '3.3.0'
   s.author       = { 'Taplytics' => 'help@taplytics.com' }
   s.license      = { :type => 'Commercial', :text => 'See https://taplytics.com/terms' }
   s.homepage     = 'https://taplytics.com'
@@ -12,5 +12,4 @@ Pod::Spec.new do |s|
   s.preserve_paths = 'Taplytics_tvOS.framework'
   s.source_files = s.public_header_files = "Taplytics_tvOS.framework/**/*.h"
   s.vendored_frameworks = "Taplytics_tvOS.framework"
-  s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=appletvsimulator*]' => 'arm64' }
 end
