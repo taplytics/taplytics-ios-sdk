@@ -38,6 +38,7 @@ extern NSString *const TaplyticsDisableTrackLocation;
 extern NSString *const TaplyticsDisableTrackSocialSignIn;
 extern NSString *const TaplyticsDisableTrackiAdInstallation;
 extern NSString *const TaplyticsDisableTrackPhotoLibraryAccess;
+extern NSString *const TaplyticsDisableTrackDeviceName;
 
 extern NSString *const TaplyticsDisableSourceGoogleAnalytics;
 extern NSString *const TaplyticsDisableSourceFlurry;
