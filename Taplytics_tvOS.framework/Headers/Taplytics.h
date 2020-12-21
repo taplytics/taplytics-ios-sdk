@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v3.3.0
+//  Taplytics v3.4.0
 //
 //  Copyright © 2020 Taplytics. All rights reserved.
 //
