@@ -12,4 +12,5 @@ Pod::Spec.new do |s|
   s.preserve_paths = 'Taplytics_tvOS.framework'
   s.source_files = s.public_header_files = "Taplytics_tvOS.framework/**/*.h"
   s.vendored_frameworks = "Taplytics_tvOS.framework"
+  s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=appletvsimulator*]' => 'arm64' }
 end
