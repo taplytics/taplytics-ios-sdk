@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'Taplytics'
-  s.version      = '3.6.1'
+  s.version      = '3.6.2'
   s.author       = { 'Taplytics' => 'help@taplytics.com' }
   s.license      = { :type => 'Commercial', :text => 'See https://taplytics.com/terms' }
   s.homepage     = 'https://taplytics.com'
@@ -14,3 +14,4 @@ Pod::Spec.new do |s|
   s.vendored_frameworks = "Taplytics.framework"
   s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
 end
+
