@@ -1,8 +1,8 @@
 //
 //  Taplytics.h
-//  Taplytics v3.6.2
+//  Taplytics v3.6.4
 //
-//  Copyright © 2020 Taplytics. All rights reserved.
+//  Copyright © 2021 Taplytics. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -44,6 +44,7 @@ typedef void(^TLResetUserBlock)(void);
  */
 - (void)taplyticsExperimentChanged:(nullable NSString*)experimentName variationName:(nullable NSString*)variationName;
 
+@optional
 /**
  This delegate method will be called every time the SDK starts a new session including; on the first launch, when startNewSession: is called, or when a new userId is set.
  Note that this method can callback multiple times.
