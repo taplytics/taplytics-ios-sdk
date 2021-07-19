@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v3.6.4
+//  Taplytics v3.7.0
 //
 //  Copyright © 2021 Taplytics. All rights reserved.
 //
@@ -340,6 +340,14 @@ typedef void(^TLResetUserBlock)(void);
  */
 
 + (void)showMenu;
+
+/**
+ Takes a view controller to use to present the alert from
+ 
+ Threading: This method should be called from the main thread, will dispatch_sync to main thread if not.
+ */
+
++ (void)showMenu:(nullable UIViewController *)presenter;
 
 /**
  Threading: This method is thread-safe.
