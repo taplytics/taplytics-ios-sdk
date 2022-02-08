@@ -1,6 +1,6 @@
 # Taplytics iOS SDK
 
-_Taplytics is a native mobile A/B testing and push notification platform that helps you optimize your iOS and tvOS apps! Supports iOS 8-11 and tvOS 9-11._
+_Taplytics is a native mobile A/B testing, feature management and push notification platform that helps you optimize your iOS and tvOS apps! Supports iOS, iPad OS and tvOS versions 12 and up._
 
 ## Getting Started
 
