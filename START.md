@@ -12,7 +12,7 @@ You can get started with using Taplytics on iOS or tvOS in minutes. Just follow 
 
 First, you'll want to install our SDK inside your XCode project.
 
-#### Swift Pacakge Manager
+#### Swift Package Manager
 
 1. Add the `Taplytics` package in XCode using `File` -> `Add Packages...`, then enter the git repo URL: `https://github.com/taplytics/taplytics-ios-sdk`
 2. Add the `-ObjC` Linker flag to your project's `Build Settings` under `Other Linker Flags`.
