@@ -11,3 +11,4 @@ Pod::Spec.new do |s|
   s.frameworks = 'CoreTelephony', 'SystemConfiguration', 'JavaScriptCore'
   s.vendored_frameworks = 'Taplytics.xcframework'
 end
+
