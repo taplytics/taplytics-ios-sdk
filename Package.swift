@@ -9,7 +9,11 @@ let package = Package(
     products: [
         .library(
             name: "Taplytics",
-            targets: ["Taplytics", "Taplytics_tvOS"]
+            targets: ["Taplytics"]
+        ),
+        .library(
+            name: "Taplytics_tvOS",
+            targets: ["Taplytics_tvOS"]
         )
     ],
     targets: [
