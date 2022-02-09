@@ -12,6 +12,30 @@ You can get started with using Taplytics on iOS or tvOS in minutes. Just follow 
 
 First, you'll want to install our SDK inside your XCode project.
 
+#### Swift Pacakge Manager
+
+1. Add the `Taplytics` package in XCode using `File` -> `Add Packages...`, then enter the git repo URL: `https://github.com/taplytics/taplytics-ios-sdk`
+2. Add the `-ObjC` Linker flag to your project's `Build Settings` under `Other Linker Flags`.
+3. Initialize the SDK by adding the correct import for the framework you are using and the following line of code with your API key to your `UIApplicationDelegate`. Make sure to call `Taplytics.startAPIKey()` before making `self.window` the key window, such as: `self.window.makeKeyAndVisible()` or `self.window.makeKeyWindow()`.
+
+    ```swift
+    // iOS
+    import Taplytics
+    // tvOS
+    import Taplytics_tvOS
+    ...
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+      ...
+      Taplytics.startAPIKey("API_KEY")
+      ...
+      // make sure you call startTaplytics before any makeKeyWindow calls:
+      // self.window.makeKeyAndVisible()
+      // self.window.makeKeyWindow()
+      ...
+      return true
+    }
+    ```
+
 #### CocoaPods Installation
 1. Install using CocoaPods
     - Create a `Podfile` using `pod init` and add Taplytics to your podfile:
@@ -76,7 +100,7 @@ First, you'll want to install our SDK inside your XCode project.
 #### Manual Installation
 
 1. [Download the SDK / clone into your app.](https://github.com/taplytics/taplytics-ios-sdk)
-2. Load the Taplytics framework into your app.
+2. Load the Taplytics xcframework into your app.
 3. Add the required frameworks
   - For iOS:
 
@@ -94,7 +118,7 @@ First, you'll want to install our SDK inside your XCode project.
     ```
 
 
-4. Add the `-ObjC` Linker flag to your project settings.
+4. Add the `-ObjC` Linker flag to your project's `Build Settings` under `Other Linker Flags`.
 5. Initialize the SDK by adding a line of code with your API key in your `UIApplicationDelegate`. Make sure to call `startTaplyticsAPIKey:` before making `self.window` the key window, such as: `[self.window makeKeyAndVisible]` or `[self.window makeKeyWindow]`.
 
     <sub>**Objective-C**</sub>
