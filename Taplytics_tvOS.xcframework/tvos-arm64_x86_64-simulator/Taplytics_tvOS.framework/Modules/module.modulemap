@@ -1,0 +1,6 @@
+framework module Taplytics_tvOS {
+  umbrella header "Taplytics_tvOS.h"
+
+  export *
+  module * { export * }
+}
