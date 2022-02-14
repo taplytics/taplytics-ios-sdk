@@ -97,6 +97,20 @@ First, you'll want to install our SDK inside your XCode project.
     That's it! You can then call Taplytics in your `didFinishLaunchingWithOptions` method in your AppDelegate.
 
 
+#### Carthage
+
+As of `4.0.0`, Taplytics can now be used with Carthage!
+
+Create a `Cartfile` and add the following:
+
+```
+github "Taplytics/taplytics-ios-sdk" ~> 4.0
+```
+
+Run `carthage update --use-xcframeworks`, and drag the built .xcframework bundle from Carthage/Build into the "Frameworks and Libraries" section of your application’s Xcode project.
+
+That's it! You can then call Taplytics in your didFinishLaunchingWithOptions method in your AppDelegate. Proceed to Initialize Taplytics here.
+
 #### Manual Installation
 
 1. [Download the SDK / clone into your app.](https://github.com/taplytics/taplytics-ios-sdk)
