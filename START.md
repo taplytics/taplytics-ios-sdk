@@ -15,26 +15,7 @@ First, you'll want to install our SDK inside your XCode project.
 #### Swift Package Manager
 
 1. Add the `Taplytics` package in XCode using `File` -> `Add Packages...`, then enter the git repo URL: `https://github.com/taplytics/taplytics-ios-sdk`
-2. Add the `-ObjC` Linker flag to your project's `Build Settings` under `Other Linker Flags`.
-3. Initialize the SDK by adding the correct import for the framework you are using and the following line of code with your API key to your `UIApplicationDelegate`. Make sure to call `Taplytics.startAPIKey()` before making `self.window` the key window, such as: `self.window.makeKeyAndVisible()` or `self.window.makeKeyWindow()`.
-
-    ```swift
-    // iOS
-    import Taplytics
-    // tvOS
-    import Taplytics_tvOS
-    ...
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-      ...
-      Taplytics.startAPIKey("API_KEY")
-      ...
-      // make sure you call startTaplytics before any makeKeyWindow calls:
-      // self.window.makeKeyAndVisible()
-      // self.window.makeKeyWindow()
-      ...
-      return true
-    }
-    ```
+2. Move on to [Starting Taplytics](#starting_taplytics).
 
 #### CocoaPods Installation
 1. Install using CocoaPods
@@ -55,9 +36,36 @@ First, you'll want to install our SDK inside your XCode project.
 
     - Open your project's `.xcworkspace` file
 
-2. Initialize the SDK by adding the correct import for the framework you are using and the following line of code with your API key to your `UIApplicationDelegate`. Make sure to call `startTaplyticsAPIKey:` before making `self.window` the key window, such as: `[self.window makeKeyAndVisible]` or `[self.window makeKeyWindow]`.
+2. Move on to [Starting Taplytics](#starting_taplytics).
 
-    <sub>**Objective-C**</sub>
+
+#### Carthage
+
+As of `4.0.0`, Taplytics can now be used with Carthage!
+
+1. Create a `Cartfile` and add the following:
+
+```
+github "Taplytics/taplytics-ios-sdk" ~> 4.0
+```
+
+2. Run `carthage update --use-xcframeworks`, and drag the built .xcframework bundle from Carthage/Build into the "Frameworks and Libraries" section of your application’s Xcode project.
+
+2. Move on to [Starting Taplytics](#starting_taplytics).
+
+#### Manual Installation
+
+1. [Download the SDK / clone into your app.](https://github.com/taplytics/taplytics-ios-sdk)
+2. Load the Taplytics xcframework into your app.
+    
+### <a name="starting_taplytics"></a> Starting Taplytics
+
+Once you have Taplytics available as a framework in your app:
+
+1. Add the `-ObjC` Linker flag to your project's `Build Settings` under `Other Linker Flags`.
+2. Initialize the SDK by adding the correct import for the framework you are using and the following line of code with your API key to your `UIApplicationDelegate`. Make sure to call `Taplytics.startAPIKey()` before making `self.window` the key window, such as: `self.window.makeKeyAndVisible()` or `self.window.makeKeyWindow()`.
+
+
     ```objc
     // iOS
     #import <Taplytics/Taplytics.h>
@@ -66,7 +74,7 @@ First, you'll want to install our SDK inside your XCode project.
     ...
     - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
         ...
-        [Taplytics startTaplyticsAPIKey:@"API_KEY"];
+        [Taplytics startTaplyticsAPIKey:@"SDK_KEY"];
         ...
         // make sure you call startTaplytics before any makeKeyWindow calls:
         // [self.window makeKeyAndVisible];
@@ -75,7 +83,7 @@ First, you'll want to install our SDK inside your XCode project.
         return YES;
     }
     ```
-    <sub>**Swift**</sub>
+
     ```swift
     // iOS
     import Taplytics
@@ -84,7 +92,7 @@ First, you'll want to install our SDK inside your XCode project.
     ...
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
       ...
-      Taplytics.startAPIKey("API_KEY")
+      Taplytics.startAPIKey("SDK_KEY")
       ...
       // make sure you call startTaplytics before any makeKeyWindow calls:
       // self.window.makeKeyAndVisible()
@@ -93,87 +101,7 @@ First, you'll want to install our SDK inside your XCode project.
       return true
     }
     ```
-
-    That's it! You can then call Taplytics in your `didFinishLaunchingWithOptions` method in your AppDelegate.
-
-
-#### Carthage
-
-As of `4.0.0`, Taplytics can now be used with Carthage!
-
-Create a `Cartfile` and add the following:
-
-```
-github "Taplytics/taplytics-ios-sdk" ~> 4.0
-```
-
-Run `carthage update --use-xcframeworks`, and drag the built .xcframework bundle from Carthage/Build into the "Frameworks and Libraries" section of your application’s Xcode project.
-
-That's it! You can then call Taplytics in your didFinishLaunchingWithOptions method in your AppDelegate. Proceed to Initialize Taplytics here.
-
-#### Manual Installation
-
-1. [Download the SDK / clone into your app.](https://github.com/taplytics/taplytics-ios-sdk)
-2. Load the Taplytics xcframework into your app.
-3. Add the required frameworks
-  - For iOS:
-
-    ```
-    CoreTelephony.framework
-    SystemConfiguration.framework
-    JavaScriptCore.framework
-    ```
-
-  - For tvOS:
-
-    ```
-    SystemConfiguration.framework
-    JavaScriptCore.framework
-    ```
-
-
-4. Add the `-ObjC` Linker flag to your project's `Build Settings` under `Other Linker Flags`.
-5. Initialize the SDK by adding a line of code with your API key in your `UIApplicationDelegate`. Make sure to call `startTaplyticsAPIKey:` before making `self.window` the key window, such as: `[self.window makeKeyAndVisible]` or `[self.window makeKeyWindow]`.
-
-    <sub>**Objective-C**</sub>
-    ```objc
-    // iOS
-    #import <Taplytics/Taplytics.h>
-    // tvOS
-    #import <Taplytics_tvOS/Taplytics.h>
-    ...
-    - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-        ...
-        [Taplytics startTaplyticsAPIKey:@"API_KEY"];
-        ...
-        // make sure you call startTaplytics before any makeKeyWindow calls:
-        // [self.window makeKeyAndVisible];
-        // [self.window makeKeyWindow];
-        ...
-        return YES;
-    }
-    ```
-
-    <sub>**Swift**</sub>
-    ```swift
-    // For iOS
-    import Taplytics
-    // For tvOS
-    import Taplytics_tvOS
-    ...
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        ...
-        Taplytics.startAPIKey("API_KEY")
-        ...
-        // make sure you call startTaplytics before any makeKeyWindow calls:
-        // self.window.makeKeyAndVisible()
-        // self.window.makeKeyWindow()
-        ...
-        return true
-    }
-    ```
-
-#### Install Using Segment
+### Install Using Segment
 The Taplytics SDK can also be installed via Segment. You can find install instructions [here](https://taplytics.com/docs/segment-integration).
 
 ---
