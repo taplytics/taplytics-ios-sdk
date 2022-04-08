@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'Taplytics_tvOS'
-  s.version      = '4.0.1'
+  s.version      = '4.0.2'
   s.author       = { 'Taplytics' => 'help@taplytics.com' }
   s.license      = { :type => 'Commercial', :text => 'See https://taplytics.com/terms' }
   s.homepage     = 'https://taplytics.com'
@@ -10,7 +10,4 @@ Pod::Spec.new do |s|
   s.platform = :tvos, '10.0'
   s.frameworks = 'SystemConfiguration', 'JavaScriptCore'
   s.vendored_frameworks = "Taplytics_tvOS.xcframework"
-  s.pod_target_xcconfig = {
-    'ARCHS[sdk=iphonesimulator*]' => '$(ARCHS_STANDARD_64_BIT)'
-  }
 end
