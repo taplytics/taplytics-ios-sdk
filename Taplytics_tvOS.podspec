@@ -10,4 +10,7 @@ Pod::Spec.new do |s|
   s.platform = :tvos, '10.0'
   s.frameworks = 'SystemConfiguration', 'JavaScriptCore'
   s.vendored_frameworks = "Taplytics_tvOS.xcframework"
+  s.pod_target_xcconfig = {
+    'ARCHS[sdk=iphonesimulator*]' => '$(ARCHS_STANDARD_64_BIT)'
+  }
 end
