@@ -10,5 +10,8 @@ Pod::Spec.new do |s|
   s.platform = :ios, '10.0'
   s.frameworks = 'CoreTelephony', 'SystemConfiguration', 'JavaScriptCore'
   s.vendored_frameworks = 'Taplytics.xcframework'
+  s.pod_target_xcconfig = {
+    'ARCHS[sdk=iphonesimulator*]' => '$(ARCHS_STANDARD_64_BIT)'
+  }
 end
 
