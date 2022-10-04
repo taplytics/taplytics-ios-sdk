@@ -1,6 +1,6 @@
 # Taplytics iOS SDK
 
-_Taplytics is a native mobile A/B testing, feature management and push notification platform that helps you optimize your iOS, tvOS, and macOS Catalyst apps! Supports iOS, iPad OS and tvOS versions 10 and up, macOS 10.15 and up using Catalyst. The SDK is avaliable using a XCFramework with Swift Package Manager, Carthage,  or CocoaPods._
+_Taplytics is a native mobile A/B testing, feature management and push notification platform that helps you optimize your iOS, tvOS, and macOS Catalyst apps! Supports iOS, iPad OS and tvOS versions 11 and up, macOS 10.15 and up using Catalyst. The SDK is avaliable using a XCFramework with Swift Package Manager, Carthage,  or CocoaPods._
 
 ## Getting Started
 
