@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v3.7.8
+//  Taplytics v4.1.0
 //
 //  Copyright © 2021 Taplytics. All rights reserved.
 //
@@ -85,7 +85,7 @@ typedef void(^TLResetUserBlock)(void);
             - @{@"liveUpdate":@NO} Taplytics will auto-detect an app store build or a development build. But to force production mode use @NO,
                 or @YES to force live update mode for testing.
             - @{@"shakeMenu":@NO} To disable the Taplytics development mode shake menu set @NO, only use if you have your own development shake menu.
-            - @{@"disable":@[TaplyticsDisableTrackLocation]} To disable any tracking attributes set a @"disable" key with an array of values to disable from
+            - @{@"disable":@[TaplyticsDisableTrackDeviceName]} To disable any tracking attributes set a @"disable" key with an array of values to disable from
                 TaplyticsOptions.h
  @param callback This callback will be triggered once, with a "loaded" bool true when properties have been loaded successfully or false when the "delayLoad" timeout has been reached.
  
@@ -314,15 +314,6 @@ typedef void(^TLResetUserBlock)(void);
  @param categories accepts a NSSet of UIUserNotificationCategory settings
  */
 + (void)registerPushNotificationsWithTypes:(NSInteger)types categories:(nullable NSSet*)categories;
-
-/**
- Registers for location access, this method will show the iOS permissions alert asking for location access.
- Location permissions are required for location based push notifications. We request kCLAuthorizationStatusAuthorizedAlways access
- so that we can monitor regions for your location based push notifications.
- 
- Threading: This method should be called from the main thread, will dispatch_async to main thread if not.
- */
-+ (void)registerLocationAccess;
 
 /**
  @return if the the user is registered with Taplytics and iOS for push notifications.

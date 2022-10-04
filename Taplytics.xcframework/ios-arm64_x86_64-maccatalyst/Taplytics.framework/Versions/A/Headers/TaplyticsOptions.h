@@ -26,7 +26,6 @@ extern NSString *const TaplyticsOptionLogging;
 extern NSString *const TaplyticsOptionLogLevel;
 
 extern NSString *const TaplyticsDisablePushNotifications;
-extern NSString *const TaplyticsDisableLocationRegions;
 
 extern NSString *const TaplyticsDisableUITableViewSW;
 extern NSString *const TaplyticsDisableUICollectionViewSW;
@@ -34,10 +33,6 @@ extern NSString *const TaplyticsDisableUIPageViewSW;
 extern NSString *const TaplyticsDisableUIActionSheetSW;
 extern NSString *const TaplyticsDisableUITextFieldViewSW;
 
-extern NSString *const TaplyticsDisableTrackLocation;
-extern NSString *const TaplyticsDisableTrackSocialSignIn;
-extern NSString *const TaplyticsDisableTrackiAdInstallation;
-extern NSString *const TaplyticsDisableTrackPhotoLibraryAccess;
 extern NSString *const TaplyticsDisableTrackDeviceName;
 
 extern NSString *const TaplyticsDisableSourceGoogleAnalytics;

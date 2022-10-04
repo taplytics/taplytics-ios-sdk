@@ -1,0 +1,6 @@
+framework module Taplytics {
+  umbrella header "Taplytics.h"
+
+  export *
+  module * { export * }
+}
