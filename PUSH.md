@@ -5,62 +5,12 @@ Setting up Push Notifications using Taplytics is simple. Follow the steps below 
 | 1 | [Setup](#1-setup) |
 | 2 | [Receiving Push Notifications](#2-receiving-push-notifications) |
 | 3 | [Resetting Users](#3-resetting-users) |
-| 4 | [Rich Push Notifications](#4-rich-push-notifications-ios-10) |
+| 4 | [Rich Push Notifications](#4-rich-push-notifications) |
 
 ## 1. Setup
 
-### Required Code for iOS 9 and Below
-For iOS and Taplytics to know that your app accepts Push Notifications, you must implement the following methods on your  `UIApplicationDelegate`.
-
-<sub>**Objective-C**</sub>
-```objc
-// Implement these methods for Taplytics Push Notifications
-- (void)application:(UIApplication *)application
-didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
-}
-
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-}
-
-- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
-}
-
-// Method will be called if the app is open when it recieves the push notification
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-	// "userInfo" will give you the notification information
-}
-
-// Method will be called when the app receives a push notification
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
-fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-	// "userInfo" will give you the notification information
-	completionHandler(UIBackgroundFetchResultNoData);
-}
-```
-
-<sub>**Swift**</sub>
-```swift
-func application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings) {
-}
-
-func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-}
-
-func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-}
-
-func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
-	// "userInfo" will give you the notification information
-}
-
-func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-	// "userInfo" will give you the notification information
-	completionHandler(UIBackgroundFetchResult.noData)
-}
-```
-
-### Required Code for iOS 10
-For iOS 10, you'll need to implement the new `UserNotification` class to allow Taplytics and iOS to accept Push Notifications.  You will need to change your `UIApplicationDelegate` header file to look something like the following
+### Required Code
+You'll need to implement the `UserNotification` class to allow Taplytics and iOS to accept Push Notifications.  You will need to change your `UIApplicationDelegate` header file to look something like the following
 
 <sub>**Objective-C**</sub>
 ```objc
@@ -137,8 +87,6 @@ func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive respo
 	completionHandler()
 }
 ```
-
-If you want your app to also support lower versions of iOS, you just need to add the missing methods described in the above section.
 
 ### Register for Push Notifications
 
@@ -254,9 +202,9 @@ Taplytics.resetUser {
 
 ___
 
-## 4. Rich Push Notifications (iOS 10+)
+## 4. Rich Push Notifications
 
-Implementing rich push notification support can help improve user engagement with your push notifications with image content attached. Rich push notifications make use of **Notification Service Extension** on iOS 10+ to display images attached to the push notifications. We currently support JPEG and PNG images sent through the Taplytics dashboard or API.
+Implementing rich push notification support can help improve user engagement with your push notifications with image content attached. Rich push notifications make use of **Notification Service Extension** to display images attached to the push notifications. We currently support JPEG and PNG images sent through the Taplytics dashboard or API.
 
 The max image size that can be uploaded is 10mb. Note that images are not downscaled and if an image is sent, the full file size of the crop will be used.
 
