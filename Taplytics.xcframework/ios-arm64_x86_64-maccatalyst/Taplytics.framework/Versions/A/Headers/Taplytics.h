@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v4.1.1
+//  Taplytics v4.2.0
 //
 //  Copyright © 2021 Taplytics. All rights reserved.
 //
@@ -14,6 +14,8 @@ typedef void(^TLCodeBlock)(void);
 typedef void(^TLRunningExperimentsAndVariationsBlock)(NSDictionary* _Nonnull experimentsAndVariations);
 
 typedef void(^TLRunningFeatureFlagsBlock)(NSDictionary* _Nonnull featureFlags);
+
+typedef void(^TLCurrentVarsBlock)(NSArray<NSDictionary*>* _Nonnull variables);
 
 typedef void(^TLSetUserAttributesBlock)(void);
 
@@ -395,6 +397,23 @@ typedef void(^TLResetUserBlock)(void);
  @param block This block will be called back with a NSDictionary with key value of feature flag name and feature flag key. Returns on main thread.
  */
 + (void)getRunningFeatureFlags:(nonnull TLRunningFeatureFlagsBlock)block;
+
+/**
+ Get a NSDictionary of all variables that are active. This block will return async on the main thread once the feature flag
+ configuration has loaded from our servers, or synchronously if the configuration has already loaded. Example of a NSDictionary that is returned:
+ 
+ NSDictionary* variable = @{
+    @"_id": @"id",
+    @"name": @"variable-name",
+    @"value": @"my_value"
+    @"variableType" :@"String"
+ };
+ 
+ Threading: This method is thread-safe. Callback will either be fired from current thread or main thread.
+
+ @param block This block will be called back with a NSDictionary with key value of feature flag name and feature flag key. Returns on main thread.
+ */
++ (void)getAllVariables:(nonnull TLCurrentVarsBlock)block;
 
 /**
  Updates Taplytics configuration in a background fetch. It is HIGHLY recommended to implement background fetch
