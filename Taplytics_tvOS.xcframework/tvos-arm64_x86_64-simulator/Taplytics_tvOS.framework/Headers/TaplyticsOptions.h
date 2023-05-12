@@ -26,6 +26,7 @@ extern NSString *const TaplyticsOptionLogging;
 extern NSString *const TaplyticsOptionLogLevel;
 
 extern NSString *const TaplyticsDisablePushNotifications;
+extern NSString *const TaplyticsDisablePushNotificationSW;
 
 extern NSString *const TaplyticsDisableUITableViewSW;
 extern NSString *const TaplyticsDisableUICollectionViewSW;

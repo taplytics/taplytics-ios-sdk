@@ -1,6 +1,6 @@
 //
 //  Taplytics.h
-//  Taplytics v4.2.1
+//  Taplytics v4.3.0
 //
 //  Copyright © 2021 Taplytics. All rights reserved.
 //
@@ -323,6 +323,28 @@ typedef void(^TLResetUserBlock)(void);
  Threading: This method is thread-safe.
  */
 + (BOOL)isUserRegisteredForPushNotifications;
+
+/**
+ If you have the option TaplyticsDisablePushNotificationSW you can use this method
+ to save push tokens from your didRegisterForRemoteNotificationsWithDeviceToken delegate method,
+ as the option will disable the swizzling of UNUserNotificationCenter push notification methods
+ */
+
++ (void)registerPushToken:(nullable NSData *)deviceToken;
+
+/**
+ If you have the option TaplyticsDisablePushNotificationSW you can use this method
+ to track push notification opens from your didReceive or willPresent delegate methods
+ */
+
++ (void)trackPushOpen:(nullable UNNotification *)notification;
+
+/**
+ If you have the option TaplyticsDisablePushNotificationSW you can use this method
+ to track push notification received events from your didReceiveRemoteNotification delegate method
+ */
+
++ (void)trackPushReceived:(nullable NSDictionary *)userInfo;
 
 #pragma mark - Utility Functions
 
